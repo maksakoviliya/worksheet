@@ -21272,7 +21272,6 @@ video {
 
 .vm--modal {
   position: relative;
-  overflow: hidden;
   box-sizing: border-box;
   background-color: white;
   border-radius: 0.5rem;
@@ -21395,6 +21394,12 @@ fieldset[disabled] .multiselect {
   --text-opacity: 1;
   color: #1a202c;
   color: rgba(26, 32, 44, var(--text-opacity));
+}
+
+.multiselect.invalid .multiselect__tags {
+  --border-opacity: 1;
+  border-color: #fc8181;
+  border-color: rgba(252, 129, 129, var(--border-opacity));
 }
 
 .multiselect * {

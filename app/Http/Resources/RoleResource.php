@@ -2,9 +2,10 @@
 
 namespace App\Http\Resources;
 
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class UserCollection extends ResourceCollection
+class RoleResource extends JsonResource
 {
     /**
      * Transform the resource collection into an array.
@@ -15,11 +16,8 @@ class UserCollection extends ResourceCollection
     public function toArray($request)
     {
         return [
-            'data' => UserResource::collection($this->collection),
-            'links' => [
-                  'next_page_url' => $this->nextPageUrl(),
-                  'prev_page_url' => $this->previousPageUrl()
-            ],
+            'name' => $this->name,
+            'title' => $this->title
         ];
     }
 }

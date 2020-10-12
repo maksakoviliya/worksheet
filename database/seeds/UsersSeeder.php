@@ -29,6 +29,7 @@ class UsersSeeder extends Seeder
             'name' => 'Руководитель Филиала',
             'email' => 'head@worksheet.test',
             'password' => Hash::make('123'),
+            'filial_id' => '3'
         ]);
         // Пользователь
         User::create([

@@ -39,7 +39,7 @@
 
 .vm--modal {
     position: relative;
-    overflow: hidden;
+    //overflow: hidden;
     box-sizing: border-box;
 
     background-color: white;
@@ -156,6 +156,11 @@ fieldset[disabled] .multiselect {
     min-height: 39px;
     text-align: left;
     @apply text-gray-900;
+    &.invalid {
+        .multiselect__tags {
+            @apply border-red-400;
+        }
+    }
 }
 
 .multiselect * {

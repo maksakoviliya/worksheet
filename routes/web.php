@@ -15,4 +15,15 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes(['register' => false]);
 
-Route::get('/', 'HomeController@index')->name('home');
+
+Route::get('/', 'HomeController@home')->name('home');
+
+Route::group(['middleware' => ['role:admin|head', 'auth']], function () {
+    Route::get('/users', 'HomeController@index')->name('users');
+});
+
+//Route::group(['middleware' => ['role:user', 'auth']], function () {
+//    Route::get('/', function () { return redirect('')->route('worksheets'); });
+//});
+
+Route::get('/worksheets', 'HomeController@worksheets')->name('worksheets');

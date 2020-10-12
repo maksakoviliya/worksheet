@@ -29,7 +29,15 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+//    protected $redirectTo = RouteServiceProvider::HOME;
+
+    public function redirectTo()
+    {
+        if (Auth::user()->hasAnyRole(['admin', 'head'])) {
+            return redirect('/');
+        }
+        return redirect()->route('worksheets');
+    }
 
     /**
      * Create a new controller instance.

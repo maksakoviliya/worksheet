@@ -2,9 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Filial;
+use App\Http\Requests\StoreUser;
+use App\Http\Requests\UpdateUser;
 use App\Http\Resources\UserCollection;
+use App\Http\Resources\UserResource;
+use App\Role;
 use App\User;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
@@ -18,23 +27,26 @@ class UsersController extends Controller
         $request->validate([
             'search' => 'string|nullable|max:100',
         ]);
-
-        if (!$request->search) {
-            return new UserCollection(User::with('roles:name,title')->select(['id', 'name', 'email'])->paginate(10));
+        if (Auth::user()->can('manage heads')) {
+            if (!$request->search) {
+                return new UserCollection(User::paginate(10));
+            }
+            return new UserCollection(User::where('id', $request->search)
+                ->orWhere('name', 'LIKE', "%$request->search%")
+                ->orWhere('email', 'LIKE', "%$request->search%")->paginate(10));
+        } elseif (Auth::user()->can('manage users')) {
+            if (!$request->search) {
+                return new UserCollection(User::where('filial_id', Auth::user()->filial_id)->paginate(10));
+            }
+            return new UserCollection(User::where('filial_id', Auth::user()->filial_id)
+                ->where(function ($query) use ($request) {
+                    $query->where('id', $request->search)
+                        ->orWhere('name', 'LIKE', "%$request->search%")
+                        ->orWhere('email', 'LIKE', "%$request->search%");
+                })->paginate(10));
+        } else {
+            return redirect()->route('login');
         }
-        return new UserCollection(User::with('roles:name')->select(['id', 'name', 'email'])->where('id', $request->search)
-                                    ->orWhere('name', 'LIKE', "%$request->search%")
-                                    ->orWhere('email', 'LIKE', "%$request->search%")->paginate(10));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -43,31 +55,50 @@ class UsersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreUser $request)
     {
-        //
+        $newUser = Arr::get($request->validated(), 'user');
+
+        try {
+            if (Auth::user()->can('manage heads')) {
+                $user = User::create([
+                    'name' => $newUser['name'],
+                    'email' => $newUser['email'],
+                    'password' => Hash::make($newUser['password']),
+                    'filial_id' => $newUser['filial']
+                ]);
+
+                $user->assignRole($newUser['role']);
+            } elseif (Auth::user()->can('manage users')) {
+                $user = User::create([
+                    'name' => $newUser['name'],
+                    'email' => $newUser['email'],
+                    'password' => Hash::make($newUser['password']),
+                    'filial_id' => Auth::user()->filial_id
+                ]);
+
+                $user->assignRole('user');
+            }
+        } catch (\Exception $exception) {
+            throw new \Exception('Что-то пошло не так');
+        }
+
+        return response()->json(['success']);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  User  $user
+     * @return JsonResponse
      */
-    public function show($id)
+    public function show(\App\User $user)
     {
-        //
-    }
+        $userData = new UserResource($user);
+        $roles = Role::all();
+        $filials = Filial::all();
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return response()->json(compact(['userData', 'roles', 'filials']));
     }
 
     /**
@@ -77,9 +108,22 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateUser $request, \App\User $user)
     {
-        //
+        $userData = Arr::get($request->validated(), 'user');
+        try {
+            $user->name = $userData['name'];
+            $user->email = $userData['email'];
+            if (Arr::has($userData, 'password')) {
+                $user->password = Hash::make($userData['password']);
+            }
+            $user->filial_id = $userData['filial'];
+            $user->syncRoles($userData['role']);
+
+            $user->save();
+        } catch (\Exception $exception) {
+            throw new \Exception('Что-то пошло не так');
+        }
     }
 
     /**
@@ -91,5 +135,11 @@ class UsersController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getUsersData() {
+        $roles = Role::all();
+        $filials = Filial::all();
+        return response()->json(compact(['roles', 'filials']));
     }
 }
