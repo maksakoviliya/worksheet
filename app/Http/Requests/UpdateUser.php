@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateUser extends FormRequest
 {
@@ -13,7 +14,7 @@ class UpdateUser extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->can(['manage users', 'manage heads']);
+        return $this->user()->can(['manage users']);
     }
 
     /**
@@ -26,8 +27,8 @@ class UpdateUser extends FormRequest
         return [
             'user.name' => 'required|max:255',
             'user.email' => 'required|email|unique:users,email,'.$this->user['id'],
-            'user.role' => 'required',
-            'user.filial' => 'required',
+            'user.role' => Rule::requiredIf($this->user()->can(['manage heads'])),
+            'user.filial' => Rule::requiredIf($this->user()->can(['manage heads'])),
             'user.password' => 'confirmed',
         ];
     }

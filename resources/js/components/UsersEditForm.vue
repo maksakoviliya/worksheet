@@ -85,38 +85,42 @@
                     </ValidationProvider>
                 </VueSlideToggle>
             </transition>
-            <div class="mt-4">
-                <ValidationProvider v-slot="{ errors }" name="role" rules="required">
-                    <label class="inline-block text-gray-700 text-sm font-bold mb-2" for="roles">Роль<span
-                        class="text-red-300 text-sm">*</span>: <small v-if="errors[0]" class="text-red-400">{{
-                            errors[0]
-                        }}</small></label>
-                    <multiselect id="roles" v-model="user.role"
-                                 :class="{'invalid': errors.length}"
-                                 :custom-label=" opt => roles.find(role => role.name === opt).title"
-                                 :options="roles.map(role => role.name)"
-                                 :show-labels="false"
-                                 placeholder="Выберите роль"></multiselect>
-                </ValidationProvider>
-            </div>
-            <transition name="slide-y">
-                <VueSlideToggle :duration="200"
-                                :open="(user.role && roles.find(role => role.name === user.role).name !== 'admin')"
-                                tag="div">
-                    <ValidationProvider v-slot="{ errors }" name="filial" rules="required_if:role,2,3">
-                        <label class="inline-block text-gray-700 text-sm font-bold mb-2 mt-4" for="filial">Филиал<span
+            <template v-if="isAdmin">
+                <div class="mt-4">
+                    <ValidationProvider v-slot="{ errors }" name="role" rules="required">
+                        <label class="inline-block text-gray-700 text-sm font-bold mb-2" for="roles">Роль<span
                             class="text-red-300 text-sm">*</span>: <small v-if="errors[0]" class="text-red-400">{{
                                 errors[0]
                             }}</small></label>
-                        <multiselect id="filial" v-model="user.filial" :class="{'invalid': errors.length}"
-                                     :custom-label=" opt => filials.find(filial => filial.id === opt).name"
-                                     :options="filials.map(filial => filial.id)"
+                        <multiselect id="roles" v-model="user.role"
+                                     :class="{'invalid': errors.length}"
+                                     :custom-label=" opt => roles.find(role => role.name === opt).title"
+                                     :options="roles.map(role => role.name)"
                                      :show-labels="false"
-                                     placeholder="Выберите филиал"></multiselect>
+                                     placeholder="Выберите роль"></multiselect>
                     </ValidationProvider>
-                </VueSlideToggle>
-            </transition>
+                </div>
+                <transition name="slide-y">
+                    <VueSlideToggle :duration="200"
+                                    :open="(user.role && roles.find(role => role.name === user.role).name !== 'admin')"
+                                    tag="div">
+                        <ValidationProvider v-slot="{ errors }" name="filial" rules="required_if:role,2,3">
+                            <label class="inline-block text-gray-700 text-sm font-bold mb-2 mt-4"
+                                   for="filial">Филиал<span
+                                class="text-red-300 text-sm">*</span>: <small v-if="errors[0]" class="text-red-400">{{
+                                    errors[0]
+                                }}</small></label>
+                            <multiselect id="filial" v-model="user.filial" :class="{'invalid': errors.length}"
+                                         :custom-label=" opt => filials.find(filial => filial.id === opt).name"
+                                         :options="filials.map(filial => filial.id)"
+                                         :show-labels="false"
+                                         placeholder="Выберите филиал"></multiselect>
+                        </ValidationProvider>
+                    </VueSlideToggle>
+                </transition>
+            </template>
             <div class="mt-6">
+
                 <button
                     :class="{'opacity-50 cursor-not-allowed': invalid}"
                     :disabled="invalid"

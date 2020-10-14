@@ -36,9 +36,13 @@ class UsersController extends Controller
                 ->orWhere('email', 'LIKE', "%$request->search%")->paginate(10));
         } elseif (Auth::user()->can('manage users')) {
             if (!$request->search) {
-                return new UserCollection(User::where('filial_id', Auth::user()->filial_id)->paginate(10));
+                return new UserCollection(User::where('filial_id', Auth::user()->filial_id)->whereHas('roles', function ($query) {
+                    return $query->where('name', 'user');
+                })->paginate(10));
             }
-            return new UserCollection(User::where('filial_id', Auth::user()->filial_id)
+            return new UserCollection(User::where('filial_id', Auth::user()->filial_id)->whereHas('roles', function ($query) {
+                return $query->where('name', 'user');
+            })
                 ->where(function ($query) use ($request) {
                     $query->where('id', $request->search)
                         ->orWhere('name', 'LIKE', "%$request->search%")
@@ -52,7 +56,7 @@ class UsersController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreUser $request)
@@ -89,7 +93,7 @@ class UsersController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  User  $user
+     * @param User $user
      * @return JsonResponse
      */
     public function show(\App\User $user)
@@ -104,8 +108,8 @@ class UsersController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateUser $request, \App\User $user)
@@ -129,7 +133,7 @@ class UsersController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -137,7 +141,8 @@ class UsersController extends Controller
         //
     }
 
-    public function getUsersData() {
+    public function getUsersData()
+    {
         $roles = Role::all();
         $filials = Filial::all();
         return response()->json(compact(['roles', 'filials']));

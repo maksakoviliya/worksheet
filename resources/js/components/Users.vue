@@ -75,6 +75,7 @@ export default {
         },
         isAdmin: {
             required: true,
+            type: Boolean
         }
     },
     data() {
@@ -168,7 +169,7 @@ export default {
         showEditUserForm(id) {
             this.$modal.show(
                 UsersEditForm,
-                {userId: id, token: this.token},
+                {userId: id, token: this.token, isAdmin: this.isAdmin},
                 {classes: 'rounded-lg ml-32', height: 'auto', name: 'UsersEditForm'},
                 {'userChanged': () => { this.onUserChanged() }}
             )
