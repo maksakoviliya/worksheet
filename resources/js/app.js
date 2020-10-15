@@ -15,13 +15,21 @@ Vue.component('ValidationProvider', ValidationProvider);
 
 import './vaildation/validators'
 import './vaildation/locale'
+import Worksheets from "./components/Worksheets";
+import Worksheet from "./components/Worksheet";
+
+import VueScrollactive from 'vue-scrollactive';
+
+Vue.use(VueScrollactive);
 
 Vue.use(Notifications)
 
 const app = new Vue({
     el: '#app',
     components: {
-        Users
+        Users,
+        Worksheets,
+        Worksheet
     },
     data() {
         return {

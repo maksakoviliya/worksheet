@@ -20,9 +20,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2893a89d-c2b1-4e6a-ba5d-8892472103f2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/layouts/sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/sidebar.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/worksheets.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/worksheets.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -165,6 +170,9 @@
     </include_path>
   </component>
   <component name="ProjectId" id="1iMeRF1VYkfMXMFldBxK6pHOTUW" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -203,6 +211,7 @@
       <workItem from="1602355495432" duration="25537000" />
       <workItem from="1602483358000" duration="7964000" />
       <workItem from="1602705219139" duration="17000" />
+      <workItem from="1602709323010" duration="5219000" />
     </task>
     <servers />
   </component>
@@ -222,10 +231,10 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="1024" y="755" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1602452170148">
+    <state x="1024" y="755" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1602711541917">
       <screen x="0" y="23" width="2560" height="1417" />
     </state>
-    <state x="1024" y="755" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.23.2560.1417@0.23.2560.1417" timestamp="1602452170148" />
+    <state x="1024" y="755" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.23.2560.1417@0.23.2560.1417" timestamp="1602711541917" />
     <state x="1024" y="912" key="ComposerInitDialogKey" timestamp="1601723061982">
       <screen x="0" y="23" width="2560" height="1417" />
     </state>
@@ -234,17 +243,17 @@
       <screen x="0" y="23" width="2560" height="1417" />
     </state>
     <state x="1074" y="784" key="FileChooserDialogImpl/0.23.2560.1417@0.23.2560.1417" timestamp="1602454277402" />
-    <state x="787" y="632" key="SettingsEditor" timestamp="1602417598314">
+    <state x="787" y="632" key="SettingsEditor" timestamp="1602711078023">
       <screen x="0" y="23" width="2560" height="1417" />
     </state>
-    <state x="787" y="632" key="SettingsEditor/0.23.2560.1417@0.23.2560.1417" timestamp="1602417598314" />
-    <state x="988" y="732" width="596" height="580" key="find.popup" timestamp="1602488143241">
+    <state x="787" y="632" key="SettingsEditor/0.23.2560.1417@0.23.2560.1417" timestamp="1602711078023" />
+    <state x="988" y="732" width="596" height="586" key="find.popup" timestamp="1602709366776">
       <screen x="0" y="23" width="2560" height="1417" />
     </state>
-    <state x="988" y="732" width="596" height="580" key="find.popup/0.23.2560.1417@0.23.2560.1417" timestamp="1602488143241" />
-    <state x="951" y="758" width="670" height="676" key="search.everywhere.popup" timestamp="1602490858749">
+    <state x="988" y="732" width="596" height="586" key="find.popup/0.23.2560.1417@0.23.2560.1417" timestamp="1602709366776" />
+    <state x="951" y="758" width="670" height="676" key="search.everywhere.popup" timestamp="1602745296319">
       <screen x="0" y="23" width="2560" height="1417" />
     </state>
-    <state x="951" y="758" width="670" height="676" key="search.everywhere.popup/0.23.2560.1417@0.23.2560.1417" timestamp="1602490858749" />
+    <state x="951" y="758" width="670" height="676" key="search.everywhere.popup/0.23.2560.1417@0.23.2560.1417" timestamp="1602745296319" />
   </component>
 </project>
