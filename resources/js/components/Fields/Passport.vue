@@ -124,9 +124,8 @@
                 </ValidationProvider>
             </div>
             <div class="w-1/2">
-                <ValidationProvider v-slot="{ errors }" class="mt-4" name="region" rules="required|max:255" tag="div">
-                    <label class="inline-block text-gray-700 text-sm font-bold mb-2" for="region">Регион<span
-                        class="text-red-300 text-sm">*</span>: <small v-if="errors[0]" class="text-red-400">{{
+                <ValidationProvider v-slot="{ errors }" class="mt-4" name="region" rules="max:255" tag="div">
+                    <label class="inline-block text-gray-700 text-sm font-bold mb-2" for="region">Регион: <small v-if="errors[0]" class="text-red-400">{{
                             errors[0]
                         }}</small>
                     </label>
@@ -140,9 +139,8 @@
         </div>
         <div class="flex">
             <div class="w-1/2 mr-4">
-                <ValidationProvider v-slot="{ errors }" class="mt-4" name="area" rules="required|max:255" tag="div">
-                    <label class="inline-block text-gray-700 text-sm font-bold mb-2" for="area">Район<span
-                        class="text-red-300 text-sm">*</span>: <small v-if="errors[0]" class="text-red-400">{{
+                <ValidationProvider v-slot="{ errors }" class="mt-4" name="area" rules="max:255" tag="div">
+                    <label class="inline-block text-gray-700 text-sm font-bold mb-2" for="area">Район: <small v-if="errors[0]" class="text-red-400">{{
                             errors[0]
                         }}</small>
                     </label>
@@ -197,10 +195,9 @@
                 </ValidationProvider>
             </div>
             <div class="w-1/3 mr-4">
-                <ValidationProvider v-slot="{ errors }" class="mt-4" name="housing" rules="required|max:255"
+                <ValidationProvider v-slot="{ errors }" class="mt-4" name="housing" rules="max:255"
                                     tag="div">
-                    <label class="inline-block text-gray-700 text-sm font-bold mb-2" for="housing">Корпус<span
-                        class="text-red-300 text-sm">*</span>: <small v-if="errors[0]" class="text-red-400">{{
+                    <label class="inline-block text-gray-700 text-sm font-bold mb-2" for="housing">Корпус: <small v-if="errors[0]" class="text-red-400">{{
                             errors[0]
                         }}</small>
                     </label>
@@ -212,10 +209,9 @@
                 </ValidationProvider>
             </div>
             <div class="w-1/3">
-                <ValidationProvider v-slot="{ errors }" class="mt-4" name="room" rules="required|max:255"
+                <ValidationProvider v-slot="{ errors }" class="mt-4" name="room" rules="max:255"
                                     tag="div">
-                    <label class="inline-block text-gray-700 text-sm font-bold mb-2" for="room">Квартира<span
-                        class="text-red-300 text-sm">*</span>: <small v-if="errors[0]" class="text-red-400">{{
+                    <label class="inline-block text-gray-700 text-sm font-bold mb-2" for="room">Квартира: <small v-if="errors[0]" class="text-red-400">{{
                             errors[0]
                         }}</small>
                     </label>
@@ -227,6 +223,35 @@
                 </ValidationProvider>
             </div>
         </div>
+        <hr class="w-20 border-gray-400 mt-8">
+        <ValidationProvider v-slot="{ errors }" class="mt-4" name="registration" rules="max:255" tag="div">
+            <label class="inline-block text-gray-700 text-sm font-bold mb-2" for="registration">Адрес регистрации: <small v-if="errors[0]" class="text-red-400">{{
+                    errors[0]
+                }}</small>
+            </label>
+            <textarea id="registration" v-model="data.registration"
+                      :class="{'border-red-400 focus:red-400': errors.length}"
+                      class="appearance-none resize-none rounded-lg border border-gray-300 border-b block px-2 py-2 w-full bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none focus:border-gray-800"
+                      name="registration"
+                      placeholder="133322, г. Смоленск, ул. Кравченко, д. 33, корп. 3, кв. 765"></textarea>
+        </ValidationProvider>
+        <ValidationProvider v-slot="{ errors }" class="mt-4" name="post" rules="max:255" tag="div">
+            <label class="inline-block text-gray-700 text-sm font-bold mb-2" for="post">Почтовый адрес: <small v-if="errors[0]" class="text-red-400">{{
+                    errors[0]
+                }}</small>
+            </label>
+            <div class="relative">
+                <button @click="data.post = data.registration" :class="data.registration.length ? 'bg-gray-300' : 'pointer-events-none cursor-not-allowed bg-gray-100 text-gray-600'" class="hover:bg-gray-400 focus:outline-none absolute right-0 top-0 mt-2 mr-2 p-1 rounded-lg">
+                    <svg class="w-4 h-4 fill-current" viewBox="0 0 561 561">
+                        <path d="M395.25 0h-306c-28.05 0-51 22.95-51 51v357h51V51h306V0zm76.5 102h-280.5c-28.05 0-51 22.95-51 51v357c0 28.05 22.95 51 51 51h280.5c28.05 0 51-22.95 51-51V153c0-28.05-22.95-51-51-51zm0 408h-280.5V153h280.5v357z"/>
+                    </svg>
+                </button>
+                <textarea id="post" v-model="data.post"
+                  :class="{'border-red-400 focus:red-400': errors.length}"
+                  class="appearance-none resize-none rounded-lg border border-gray-300 border-b block px-2 py-2 w-full bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none focus:border-gray-800"
+                  name="post"
+                  placeholder="456634, г. Йошкар - Ола, ул. Малько, д. 12"></textarea></div>
+                </ValidationProvider>
     </div>
 </template>
 
@@ -238,24 +263,25 @@ export default {
     directives: {
         'mask': VueMaskDirective
     },
+    props: ['data'],
     data() {
         return {
-            data: {
-                birthday: '',
-                series: '',
-                number: '',
-                issued: '',
-                code: '',
-                issuedBy: '',
-                born: '',
-                region: '',
-                area: '',
-                city: '',
-                street: '',
-                house: '',
-                housing: '',
-                room: ''
-            }
+            // data: {
+            //     birthday: '',
+            //     series: '',
+            //     number: '',
+            //     issued: '',
+            //     code: '',
+            //     issuedBy: '',
+            //     born: '',
+            //     region: '',
+            //     area: '',
+            //     city: '',
+            //     street: '',
+            //     house: '',
+            //     housing: '',
+            //     room: ''
+            // }
         }
     }
 }

@@ -16,17 +16,20 @@
                     ref="children"
                     :api-mode="false"
                     :css="classes.table"
-                    :data="children"
+                    :data="childrenComputed"
                     :fields="fields"
                 >
                 </vuetable>
             </div>
         </template>
+        <div v-else class="mt-4 text-gray-500 font-light">Нет данных</div>
     </div>
 </template>
 
 <script>
 import Vuetable from "vuetable-2";
+import moment from "moment";
+import AddChildForm from "./forms/AddChildForm";
 
 export default {
     name: "Children",
@@ -53,7 +56,7 @@ export default {
             },
             fields: [
                 {
-                    name: 'fio',
+                    name: 'name',
                     title: 'ФИО ребенка'
                 },
                 {
@@ -72,9 +75,26 @@ export default {
             ]
         }
     },
+    computed: {
+        childrenComputed() {
+            return this.children.map(child => {
+                child['age'] = moment().diff(child.birthday, 'years')
+                return child
+            })
+        }
+    },
     methods: {
         showAddChildForm() {
-            console.log('showAddChildForm')
+            this.$modal.show(
+                AddChildForm,
+                {},
+                {classes: 'rounded-lg ml-32', height: 'auto', name: 'AddChildForm'},
+                {
+                    'childAdded': (child) => {
+                        this.children.push(child)
+                    }
+                }
+            )
         }
     }
 }

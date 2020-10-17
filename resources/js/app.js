@@ -6,6 +6,8 @@ import VModal from 'vue-js-modal/dist/index.nocss.js'
 import Multiselect from 'vue-multiselect'
 import {ValidationObserver, ValidationProvider} from 'vee-validate';
 import Notifications from 'vue-notification'
+import VueMask from 'v-mask'
+
 
 Vue.use(VModal, {dynamicDefault: {draggable: false, resizable: false, adaptive: true}})
 Vue.component('multiselect', Multiselect)
@@ -23,6 +25,16 @@ import VueScrollactive from 'vue-scrollactive';
 Vue.use(VueScrollactive);
 
 Vue.use(Notifications)
+
+import VueCurrencyInput from 'vue-currency-input'
+
+Vue.use(VueCurrencyInput, {
+    globalOptions: {
+        currency: "RUB",
+        precision: 0,
+        distractionFree: false
+    },
+})
 
 const app = new Vue({
     el: '#app',

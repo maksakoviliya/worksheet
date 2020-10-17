@@ -106,16 +106,9 @@ export default {
     directives: {
         'mask': VueMaskDirective
     },
+    props: ['data'],
     data() {
         return {
-            data: {
-                envyID: '',
-                name: '',
-                phone: '',
-                mail: '',
-                messengers: [],
-                livingCity: '',
-            },
             messengersList: ['WhatsApp', 'Viber', 'Telegram', 'SMS']
         }
     }

@@ -41,6 +41,8 @@
     position: relative;
     //overflow: hidden;
     box-sizing: border-box;
+    max-height: 90vh;
+    overflow: auto;
 
     background-color: white;
     @apply rounded-lg shadow-lg p-8;
@@ -553,4 +555,8 @@ fieldset[disabled] .multiselect {
     to {
         transform: rotate(2turn);
     }
+}
+
+.vuetable-body-wrapper{
+    overflow: auto;
 }

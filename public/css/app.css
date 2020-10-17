@@ -21273,6 +21273,8 @@ video {
 .vm--modal {
   position: relative;
   box-sizing: border-box;
+  max-height: 90vh;
+  overflow: auto;
   background-color: white;
   border-radius: 0.5rem;
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
@@ -21835,6 +21837,10 @@ fieldset[disabled] .multiselect {
   to {
     transform: rotate(2turn);
   }
+}
+
+.vuetable-body-wrapper {
+  overflow: auto;
 }
 
 @media (min-width: 640px){

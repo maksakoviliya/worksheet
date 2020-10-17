@@ -13,7 +13,7 @@
                         <input id="isMarried" v-model="isMarried" class="absolute opacity-0 w-0 h-0" type="checkbox"/>
                       </span>
                     </span>
-                <span class="ml-3 text-sm text-gray-800">Семейное положение <span class="text-gray-500">({{
+                <span class="ml-3 text-sm text-gray-800 inline-flex flex-col">Семейное положение <span class="text-gray-500">({{
                         isMarried ? 'Женат/Замужем' : 'Холост'
                     }})</span></span>
             </label>
