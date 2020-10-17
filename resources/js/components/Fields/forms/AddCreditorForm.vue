@@ -48,9 +48,10 @@
                             errors[0]
                         }}</small>
                 </label>
-                <currency-input
+                <input
                     id="current"
                     v-model="current"
+                    v-currency
                     :class="{'border-red-400 focus:red-400': errors.length}"
                     class="appearance-none rounded-lg border border-gray-300 border-b block px-2 py-2 w-full bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none focus:border-gray-800"
                     placeholder=""/>
@@ -61,9 +62,10 @@
                         errors[0]
                     }}</small>
                 </label>
-                <currency-input
+                <input
                     id="monthly"
                     v-model="monthly"
+                    v-currency
                     :class="{'border-red-400 focus:red-400': errors.length}"
                     class="appearance-none rounded-lg border border-gray-300 border-b block px-2 py-2 w-full bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none focus:border-gray-800"
                     placeholder=""/>
