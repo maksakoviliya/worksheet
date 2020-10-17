@@ -7,11 +7,12 @@
                         errors[0]
                     }}</small>
                 </label>
-                <input id="bank"
-                       v-model="bank"
-                       :class="{'border-red-400 focus:red-400': errors.length}"
-                       class="appearance-none rounded-lg border border-gray-300 border-b block px-2 py-2 w-full bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none focus:border-gray-800"
-                       placeholder=""/>
+                <multiselect id="bank" v-model="bank"
+                             :class="{'invalid': errors.length}"
+                             :custom-label=" opt => banks.find(bank => bank.id === opt).name"
+                             :options="banks.map(bank => bank.id)"
+                             :show-labels="false"
+                             placeholder="Выберите банк"></multiselect>
             </ValidationProvider>
             <ValidationProvider v-slot="{ errors }" name="type" rules="required" tag="div" class="mt-4">
                 <label class="inline-block text-gray-700 text-sm font-bold mb-2" for="type">Тип кредита<span
@@ -19,11 +20,11 @@
                         errors[0]
                     }}</small>
                 </label>
-                <input id="type"
-                       v-model="type"
-                       :class="{'border-red-400 focus:red-400': errors.length}"
-                       class="appearance-none rounded-lg border border-gray-300 border-b block px-2 py-2 w-full bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none focus:border-gray-800"
-                       placeholder=""/>
+                <multiselect id="type" v-model="type"
+                             :class="{'invalid': errors.length}"
+                             :options="types"
+                             :show-labels="false"
+                             placeholder="Выберите тип кредита"></multiselect>
             </ValidationProvider>
             <ValidationProvider v-slot="{ errors }" name="total" rules="required" tag="div" class="mt-4">
                 <label class="inline-block text-gray-700 text-sm font-bold mb-2" for="total">Сумма кредита<span
@@ -123,6 +124,20 @@ export default {
             monthly: 0,
             delay: '',
             comment: '',
+            banks: [
+                {id: 1, name: 'Сбер'},
+                {id: 2, name: 'ВТБ'},
+                {id: 3, name: 'МКБ'},
+                {id: 4, name: 'Тинькоф Банк'},
+            ],
+            types: [
+                'Потреб. кредит',
+                'Кредитная карта',
+                'Ипотека',
+                'Залоговый кредит',
+                'Автокредит',
+                'МФО'
+            ]
         }
     },
     directives: {
@@ -131,7 +146,7 @@ export default {
     methods: {
         addCreditor() {
             this.$parent.$emit('creditorAdded', {
-                bank: this.bank,
+                bank: this.banks.find(bank => bank.id === this.bank).id,
                 type: this.type,
                 total: this.total,
                 current: this.current,

@@ -1,7 +1,7 @@
 import {extend} from 'vee-validate';
 
 
-import { email, required, required_if, min, max, confirmed } from 'vee-validate/dist/rules';
+import { email, required, required_if, min, max, confirmed, is_not } from 'vee-validate/dist/rules';
 
 extend('email', {
     ...email,
@@ -20,4 +20,7 @@ extend('max', {
 });
 extend('confirmed', {
     ...confirmed,
+});
+extend('is_not', {
+    ...is_not,
 });

@@ -75,10 +75,19 @@ export default {
                     handleIcon: 'grey sidebar icon',
                 },
             },
+            banks: [
+                {id: 1, name: 'Сбер'},
+                {id: 2, name: 'ВТБ'},
+                {id: 3, name: 'МКБ'},
+                {id: 4, name: 'Тинькоф Банк'},
+            ],
             fields: [
                 {
                     name: 'bank',
-                    title: 'Банк'
+                    title: 'Банк',
+                    formatter: value => {
+                        return this.banks.find(bank=>bank.id===value).name
+                    }
                 },
                 {
                     name: 'type',
