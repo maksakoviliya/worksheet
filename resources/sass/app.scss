@@ -260,13 +260,12 @@ fieldset[disabled] .multiselect {
     margin-right: 10px;
     color: #fff;
     line-height: 1;
-    background: #41b883;
-    margin-bottom: 5px;
+    //margin-bottom: 5px;
     white-space: nowrap;
     overflow: hidden;
     max-width: 100%;
     text-overflow: ellipsis;
-    @apply rounded-lg;
+    @apply rounded-lg bg-gray-300 text-gray-800;
 }
 
 .multiselect__tag-icon {

@@ -22,7 +22,10 @@
     },
     "names": {
         "username": "'Имя'",
+        "name": "'ФИО'",
+        "envyID": "'Ссылка Envy'",
         "email": "'Email'",
+        "phone": "'Телефон'",
         "password": "'Пароль'",
         "password_confirmation": "'Пароли'",
         "role": "'Роль'"

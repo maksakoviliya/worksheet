@@ -21514,13 +21514,17 @@ fieldset[disabled] .multiselect {
   margin-right: 10px;
   color: #fff;
   line-height: 1;
-  background: #41b883;
-  margin-bottom: 5px;
   white-space: nowrap;
   overflow: hidden;
   max-width: 100%;
   text-overflow: ellipsis;
   border-radius: 0.5rem;
+  --bg-opacity: 1;
+  background-color: #e2e8f0;
+  background-color: rgba(226, 232, 240, var(--bg-opacity));
+  --text-opacity: 1;
+  color: #2d3748;
+  color: rgba(45, 55, 72, var(--text-opacity));
 }
 
 .multiselect__tag-icon {
