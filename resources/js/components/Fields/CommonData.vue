@@ -1,5 +1,5 @@
 <template>
-    <div id="common" class="rounded-lg bg-white p-6 mr-6 shadow-md">
+    <ValidationObserver id="common" class="rounded-lg bg-white p-6 mr-6 shadow-md" ref="commonValidationObserver" v-slot="{ invalid, handleSubmit }" tag="div">
         <h3 class="font-semibold text-lg text-gray-600">Общие данные сделки</h3>
         <hr class="w-20 border-teal-400 mt-2">
         <ValidationProvider v-slot="{ errors }" class="mt-4" name="envyID" rules="required|max:255" tag="div">
@@ -95,7 +95,7 @@
                 </ValidationProvider>
             </div>
         </div>
-    </div>
+    </ValidationObserver>
 </template>
 
 <script>

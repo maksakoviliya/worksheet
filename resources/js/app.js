@@ -28,6 +28,11 @@ Vue.use(Notifications)
 
 import VueCurrencyInput from 'vue-currency-input'
 
+import DatePicker from 'vue2-datepicker';
+import 'vue2-datepicker/locale/ru';
+
+Vue.component('date-picker', DatePicker)
+
 Vue.use(VueCurrencyInput, {
     globalOptions: {
         currency: "RUB",

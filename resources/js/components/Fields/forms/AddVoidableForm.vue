@@ -19,12 +19,13 @@
                         errors[0]
                     }}</small>
                 </label>
-                <input id="date"
-                       v-mask="'##.##.####'"
-                       v-model="date"
-                       :class="{'border-red-400 focus:red-400': errors.length}"
-                       class="appearance-none rounded-lg border border-gray-300 border-b block px-2 py-2 w-full bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none focus:border-gray-800"
-                       placeholder=""/>
+              <date-picker id="date"
+                           v-model="date"
+                           placeholder="22.08.1987"
+                           :input-class="errors.length ? 'custom-input has-errors' : 'custom-input'"
+                           format="DD.MM.YYYY"
+                           prefix-class="custom"
+                           type="date"></date-picker>
             </ValidationProvider>
             <ValidationProvider v-slot="{ errors }" class="mt-4" name="cost" rules="required" tag="div">
                 <label class="inline-block text-gray-700 text-sm font-bold mb-2" for="cost">Стоимость<span
@@ -34,6 +35,7 @@
                 </label>
                 <input id="cost"
                        v-model="cost"
+                       v-currency
                        :class="{'border-red-400 focus:red-400': errors.length}"
                        class="appearance-none rounded-lg border border-gray-300 border-b block px-2 py-2 w-full bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none focus:border-gray-800"
                        placeholder=""/>
@@ -77,7 +79,7 @@ export default {
         return {
             object: '',
             date: '',
-            cost: '',
+            cost: '0 ₽',
             money: '',
         }
     },

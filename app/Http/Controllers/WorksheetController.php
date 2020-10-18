@@ -35,7 +35,9 @@ class WorksheetController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Worksheet::create($request->all());
+
+        return response()->json(['success']);
     }
 
     /**

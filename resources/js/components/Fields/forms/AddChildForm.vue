@@ -14,17 +14,18 @@
                        placeholder=""/>
             </ValidationProvider>
             <ValidationProvider v-slot="{ errors }" name="birthday" rules="required" tag="div" class="mt-4">
-                <label class="inline-block text-gray-700 text-sm font-bold mb-2" for="birthday">Дата рождения<span
+                <label class="inline-block text-gray-700 text-sm font-bold mb-2" for="child_birthday">Дата рождения<span
                     class="text-red-300 text-sm">*</span>: <small v-if="errors[0]" class="text-red-400">{{
                         errors[0]
                     }}</small>
                 </label>
-                <input id="birthday"
-                       v-mask="'##.##.####'"
-                       v-model="birthday"
-                       :class="{'border-red-400 focus:red-400': errors.length}"
-                       class="appearance-none rounded-lg border border-gray-300 border-b block px-2 py-2 w-full bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none focus:border-gray-800"
-                       placeholder=""/>
+                <date-picker id="child_birthday"
+                             v-model="birthday"
+                             placeholder="22.08.1987"
+                             :input-class="errors.length ? 'custom-input has-errors' : 'custom-input'"
+                             format="DD.MM.YYYY"
+                             prefix-class="custom"
+                             type="date"></date-picker>
             </ValidationProvider>
             <div class="mt-6">
                 <button

@@ -7,11 +7,12 @@
                         errors[0]
                     }}</small>
                 </label>
-                <input id="type"
-                       v-model="type"
-                       :class="{'border-red-400 focus:red-400': errors.length}"
-                       class="appearance-none rounded-lg border border-gray-300 border-b block px-2 py-2 w-full bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none focus:border-gray-800"
-                       placeholder=""/>
+                <multiselect id="type"
+                             v-model="type"
+                             :class="{'invalid': errors.length}"
+                             :options="types"
+                             :show-labels="false"
+                             placeholder="Выберите вид имущества"></multiselect>
             </ValidationProvider>
             <ValidationProvider v-slot="{ errors }" class="mt-4" name="ownership" rules="required" tag="div">
                 <label class="inline-block text-gray-700 text-sm font-bold mb-2" for="ownership">Вид собственности<span
@@ -38,7 +39,7 @@
                        placeholder=""/>
             </ValidationProvider>
             <ValidationProvider v-slot="{ errors }" class="mt-4" name="area" rules="required" tag="div">
-                <label class="inline-block text-gray-700 text-sm font-bold mb-2" for="area">Площадь<span
+                <label class="inline-block text-gray-700 text-sm font-bold mb-2" for="area">Площадь <span class="text-gray-500 font-light">(м<sup>2</sup>)</span><span
                     class="text-red-300 text-sm">*</span>: <small v-if="errors[0]" class="text-red-400">{{
                         errors[0]
                     }}</small>
@@ -81,22 +82,24 @@
                 </label>
                 <input id="cost"
                        v-model="cost"
+                       v-currency
                        :class="{'border-red-400 focus:red-400': errors.length}"
                        class="appearance-none rounded-lg border border-gray-300 border-b block px-2 py-2 w-full bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none focus:border-gray-800"
                        placeholder=""/>
             </ValidationProvider>
             <ValidationProvider v-slot="{ errors }" class="mt-4" name="date" rules="required" tag="div">
-                <label class="inline-block text-gray-700 text-sm font-bold mb-2" for="date">Дата приобретения<span
+                <label class="inline-block text-gray-700 text-sm font-bold mb-2" for="imBuyDate">Дата приобретения<span
                     class="text-red-300 text-sm">*</span>: <small v-if="errors[0]" class="text-red-400">{{
                         errors[0]
                     }}</small>
                 </label>
-                <input id="date"
-                       v-mask="'##.##.####'"
-                       v-model="date"
-                       :class="{'border-red-400 focus:red-400': errors.length}"
-                       class="appearance-none rounded-lg border border-gray-300 border-b block px-2 py-2 w-full bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none focus:border-gray-800"
-                       placeholder=""/>
+                <date-picker id="imBuyDate"
+                             v-model="date"
+                             placeholder="22.08.1987"
+                             :input-class="errors.length ? 'custom-input has-errors' : 'custom-input'"
+                             format="DD.MM.YYYY"
+                             prefix-class="custom"
+                             type="date"></date-picker>
             </ValidationProvider>
             <div class="mt-6">
                 <button
@@ -129,8 +132,16 @@ export default {
             area: '',
             pledge: '',
             basis: '',
-            cost: '',
+            cost: '0 ₽',
             date: '',
+            types: [
+                'Гараж',
+                'Дача',
+                'Жилой дом',
+                'Земельный участок',
+                'Квартира',
+                'Иное',
+            ]
         }
     },
     methods: {

@@ -25,13 +25,13 @@ class CreateWorksheetsTable extends Migration
             $table->string('livingCity');
 
             // Паспорт
-            $table->string('birthday');
+            $table->date('birthday');
             $table->string('series');
             $table->string('number');
             $table->string('issued');
             $table->string('code');
-            $table->string('issuedBy');
-            $table->string('born');
+            $table->text('issuedBy');
+            $table->text('born');
             $table->string('region')->nullable();
             $table->string('area')->nullable();
             $table->string('city');
@@ -39,8 +39,50 @@ class CreateWorksheetsTable extends Migration
             $table->string('house');
             $table->string('housing')->nullable();
             $table->string('room')->nullable();
-            $table->string('registration')->nullable();
-            $table->string('post')->nullable();
+            $table->text('registration')->nullable();
+            $table->text('post')->nullable();
+
+            // Creditors
+            $table->json('creditors')->nullable();
+            $table->date('nextPayment')->nullable();
+
+            // Income
+            $table->json('sources')->nullable();
+            $table->boolean('isIp')->nullable();
+            $table->boolean('isDirector')->nullable();
+            $table->text('oooComment')->nullable();
+
+            // Marital Status
+            $table->boolean('isMarried');
+            $table->string('spouse')->nullable();
+
+            // Children
+            $table->json('children')->nullable();
+
+            // Immovable
+            $table->json('immovable')->nullable();
+
+            // Movable
+            $table->json('movable')->nullable();
+
+            // Spouses Immovable
+            $table->json('spousesImmovable')->nullable();
+
+            // Spouses Movable
+            $table->json('spousesMovable')->nullable();
+
+            // Voidable
+            $table->json('voidable')->nullable();
+
+            // Payment
+            $table->json('payment')->nullable();
+
+            // Зависмсомть от юзера
+            $table->foreignId('user_id')->constrained();
+
+            // Зависимость от филиала
+            $table->integer('filial_id')->unsigned()->nullable();
+
             $table->timestamps();
         });
     }

@@ -20,8 +20,8 @@
                     :fields="fields"
                 >
                     <div slot="actions" slot-scope="props">
-                        <button @click="data.creditors.splice(props.rowIndex, 1)"
-                                class="bg-gray-300 text-gray-600 p-1 rounded-lg hover:bg-gray-400 text-gray-700 focus:outline-none">
+                        <button class="bg-gray-300 text-gray-600 p-1 rounded-lg hover:bg-gray-400 text-gray-700 focus:outline-none"
+                                @click="data.creditors.splice(props.rowIndex, 1)">
                             <svg class="w-4 h-4 fill-current" viewBox="0 0 512 512">
                                 <path
                                     d="M300 0h-88c-24.262 0-44 19.738-44 44v36h-56c-35.29 0-64 28.71-64 64 0 32.579 24.475 59.531 56 63.482V448c0 35.29 28.71 64 64 64h176c35.29 0 64-28.71 64-64V207.482c31.525-3.952 56-30.903 56-63.482 0-35.29-28.71-64-64-64h-56V44c0-24.262-19.738-44-44-44zm-84 48h80v32h-80zm144 400c0 8.822-7.178 16-16 16H168c-8.822 0-16-7.178-16-16V208h208zm56-304c0 8.822-7.178 16-16 16H112c-8.822 0-16-7.178-16-16s7.178-16 16-16h288c8.822 0 16 7.178 16 16z"/>
@@ -38,19 +38,26 @@
                 class="text-gray-500 font-semibold text-base">{{ totalSum }}</span></p>
             <p class="text-gray-800 mt-1 text-sm">Ежемесячный платеж по всем кредитам: <span
                 class="text-gray-500 font-semibold text-base">{{ totalMonthly }}</span></p>
-            <ValidationProvider v-slot="{ errors }" class="mt-4" name="nextPayment" rules="required|max:255" tag="div">
-                <label class="inline-block text-gray-700 text-sm font-bold mb-2" for="nextPayment">Дата ближайшего
-                    платежа по кредиту<span
-                        class="text-red-300 text-sm">*</span>: <small v-if="errors[0]" class="text-red-400">{{
-                            errors[0]
-                        }}</small>
-                </label>
-                <input id="nextPayment"
-                       v-model="data.nextPayment"
-                       :class="{'border-red-400 focus:red-400': errors.length}"
-                       class="appearance-none w-1/3 rounded-lg border border-gray-300 border-b block px-2 py-2 bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none focus:border-gray-800"
-                       placeholder="22.08.1987"/>
-            </ValidationProvider>
+            <ValidationObserver ref="creditorsValidationObserver" tag="div">
+                <ValidationProvider v-slot="{ errors }" class="mt-4" name="nextPayment" rules="required|max:255"
+                                    tag="div">
+                    <label class="inline-block text-gray-700 text-sm font-bold mb-2" for="nextPayment">Дата ближайшего
+                        платежа по кредиту<span
+                            class="text-red-300 text-sm">*</span>: <small v-if="errors[0]" class="text-red-400">{{
+                                errors[0]
+                            }}</small>
+                    </label>
+                    <div class="w-1/3 pr-2">
+                        <date-picker id="nextPayment"
+                                     v-model="data.nextPayment"
+                                     :input-class="errors.length ? 'custom-input has-errors' : 'custom-input'"
+                                     format="DD.MM.YYYY"
+                                     placeholder="22.08.1987"
+                                     prefix-class="custom"
+                                     type="date"></date-picker>
+                    </div>
+                </ValidationProvider>
+            </ValidationObserver>
         </template>
         <div v-else class="mt-4 text-gray-500 font-light">Нет данных</div>
     </div>
@@ -162,7 +169,6 @@ export default {
                 {classes: 'lg:ml-32', height: 'auto', name: 'AddCreditorForm'},
                 {
                     'creditorAdded': (creditor) => {
-                        console.log('creditor:', creditor)
                         this.data.creditors.push(creditor)
                     }
                 }

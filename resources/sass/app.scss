@@ -560,3 +560,36 @@ fieldset[disabled] .multiselect {
 .vuetable-body-wrapper{
     overflow: auto;
 }
+
+$namespace: 'custom';
+
+@import '~vue2-datepicker/scss/index.scss';
+
+.#{$namespace}-datepicker {
+    @apply block w-full;
+}
+
+.#{$namespace}-input {
+    //placeholder-gray-400
+    min-height: 39px;
+    @apply appearance-none rounded-lg border border-b block px-2 py-2 w-full bg-white text-sm border-gray-300 text-gray-700;
+    &::placeholder{
+        @apply  text-gray-400;
+    }
+    &:hover {
+        @apply border-gray-300;
+    }
+    &:focus {
+        // placeholder-gray-600
+        @apply bg-white text-gray-700 outline-none border-gray-800;
+    }
+    &.has-errors{
+        @apply border-red-400;
+    }
+}
+
+.#{$namespace}-btn {
+    &:focus{
+        @apply outline-none;
+    }
+}

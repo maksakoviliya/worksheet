@@ -29,4 +29,5 @@ Route::middleware(['auth:sanctum', 'can:manage users'])->group(function() {
 Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('users', 'UsersController');
     Route::get('users-data', 'UsersController@getUsersData');
+    Route::resource('worksheets', 'WorksheetController')->except('index');
 });

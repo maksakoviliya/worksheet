@@ -7,8 +7,12 @@
 
     </div>
 
-    <div class="flex flex-col mt-8">
-        <worksheet></worksheet>
+    <div class="flex flex-col mt-8 mb-20">
+{{--        {{ Auth()->user()->filial }}--}}
+{{--        {{ Auth()->user()->filial || 'empty' }}--}}
+        <worksheet :user-id="{{ Auth()->user()->id }}" :filial="{{ Auth()->user()->filial || 'empty' }}" token="{{ Auth()->user()->token }}"></worksheet>
+
     </div>
+
 @endsection
 

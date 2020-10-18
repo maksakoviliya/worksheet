@@ -32,17 +32,17 @@
             <h3 class="font-semibold text-gray-600 mt-4">Итоги по доходам</h3>
             <hr class="w-20 border-gray-400 mt-2">
             <p class="text-gray-800 mt-1 text-sm">Общая сумма официальных доходов: <span
-                class="text-gray-500 font-semibold text-base">23234</span></p>
+                class="text-gray-500 font-semibold text-base">{{ totalLegal }}</span></p>
             <p class="text-gray-800 mt-1 text-sm">Общая сумма неофициальных доходов: <span
-                class="text-gray-500 font-semibold text-base">23234</span></p>
-            <p class="text-gray-800 mt-4 text-sm">Общая сумма доходов: <span
-                class="text-gray-500 font-semibold text-base">234234</span></p>
+                class="text-gray-500 font-semibold text-base">{{ totalIllegal }}</span></p>
+            <p class="text-gray-800 mt-4 text-sm font-semibold">Общая сумма доходов: <span
+                class="text-gray-500 font-semibold text-base">{{ total }}</span></p>
         </template>
         <div v-else class="mt-4 text-gray-500 font-light">Нет данных</div>
         <h3 class="font-semibold text-gray-600 mt-4">Предпренимательская деятельность</h3>
         <hr class="w-20 border-gray-400 mt-2">
         <div class="flex">
-            <div class="w-1/2">
+            <div class="w-1/2 mr-4">
                 <label class="mt-3 inline-flex items-center cursor-pointer" for="isIp">
                     <span class="relative">
                       <span class="block w-10 h-6 bg-gray-400 rounded-full shadow-inner"></span>
@@ -57,7 +57,7 @@
                         }})</span></span>
                 </label>
                 <transition name="slide-y">
-                    <VueSlideToggle :duration="200" :open="data.isIp" tag="div">
+                    <VueSlideToggle :duration="200" :open="data.isIp" tag="div" >
                         <ValidationProvider v-slot="{ errors }" class="mt-4" name="oooComment"
                                             rules="max:500" tag="div">
                             <label class="inline-block text-gray-700 text-sm font-bold mb-2" for="oooComment">Комментарий: <small v-if="errors[0]" class="text-red-400">{{
@@ -145,6 +145,45 @@ export default {
                 }
             ]
         }
+    },
+    computed: {
+        totalLegal() {
+            return new Intl.NumberFormat('ru-RU', {
+                style: 'currency',
+                currency: 'RUB',
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            }).format(_.sumBy(this.data.sources, c => this.$ci.parse(c.legal, {
+                currency: "RUB",
+                precision: 0,
+            })))
+        },
+        totalIllegal() {
+            return new Intl.NumberFormat('ru-RU', {
+                style: 'currency',
+                currency: 'RUB',
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            }).format(_.sumBy(this.data.sources, c => this.$ci.parse(c.illegal, {
+                currency: "RUB",
+                precision: 0,
+            })))
+        },
+        total() {
+            return new Intl.NumberFormat('ru-RU', {
+                style: 'currency',
+                currency: 'RUB',
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            }).format(this.$ci.parse(this.totalIllegal, {
+                currency: "RUB",
+                precision: 0,
+            }) + this.$ci.parse(this.totalLegal, {
+                currency: "RUB",
+                precision: 0,
+            }))
+        },
+
     },
     methods: {
         showAddWorkForm() {

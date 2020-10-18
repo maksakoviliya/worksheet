@@ -26,5 +26,5 @@ Route::group(['middleware' => ['role:admin|head', 'auth']], function () {
 //});
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/', 'HomeController@home')->name('home');
-    Route::resource('worksheets', 'WorksheetController');
+    Route::resource('worksheets', 'WorksheetController')->only('index', 'show');
 });
