@@ -24,4 +24,11 @@ class HomeController extends Controller
     {
         return view('home');
     }
+
+    public function worksheets() {
+        return view('worksheets');
+    }
+    public function worksheet() {
+        return view('worksheet');
+    }
 }

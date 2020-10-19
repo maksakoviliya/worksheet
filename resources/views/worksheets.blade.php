@@ -9,7 +9,7 @@
 
     <div class="flex flex-col mt-8">
 
-        <worksheets :is-admin="@can('manage heads') true @else false @endcan" token="{{ Auth()->user()->token }}"></worksheets>
+        <worksheets token="{{ Auth()->user()->token }}"></worksheets>
 
     </div>
 @endsection

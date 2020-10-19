@@ -46,4 +46,29 @@ class Worksheet extends Model
         'payment',
         'user_id',
     ];
+
+    protected $casts = [
+        'messengers' => 'array',
+        'creditors' => 'array',
+        'sources' => 'array',
+        'children' => 'array',
+        'immovable' => 'array',
+        'movable' => 'array',
+        'spousesImmovable' => 'array',
+        'spousesMovable' => 'array',
+        'voidable' => 'array',
+        'payment' => 'array',
+
+        'birthday' => 'date',
+        'issued' => 'date',
+        'nextPayment' => 'date'
+    ];
+
+    public function user() {
+        return $this->belongsTo('App\User');
+    }
+
+    public function filial() {
+        return $this->belongsTo('App\Filial');
+    }
 }

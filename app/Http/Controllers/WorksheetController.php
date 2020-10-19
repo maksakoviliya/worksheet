@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\worksheet;
+use App\Http\Resources\WorksheetCollection;
+use App\Worksheet;
 use Illuminate\Http\Request;
 
 class WorksheetController extends Controller
@@ -10,11 +11,22 @@ class WorksheetController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return WorksheetCollection
      */
     public function index()
     {
-        return view('worksheets');
+//        $request->validate([
+//            'search' => 'string|nullable|max:100',
+//        ]);
+//        if (Auth::user()->can('manage heads')) {
+//            if (!$request->search) {
+//                return new UserCollection(User::paginate(10));
+//            }
+//            return new UserCollection(User::where('id', $request->search)
+//                ->orWhere('name', 'LIKE', "%$request->search%")
+//                ->orWhere('email', 'LIKE', "%$request->search%")->paginate(10));
+//
+        return new WorksheetCollection(Worksheet::paginate(10));
     }
 
     /**
