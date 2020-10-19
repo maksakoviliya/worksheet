@@ -16,7 +16,7 @@
             <!--            <svg v-if="loading" class="animate-spin h-5 w-5 mr-3 fill-current text-gray-500 mr-auto ml-2" viewBox="0 0 512 512">-->
             <!--                <path d="M24 304a24 24 0 1124 24 24 24 0 01-24-24zm168 168a24 24 0 10-24-24 24 24 0 0024 24zm-91-53a24 24 0 10-24-24 24 24 0 0024 24zm115 29a24 24 0 10-24 24 24 24 0 0024-24m-115-29a24 24 0 10-24-24 24 24 0 0024 24zM24 192a24 24 0 1024-24 24 24 0 00-24 24zM168 48a24 24 0 1024-24 24 24 0 00-24 24zm-91 53a24 24 0 1024-24 24 24 0 00-24 24zm-53 91a24 24 0 1024-24 24 24 0 00-24 24zM216 48a24 24 0 10-24 24 24 24 0 0024-24M77 101a24 24 0 1024-24 24 24 0 00-24 24zm228.4-29.922C384.653 93.751 440 166.5 440 248a181.553 181.553 0 01-38.115 111.96 184.289 184.289 0 01-33.1 33.065l-5.669 20.408 49.393 5.488A230.377 230.377 0 00488 248a228.313 228.313 0 00-48.4-140.983 236.543 236.543 0 00-120.993-82.086 24 24 0 00-13.2 46.147zM479.854 466.65a24 24 0 00-21.2-26.5L342.67 427.26l32.454-116.836a24 24 0 10-46.248-12.848l-40 144a24 24 0 0020.474 30.278l144 16a24.512 24.512 0 002.679.148 24.005 24.005 0 0023.825-21.352z"/>-->
             <!--            </svg>-->
-            <button class="px-6 py-2 bg-green-600 rounded-md text-white text-sm hover:bg-green-500 ml-3 focus:outline-none focus:shadow" type="button" @click="showAddUserForm">Добавить</button>
+            <a href="/worksheets/create" class="px-6 py-2 bg-green-600 rounded-md text-white text-sm hover:bg-green-500 ml-3 focus:outline-none focus:shadow">Добавить</a>
         </div>
         <div
             class="align-middle inline-block min-w-full shadow overflow-hidden sm:rounded-lg border-b border-gray-200 mt-6">
@@ -30,18 +30,17 @@
                 pagination-path="meta"
                 @vuetable:pagination-data="onPaginationData"
             >
-<!--                <template slot="actions" slot-scope="props">-->
-<!--                    <button @click="showEditUserForm(props.rowData.id)" type="button" class="text-gray-600 hover:text-gray-900 transition duration-200 ease-in-out inline-flex items-center focus:outline-none focus:text-gray-500"-->
-<!--                            href="#">-->
-<!--                        <svg class="w-6 h-6 fill-current" viewBox="0 0 512.009 512.009">-->
-<!--                            <path-->
-<!--                                d="M397.96 330.099c-13.755 0-24.872 11.118-24.872 24.872v78.125c0 13.73-11.143 24.872-24.872 24.872H74.617c-13.73 0-24.872-11.143-24.872-24.872V109.754c0-13.73 11.143-24.872 24.872-24.872h144.509c13.754 0 24.872-11.118 24.872-24.872s-11.118-24.872-24.872-24.872H74.617C33.478 35.136 0 68.615 0 109.754v323.342c0 41.139 33.478 74.617 74.617 74.617h273.597c41.139 0 74.617-33.453 74.617-74.617v-78.124c.001-13.755-11.117-24.873-24.871-24.873z"/>-->
-<!--                            <path-->
-<!--                                d="M484.193 31.977c-18.057-18.057-41.637-27.161-65.39-27.658-24.997-.547-50.143 8.506-69.046 27.434L181.37 200.14c-24.574 24.674-38.105 57.406-38.105 92.177v55.714c0 13.754 11.118 24.872 24.872 24.872h55.714c34.772 0 67.504-13.531 92.202-38.13L484.216 166.61c37.061-37.083 37.061-97.523-.023-134.633zM280.91 299.581c-15.247 15.197-35.543 23.579-57.057 23.579H193.01v-30.842c0-21.515 8.382-41.811 23.554-57.033L327.57 124.279l64.32 64.32-110.98 110.982zm168.113-168.114L427.06 153.43l-64.32-64.32 21.962-21.962c17.759-17.759 46.611-17.709 64.32 0 17.71 17.733 17.71 46.585.001 64.319z"/>-->
-<!--                        </svg>-->
-<!--                        <span class="text-sm ml-2">Изменить</span>-->
-<!--                    </button>-->
-<!--                </template>-->
+                <template slot="actions" slot-scope="props">
+                    <a :href="`/worksheets/${props.rowData.id}`" class="text-gray-600 hover:text-gray-900 transition duration-200 ease-in-out inline-flex items-center focus:outline-none focus:text-gray-500">
+                        <svg class="w-6 h-6 fill-current" viewBox="0 0 512.009 512.009">
+                            <path
+                                d="M397.96 330.099c-13.755 0-24.872 11.118-24.872 24.872v78.125c0 13.73-11.143 24.872-24.872 24.872H74.617c-13.73 0-24.872-11.143-24.872-24.872V109.754c0-13.73 11.143-24.872 24.872-24.872h144.509c13.754 0 24.872-11.118 24.872-24.872s-11.118-24.872-24.872-24.872H74.617C33.478 35.136 0 68.615 0 109.754v323.342c0 41.139 33.478 74.617 74.617 74.617h273.597c41.139 0 74.617-33.453 74.617-74.617v-78.124c.001-13.755-11.117-24.873-24.871-24.873z"/>
+                            <path
+                                d="M484.193 31.977c-18.057-18.057-41.637-27.161-65.39-27.658-24.997-.547-50.143 8.506-69.046 27.434L181.37 200.14c-24.574 24.674-38.105 57.406-38.105 92.177v55.714c0 13.754 11.118 24.872 24.872 24.872h55.714c34.772 0 67.504-13.531 92.202-38.13L484.216 166.61c37.061-37.083 37.061-97.523-.023-134.633zM280.91 299.581c-15.247 15.197-35.543 23.579-57.057 23.579H193.01v-30.842c0-21.515 8.382-41.811 23.554-57.033L327.57 124.279l64.32 64.32-110.98 110.982zm168.113-168.114L427.06 153.43l-64.32-64.32 21.962-21.962c17.759-17.759 46.611-17.709 64.32 0 17.71 17.733 17.71 46.585.001 64.319z"/>
+                        </svg>
+                        <span class="text-sm ml-2">Изменить</span>
+                    </a>
+                </template>
             </vuetable>
         </div>
         <users-paginator @vuetable-pagination:change-page="onChangePage" class="mt-6" ref="pagination"></users-paginator>
@@ -133,7 +132,7 @@ export default {
     watch: {
         search: _.debounce(async function () {
             this.$nextTick(() => {
-                this.$refs.vuetable.refresh()
+                this.$refs.worksheetsVuetable.refresh()
             })
         }, 500)
     },
@@ -142,43 +141,9 @@ export default {
             this.$refs.pagination.setPaginationData(paginationData)
         },
         onChangePage (page) {
-            this.$refs.vuetable.changePage(page)
+            this.$refs.worksheetsVuetable.changePage(page)
         },
-        onUserAdded() {
-            this.$refs.vuetable.reload()
-            this.$notify({
-                title: 'Все получилось!',
-                text: 'Новый пользователь добавлен',
-                type: 'success'
-            })
-        },
-        onUserChanged() {
-            this.$refs.vuetable.reload()
-            this.$notify({
-                title: 'Все получилось!',
-                text: 'Данные пользователя обновлены',
-                type: 'success'
-            })
-        },
-        showAddUserForm() {
-            this.$modal.show(
-                UsersCreateForm,
-                {userData: {name: '', email: ''}, token: this.token, isAdmin: this.isAdmin},
-                {classes: 'rounded-lg ml-32', height: 'auto', name: 'UsersCreateForm'},
-                {'userAdded': () => { this.onUserAdded() }}
-            )
-
-        },
-        showEditUserForm(id) {
-            this.$modal.show(
-                UsersEditForm,
-                {userId: id, token: this.token, isAdmin: this.isAdmin},
-                {classes: 'rounded-lg ml-32', height: 'auto', name: 'UsersEditForm'},
-                {'userChanged': () => { this.onUserChanged() }}
-            )
-
-        }
-    }
+    },
 }
 </script>
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Resources\WorksheetCollection;
 use App\Worksheet;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class WorksheetController extends Controller
 {
@@ -13,20 +14,20 @@ class WorksheetController extends Controller
      *
      * @return WorksheetCollection
      */
-    public function index()
+    public function index(Request $request)
     {
-//        $request->validate([
-//            'search' => 'string|nullable|max:100',
-//        ]);
-//        if (Auth::user()->can('manage heads')) {
-//            if (!$request->search) {
-//                return new UserCollection(User::paginate(10));
-//            }
-//            return new UserCollection(User::where('id', $request->search)
-//                ->orWhere('name', 'LIKE', "%$request->search%")
-//                ->orWhere('email', 'LIKE', "%$request->search%")->paginate(10));
-//
-        return new WorksheetCollection(Worksheet::paginate(10));
+        $request->validate([
+            'search' => 'string|nullable|max:100',
+        ]);
+        if (!$request->search) {
+            return new WorksheetCollection(Worksheet::paginate(10));
+        }
+        return new WorksheetCollection(Worksheet::where(function ($query) use ($request) {
+            $query->where('id', $request->search)
+                ->orWhere('envyID', 'LIKE', "%$request->search%")
+                ->orWhere('name', 'LIKE', "%$request->search%")
+                ->orWhere('email', 'LIKE', "%$request->search%");
+        })->paginate(10));
     }
 
     /**
@@ -48,7 +49,6 @@ class WorksheetController extends Controller
     public function store(Request $request)
     {
         Worksheet::create($request->all());
-
         return response()->json(['success']);
     }
 

@@ -62,12 +62,13 @@
                             errors[0]
                         }}</small>
                     </label>
-                    <input id="issued"
-                           v-model="data.issued"
-                           v-mask="'##.##.####'"
-                           :class="{'border-red-400 focus:red-400': errors.length}"
-                           class="appearance-none rounded-lg border border-gray-300 border-b block px-2 py-2 w-full bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none focus:border-gray-800"
-                           placeholder="22.08.1987"/>
+                    <date-picker id="issued"
+                                 v-model="data.issued"
+                                 :input-class="errors.length ? 'custom-input has-errors' : 'custom-input'"
+                                 format="DD.MM.YYYY"
+                                 placeholder="22.08.1987"
+                                 prefix-class="custom"
+                                 type="date"></date-picker>
                 </ValidationProvider>
             </div>
             <div class="w-1/2">

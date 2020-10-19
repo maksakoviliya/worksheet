@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Worksheet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class HomeController extends Controller
 {
@@ -28,7 +30,10 @@ class HomeController extends Controller
     public function worksheets() {
         return view('worksheets');
     }
-    public function worksheet() {
+    public function worksheet(Worksheet $worksheet) {
+        return view('worksheet', compact('worksheet'));
+    }
+    public function createWorksheet() {
         return view('worksheet');
     }
 }

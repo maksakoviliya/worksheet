@@ -61,7 +61,11 @@ class Worksheet extends Model
 
         'birthday' => 'date',
         'issued' => 'date',
-        'nextPayment' => 'date'
+        'nextPayment' => 'date',
+
+        'isIp' => 'boolean',
+        'isDirector' => 'boolean',
+        'isMarried' => 'boolean',
     ];
 
     public function user() {

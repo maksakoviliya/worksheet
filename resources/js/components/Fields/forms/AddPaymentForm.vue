@@ -102,20 +102,6 @@
                         }})</span></span>
                 </label>
             </ValidationProvider>
-            <ValidationProvider v-slot="{ errors }" class="mt-4" name="buyDate" rules="required" tag="div">
-                <label class="inline-block text-gray-700 text-sm font-bold mb-2" for="buyDate">Дата приобретения<span
-                    class="text-red-300 text-sm">*</span>: <small v-if="errors[0]" class="text-red-400">{{
-                        errors[0]
-                    }}</small>
-                </label>
-                <date-picker id="buyDate"
-                             v-model="buyDate"
-                             :input-class="errors.length ? 'custom-input has-errors' : 'custom-input'"
-                             format="DD.MM.YYYY"
-                             placeholder="22.08.1987"
-                             prefix-class="custom"
-                             type="date"></date-picker>
-            </ValidationProvider>
             <div class="mt-6">
                 <button
                     :class="{'opacity-50 cursor-not-allowed': invalid}"

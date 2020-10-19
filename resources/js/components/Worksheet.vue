@@ -1,7 +1,6 @@
 <template>
     <div class="flex mt-8 items-start relative">
 
-
         <div class="w-full">
             <!--            <scrollactive :duration="800" :offset="0" active-class="active" bezier-easing-value=".5,0,.35,1"/>-->
             <common-data ref="common" :data.sync="worksheet.common" @change="worksheet.common = $event"/>
@@ -25,7 +24,7 @@
         </div>
         <!--        <worksheet-nav class="sticky" style="top: 90px;"></worksheet-nav>-->
 
-        <div class="bg-white fixed w-full pl-64 left-0 shadow z-10 bottom-0">
+        <div class="bg-white fixed w-full pl-64 left-0 shadow z-10 bottom-0" v-if="worksheetData">
             <div class="container mx-auto px-6 py-3 text-right">
                 <!--                :class="{'opacity-50 cursor-not-allowed': invalid}"-->
                 <button
@@ -85,6 +84,9 @@ export default {
         },
         filial: {
             default: []
+        },
+        worksheetData: {
+            required: false
         }
     },
     data() {
@@ -166,7 +168,6 @@ export default {
 
                 console.log('isValid', isValid)
                 if (_.every(isValid, item => item === true)) {
-                    console.log('this.token', this.token)
                     await axios.post('/api/worksheets', {
                         // Common
                         envyID: this.worksheet.common.envyID,
@@ -225,11 +226,68 @@ export default {
                             'Authorization': 'Bearer ' + this.token
                         },
                     })
+                    window.location.href = '/worksheets'
                 }
 
             } catch (e) {
                 console.log(e)
             }
+        }
+    },
+    mounted() {
+        if (this.worksheetData) {
+            // Common
+            this.worksheet.common.envyID = this.worksheetData.envyID || ''
+            this.worksheet.common.name = this.worksheetData.name || ''
+            this.worksheet.common.phone = this.worksheetData.phone || ''
+            this.worksheet.common.email = this.worksheetData.email || ''
+            this.worksheet.common.messengers = this.worksheetData.messengers || []
+            this.worksheet.common.livingCity = this.worksheetData.livingCity || ''
+            // Passport
+            this.worksheet.passport.birthday = this.worksheetData.birthday || ''
+            this.worksheet.passport.series = this.worksheetData.series || ''
+            this.worksheet.passport.number = this.worksheetData.number || ''
+            this.worksheet.passport.issued = this.worksheetData.issued || ''
+            this.worksheet.passport.code = this.worksheetData.code || ''
+            this.worksheet.passport.issuedBy = this.worksheetData.issuedBy || ''
+            this.worksheet.passport.born = this.worksheetData.born || ''
+            this.worksheet.passport.region = this.worksheetData.region || ''
+            this.worksheet.passport.area = this.worksheetData.area || ''
+            this.worksheet.passport.city = this.worksheetData.city || ''
+            this.worksheet.passport.street = this.worksheetData.street || ''
+            this.worksheet.passport.house = this.worksheetData.house || ''
+            this.worksheet.passport.housing = this.worksheetData.housing || ''
+            this.worksheet.passport.room = this.worksheetData.room || ''
+            this.worksheet.passport.registration = this.worksheetData.registration || ''
+            this.worksheet.passport.post = this.worksheetData.post || ''
+            // Creditors
+            this.worksheet.creditors.creditors = this.worksheetData.creditors
+            this.worksheet.creditors.nextPayment = this.worksheetData.nextPayment
+            // Income
+            this.worksheet.income.sources = this.worksheetData.sources
+            this.worksheet.income.isIp = this.worksheetData.isIp
+            this.worksheet.income.isDirector = this.worksheetData.isDirector
+            this.worksheet.income.oooComment = this.worksheetData.oooComment
+            // Marital
+            this.worksheet.marital.isMarried = this.worksheetData.isMarried
+            this.worksheet.marital.spouse = this.worksheetData.spouse
+            // Children
+            this.worksheet.children.children = this.worksheetData.children
+            // Immovable
+            this.worksheet.immovable.immovable = this.worksheetData.immovable
+            // Movable
+            this.worksheet.movable.movable = this.worksheetData.movable
+            // spousesImmovable
+            this.worksheet.spousesImmovable.spousesImmovable = this.worksheetData.spousesImmovable
+            // spousesMovable
+            this.worksheet.spousesMovable.spousesMovable = this.worksheetData.spousesMovable
+            // voidable
+            this.worksheet.voidable.voidable = this.worksheetData.voidable
+            // payment
+            this.worksheet.payment.payment = this.worksheetData.payment
+
+            // temp
+            this.userI = this.worksheetData.user_id
         }
     }
 }
