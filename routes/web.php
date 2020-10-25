@@ -27,7 +27,9 @@ Route::group(['middleware' => ['role:admin|head', 'auth']], function () {
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/', 'HomeController@home')->name('home');
     Route::get('worksheets', 'HomeController@worksheets')->name('worksheets.index');
-    Route::get('worksheets/{worksheet}', 'HomeController@worksheet')->name('worksheets.show')->where('worksheet', '[0-9]+');;
+    Route::get('worksheets/{worksheet}', 'HomeController@worksheet')->name('worksheets.show')->where('worksheet', '[0-9]+')->middleware('CanViewWorksheet');
     Route::get('worksheets/create', 'HomeController@createWorksheet')->name('worksheets.create');
+
+    Route::get('voidable/create', 'HomeController@createVoidable')->name('voidable.create');
 //    Route::resource('worksheets', 'WorksheetController')->only('index', 'show');
 });

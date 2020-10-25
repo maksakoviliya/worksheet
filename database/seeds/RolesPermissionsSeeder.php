@@ -34,19 +34,16 @@ class RolesPermissionsSeeder extends Seeder
         Permission::create(['name' => 'manage heads']);
         Permission::create(['name' => 'manage users']);
 
-        Permission::create(['name' => 'create forms']);
-        Permission::create(['name' => 'edit forms']);
-        Permission::create(['name' => 'delete forms']);
-        Permission::create(['name' => 'search forms']);
+        Permission::create(['name' => 'delete worksheets']);
 
         $admin = Role::create(['name' => 'admin', 'title'=>'Администратор']);
         $admin->givePermissionTo(Permission::all());
 
         $head = Role::create(['name' => 'head', 'title' => 'Руководитель филиала']);
-        $head->givePermissionTo(['manage users', 'create forms', 'edit forms', 'delete forms', 'search forms']);
+        $head->givePermissionTo(['manage users', 'delete worksheets']);
 
         $user = Role::create(['name' => 'user', 'title' => 'Пользователь']);
-        $user->givePermissionTo(['create forms', 'edit forms', 'search forms']);
+        $user->givePermissionTo(['']);
 
         User::findOrFail(1)->assignRole($admin); // Админ
         User::findOrFail(2)->assignRole($head); // Руководитель филиала

@@ -29,13 +29,14 @@ class UsersSeeder extends Seeder
             'name' => 'Руководитель Филиала',
             'email' => 'head@worksheet.test',
             'password' => Hash::make('123'),
-            'filial_id' => '3'
+            'filial_id' => rand(1,4)
         ]);
         // Пользователь
         User::create([
             'name' => 'Пользователь',
             'email' => 'user@worksheet.test',
             'password' => Hash::make('123'),
+            'filial_id' => rand(1,4)
         ]);
     }
 }

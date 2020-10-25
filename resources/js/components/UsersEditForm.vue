@@ -153,6 +153,10 @@ export default {
         token: {
             required: true,
             type: String
+        },
+        isAdmin: {
+            required: true,
+            type: Boolean
         }
     },
     data() {
@@ -223,7 +227,6 @@ export default {
                     }
                 }
                 this.roles = data.roles
-                console.log('data.filials', data.filials)
                 this.filials = data.filials
             } catch (e) {
                 this.$notify({

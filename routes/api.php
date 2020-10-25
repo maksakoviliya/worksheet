@@ -30,4 +30,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('users', 'UsersController');
     Route::get('users-data', 'UsersController@getUsersData');
     Route::apiResource('worksheets', 'WorksheetController');
+    Route::apiResource('voidable', 'VoidableController');
 });

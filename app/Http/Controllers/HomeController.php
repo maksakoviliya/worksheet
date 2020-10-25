@@ -36,4 +36,9 @@ class HomeController extends Controller
     public function createWorksheet() {
         return view('worksheet');
     }
+
+    // Создать анкету оспариваемых сделок
+    public function createVoidable() {
+        return view('voidable');
+    }
 }

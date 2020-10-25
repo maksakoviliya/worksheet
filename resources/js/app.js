@@ -15,6 +15,7 @@ Vue.component('multiselect', Multiselect)
 Vue.component('ValidationObserver', ValidationObserver);
 Vue.component('ValidationProvider', ValidationProvider);
 
+
 import './vaildation/validators'
 import './vaildation/locale'
 import Worksheets from "./components/Worksheets";
@@ -30,8 +31,11 @@ import VueCurrencyInput from 'vue-currency-input'
 
 import DatePicker from 'vue2-datepicker';
 import 'vue2-datepicker/locale/ru';
+import VoidableWorksheets from "./components/VoidableWorksheets";
+import VoidableCreate from "./components/VoidableCreate";
 
 Vue.component('date-picker', DatePicker)
+
 
 Vue.use(VueCurrencyInput, {
     globalOptions: {
@@ -46,7 +50,9 @@ const app = new Vue({
     components: {
         Users,
         Worksheets,
-        Worksheet
+        Worksheet,
+        VoidableWorksheets,
+        VoidableCreate
     },
     data() {
         return {

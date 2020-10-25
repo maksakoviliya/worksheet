@@ -1,5 +1,5 @@
 <template>
-    <div id="income" class="rounded-lg bg-white p-6 mr-6 shadow-md">
+    <div id="payment" class="rounded-lg bg-white p-6 mr-6 shadow-md">
         <div class="flex items-center justify-between">
             <div>
                 <h3 class="font-semibold text-lg text-gray-600 mr-4">Оспоримые сделки</h3>
