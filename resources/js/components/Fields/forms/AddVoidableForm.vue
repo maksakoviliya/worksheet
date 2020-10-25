@@ -20,7 +20,7 @@
                     }}</small>
                 </label>
               <date-picker id="date"
-                           v-model="date"
+                           v-model="dateComputed"
                            placeholder="22.08.1987"
                            :input-class="errors.length ? 'custom-input has-errors' : 'custom-input'"
                            format="DD.MM.YYYY"
@@ -57,7 +57,7 @@
                     :class="{'opacity-50 cursor-not-allowed': invalid}"
                     :disabled="invalid"
                     class="px-6 py-2 bg-green-600 rounded-md text-white text-sm hover:bg-green-500 focus:outline-none focus:shadow"
-                    type="submit">Добавить
+                    type="submit">{{ editing ? 'Изменить' : 'Добавить' }}
                 </button>
                 <button
                     class="px-6 py-2 bg-gray-300 rounded-md text-gray-900 text-sm hover:bg-gray-400 ml-2 focus:outline-none focus:shadow"
@@ -69,28 +69,52 @@
 </template>
 <script>
 import {VueMaskDirective} from 'v-mask'
+import moment from "moment";
 
 export default {
-    name: "AddChildForm",
+    name: "AddVoidableForm",
     directives: {
         'mask': VueMaskDirective
     },
+    props: [
+        'data'
+    ],
     data() {
         return {
-            object: '',
-            date: '',
-            cost: '0 ₽',
-            money: '',
+            object: this.data?.object || '',
+            date: this.data?.date || '',
+            cost: this.data?.cost || '0 ₽',
+            money: this.data?.money || '',
         }
+    },
+    computed: {
+        editing() {
+            return !!this.data
+        },
+        dateComputed: {
+            get: function () {
+                if (this.date) {
+                    return moment(this.date).toDate()
+                }
+            },
+            set: function (value) {
+                this.date = value
+            }
+        },
     },
     methods: {
         addChild() {
-            this.$parent.$emit('voidableAdded', {
+            let data = {
                 object: this.object,
                 date: this.date,
                 cost: this.cost,
                 money: this.money
-            })
+            }
+            if (!this.editing) {
+                this.$parent.$emit('voidableAdded', data)
+            } else {
+                this.$parent.$emit('voidableEdited', data)
+            }
             this.$modal.hide('AddVoidableForm')
         }
     }

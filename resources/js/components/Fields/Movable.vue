@@ -20,6 +20,14 @@
                     :fields="fields"
                 >
                     <div slot="actions" slot-scope="props">
+                        <button
+                            class="bg-gray-300 text-gray-600 p-1 rounded-lg hover:bg-gray-400 text-gray-700 focus:outline-none"
+                            @click="showEditMovableForm(props.rowIndex)">
+                            <svg class="w-4 h-4 fill-current" viewBox="0 0 64.954 64.954">
+                                <path
+                                    d="M63.591 10.201l-8.835-8.833A4.628 4.628 0 0051.462 0h-.004a4.628 4.628 0 00-3.293 1.363L4.287 45.243c-.484.409-.85.965-.998 1.63L.072 61.301a3 3 0 003.581 3.581l14.429-3.217a2.978 2.978 0 001.636-1.006l43.873-43.872a4.662 4.662 0 000-6.586zm-20.919 5.141l6.939 6.938-27.02 27.021-6.938-6.938 27.019-27.021zM8.947 49.068l2.463-2.463 6.938 6.938-2.465 2.465-8.927 1.99 1.991-8.93zm44.907-31.03l-6.939-6.939 4.544-4.543 6.94 6.938-4.545 4.544z"/>
+                            </svg>
+                        </button>
                         <button @click="data.movable.splice(props.rowIndex, 1)"
                                 class="bg-gray-300 text-gray-600 p-1 rounded-lg hover:bg-gray-400 text-gray-700 focus:outline-none">
                             <svg class="w-4 h-4 fill-current" viewBox="0 0 512 512">
@@ -43,7 +51,7 @@ import moment from "moment";
 import AddMovableForm from "./forms/AddMovableForm";
 
 export default {
-    name: "Children",
+    name: "Movable",
     components: {
         Vuetable
     },
@@ -136,7 +144,19 @@ export default {
                     }
                 }
             )
-        }
+        },
+        showEditMovableForm(index) {
+            this.$modal.show(
+                AddMovableForm,
+                {data: this.data.movable[index]},
+                {classes: 'rounded-lg ml-32', height: 'auto', name: 'AddMovableForm'},
+                {
+                    'movableEdited': (movable) => {
+                        this.data.movable.splice(index, 1, movable)
+                    }
+                }
+            )
+        },
     }
 }
 </script>

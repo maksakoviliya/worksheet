@@ -245,9 +245,6 @@ export default {
                 {data: this.data.creditors[index]},
                 {classes: 'lg:ml-32', height: 'auto', name: 'AddCreditorForm'},
                 {
-                    'creditorAdded': (creditor) => {
-                        this.data.creditors.push(creditor)
-                    },
                     'creditorEdited': (creditor) => {
                         this.data.creditors.splice(index, 1, creditor)
                     }

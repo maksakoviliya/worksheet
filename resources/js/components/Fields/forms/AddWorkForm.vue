@@ -56,7 +56,7 @@
                     :class="{'opacity-50 cursor-not-allowed': invalid}"
                     :disabled="invalid"
                     class="px-6 py-2 bg-green-600 rounded-md text-white text-sm hover:bg-green-500 focus:outline-none focus:shadow"
-                    type="submit">Добавить
+                    type="submit">{{ editing ? 'Изменить' : 'Добавить' }}
                 </button>
                 <button
                     class="px-6 py-2 bg-gray-300 rounded-md text-gray-900 text-sm hover:bg-gray-400 ml-2 focus:outline-none focus:shadow"
@@ -69,22 +69,36 @@
 <script>
 export default {
     name: "AddWorkForm",
+    props: [
+        'data'
+    ],
+    computed: {
+        editing() {
+            return !!this.data
+        }
+    },
     data() {
         return {
-            place: '',
-            position: '',
-            legal: '0 ₽',
-            illegal: '0 ₽',
+            place: this.data?.place || '',
+            position: this.data?.position || '',
+            legal: this.data?.legal || '0 ₽',
+            illegal: this.data?.illegal || '0 ₽',
         }
     },
     methods: {
         addWork() {
-            this.$parent.$emit('workAdded', {
+            let data = {
                 place: this.place,
                 position: this.position,
                 legal: this.legal,
                 illegal: this.illegal,
-            })
+            }
+            if (!this.editing) {
+                this.$parent.$emit('workAdded', data)
+            } else {
+                this.$parent.$emit('workEdited', data)
+            }
+
             this.$modal.hide('AddWorkForm')
         }
     }

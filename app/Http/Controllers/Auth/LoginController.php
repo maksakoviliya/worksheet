@@ -36,7 +36,7 @@ class LoginController extends Controller
         if (Auth::user()->hasAnyRole(['admin', 'head'])) {
             return redirect('/');
         }
-        return redirect()->route('worksheets');
+        return redirect()->route('worksheets.index');
     }
 
     /**

@@ -74,7 +74,7 @@
                         }}</small>
                 </label>
                 <date-picker id="paymentDate"
-                             v-model="paymentDate"
+                             v-model="paymentDateComputed"
                              :input-class="errors.length ? 'custom-input has-errors' : 'custom-input'"
                              format="DD.MM.YYYY"
                              placeholder="22.08.1987"
@@ -119,26 +119,45 @@
 </template>
 <script>
 import {VueMaskDirective} from 'v-mask'
+import moment from "moment";
 
 export default {
     name: "AddPaymentForm",
     directives: {
         'mask': VueMaskDirective
     },
+    props: [
+        'data'
+    ],
     data() {
         return {
-            filial: '',
-            manager: '',
-            budget: '0 ₽',
-            monthly: '0 ₽',
-            installment: '',
-            paymentDate: '',
-            online: false,
+            filial: this.data?.filial || '',
+            manager: this.data?.manager || '',
+            budget: this.data?.budget || '0 ₽',
+            monthly: this.data?.monthly || '0 ₽',
+            installment: this.data?.installment || '',
+            paymentDate: this.data?.paymentDate || '',
+            online: this.data?.online || false,
         }
+    },
+    computed: {
+        editing() {
+            return !!this.data
+        },
+        paymentDateComputed: {
+            get: function () {
+                if (this.paymentDate) {
+                    return moment(this.paymentDate).toDate()
+                }
+            },
+            set: function (value) {
+                this.paymentDate = value
+            }
+        },
     },
     methods: {
         addPayment() {
-            this.$parent.$emit('paymentAdded', {
+            let data = {
                 filial: this.filial,
                 manager: this.manager,
                 budget: this.budget,
@@ -146,7 +165,12 @@ export default {
                 installment: this.installment,
                 paymentDate: this.paymentDate,
                 online: this.online,
-            })
+            }
+            if (!this.editing) {
+                this.$parent.$emit('paymentAdded', data)
+            } else {
+                this.$parent.$emit('paymentEdited', data)
+            }
             this.$modal.hide('AddPaymentForm')
         }
     }

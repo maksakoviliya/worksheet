@@ -75,7 +75,8 @@
                        placeholder=""/>
             </ValidationProvider>
             <ValidationProvider v-slot="{ errors }" class="mt-4" name="cost" rules="required" tag="div">
-                <label class="inline-block text-gray-700 text-sm font-bold mb-2" for="cost">Стоимость <span class="text-gray-500 font-light">(руб.)</span><span
+                <label class="inline-block text-gray-700 text-sm font-bold mb-2" for="cost">Стоимость <span
+                    class="text-gray-500 font-light">(руб.)</span><span
                     class="text-red-300 text-sm">*</span>: <small v-if="errors[0]" class="text-red-400">{{
                         errors[0]
                     }}</small>
@@ -94,7 +95,7 @@
                     }}</small>
                 </label>
                 <date-picker id="movBuyDate"
-                             v-model="date"
+                             v-model="dateComputed"
                              placeholder="22.08.1987"
                              :input-class="errors.length ? 'custom-input has-errors' : 'custom-input'"
                              format="DD.MM.YYYY"
@@ -106,7 +107,7 @@
                     :class="{'opacity-50 cursor-not-allowed': invalid}"
                     :disabled="invalid"
                     class="px-6 py-2 bg-green-600 rounded-md text-white text-sm hover:bg-green-500 focus:outline-none focus:shadow"
-                    type="submit">Добавить
+                    type="submit">{{ editing ? 'Изменить' : 'Добавить' }}
                 </button>
                 <button
                     class="px-6 py-2 bg-gray-300 rounded-md text-gray-900 text-sm hover:bg-gray-400 ml-2 focus:outline-none focus:shadow"
@@ -118,22 +119,26 @@
 </template>
 <script>
 import {VueMaskDirective} from 'v-mask'
+import moment from "moment";
 
 export default {
     name: "AddMovableForm",
     directives: {
         'mask': VueMaskDirective
     },
+    props: [
+        'data'
+    ],
     data() {
         return {
-            type: '',
-            ownership: '',
-            address: '',
-            model: '',
-            pledge: '',
-            vin: '',
-            cost: '0 ₽',
-            date: '',
+            type: this.data?.type || '',
+            ownership: this.data?.ownership || '',
+            address: this.data?.address || '',
+            model: this.data?.model || '',
+            pledge: this.data?.pledge || '',
+            vin: this.data?.vin || '',
+            cost: this.data?.cost || '0 ₽',
+            date: this.data?.date || '',
             types: [
                 'Автомобиль легковой',
                 'Автомобиль грузовой',
@@ -143,9 +148,24 @@ export default {
             ]
         }
     },
+    computed: {
+        editing() {
+            return !!this.data
+        },
+        dateComputed: {
+            get: function () {
+                if (this.date) {
+                    return moment(this.date).toDate()
+                }
+            },
+            set: function (value) {
+                this.date = value
+            }
+        },
+    },
     methods: {
         addChild() {
-            this.$parent.$emit('movableAdded', {
+            let data = {
                 type: this.type,
                 ownership: this.ownership,
                 address: this.address,
@@ -154,7 +174,12 @@ export default {
                 vin: this.vin,
                 cost: this.cost,
                 date: this.date,
-            })
+            }
+            if (!this.editing) {
+                this.$parent.$emit('movableAdded', data)
+            } else {
+                this.$parent.$emit('movableEdited', data)
+            }
             this.$modal.hide('AddMovableForm')
         }
     }

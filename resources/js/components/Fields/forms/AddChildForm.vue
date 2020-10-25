@@ -20,7 +20,7 @@
                     }}</small>
                 </label>
                 <date-picker id="child_birthday"
-                             v-model="birthday"
+                             v-model="birthdayComputed"
                              placeholder="22.08.1987"
                              :input-class="errors.length ? 'custom-input has-errors' : 'custom-input'"
                              format="DD.MM.YYYY"
@@ -32,7 +32,7 @@
                     :class="{'opacity-50 cursor-not-allowed': invalid}"
                     :disabled="invalid"
                     class="px-6 py-2 bg-green-600 rounded-md text-white text-sm hover:bg-green-500 focus:outline-none focus:shadow"
-                    type="submit">Добавить
+                    type="submit">{{ editing ? 'Изменить' : 'Добавить' }}
                 </button>
                 <button
                     class="px-6 py-2 bg-gray-300 rounded-md text-gray-900 text-sm hover:bg-gray-400 ml-2 focus:outline-none focus:shadow"
@@ -44,24 +44,48 @@
 </template>
 <script>
 import {VueMaskDirective} from 'v-mask'
+import moment from "moment";
 
 export default {
     name: "AddChildForm",
     directives: {
         'mask': VueMaskDirective
     },
+    props: [
+        'data'
+    ],
     data() {
         return {
-            name: '',
-            birthday: '',
+            name: this.data?.name || '',
+            birthday: this.data?.birthday || '',
         }
+    },
+    computed: {
+        editing() {
+            return !!this.data
+        },
+        birthdayComputed: {
+            get: function () {
+                if (this.birthday) {
+                    return moment(this.birthday).toDate()
+                }
+            },
+            set: function (value) {
+                this.birthday = value
+            }
+        },
     },
     methods: {
         addChild() {
-            this.$parent.$emit('childAdded', {
+            let data = {
                 name: this.name,
                 birthday: this.birthday,
-            })
+            }
+            if (!this.editing) {
+                this.$parent.$emit('childAdded', data)
+            } else {
+                this.$parent.$emit('childEdited', data)
+            }
             this.$modal.hide('AddChildForm')
         }
     }

@@ -14,7 +14,7 @@ class HomeController extends Controller
         if (Auth::user()->hasAnyRole(['admin', 'head'])) {
             return redirect()->route('users');
         }
-        return redirect()->route('worksheets');
+        return redirect()->route('worksheets.index');
     }
 
     /**

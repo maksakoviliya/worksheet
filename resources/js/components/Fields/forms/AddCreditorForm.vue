@@ -122,13 +122,13 @@ export default {
     ],
     data() {
         return {
-            bank: this.data.bank || '',
-            type: this.data.type || '',
-            total: this.data.total || 0,
-            current: this.data.current || 0,
-            monthly: this.data.monthly || 0,
-            delay: this.data.delay || '',
-            comment: this.data.comment || '',
+            bank: this.data?.bank || null,
+            type: this.data?.type || '',
+            total: this.data?.total || 0,
+            current: this.data?.current || 0,
+            monthly: this.data?.monthly || 0,
+            delay: this.data?.delay || '',
+            comment: this.data?.comment || '',
             banks: [
                 {id: 1, name: 'Сбер'},
                 {id: 2, name: 'ВТБ'},
@@ -169,7 +169,6 @@ export default {
             } else {
                 this.$parent.$emit('creditorEdited', data)
             }
-
             this.$modal.hide('AddCreditorForm')
         }
     }
