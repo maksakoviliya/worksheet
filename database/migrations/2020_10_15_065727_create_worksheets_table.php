@@ -32,6 +32,7 @@ class CreateWorksheetsTable extends Migration
             $table->string('code');
             $table->text('issuedBy');
             $table->text('born');
+            $table->text('index');
             $table->string('region')->nullable();
             $table->string('area')->nullable();
             $table->string('city');

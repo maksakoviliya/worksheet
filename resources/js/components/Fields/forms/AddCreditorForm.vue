@@ -39,7 +39,7 @@
                     v-currency
                     :class="{'border-red-400 focus:red-400': errors.length}"
                     class="appearance-none rounded-lg border border-gray-300 border-b block px-2 py-2 w-full bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none focus:border-gray-800"
-                    placeholder="" />
+                    placeholder=""/>
             </ValidationProvider>
             <ValidationProvider v-slot="{ errors }" name="current" rules="required" tag="div" class="mt-4">
                 <label class="inline-block text-gray-700 text-sm font-bold mb-2" for="current">Текущая
@@ -100,7 +100,7 @@
                     :class="{'opacity-50 cursor-not-allowed': invalid}"
                     :disabled="invalid"
                     class="px-6 py-2 bg-green-600 rounded-md text-white text-sm hover:bg-green-500 focus:outline-none focus:shadow"
-                    type="submit">Добавить
+                    type="submit">{{ editing ? 'Изменить' : 'Добавить' }}
                 </button>
                 <button
                     class="px-6 py-2 bg-gray-300 rounded-md text-gray-900 text-sm hover:bg-gray-400 ml-2 focus:outline-none focus:shadow"
@@ -117,15 +117,18 @@ import {VueMaskDirective} from "v-mask";
 
 export default {
     name: "AddCreditorForm",
+    props: [
+        'data'
+    ],
     data() {
         return {
-            bank: '',
-            type: '',
-            total: 0,
-            current: 0,
-            monthly: 0,
-            delay: '',
-            comment: '',
+            bank: this.data.bank || '',
+            type: this.data.type || '',
+            total: this.data.total || 0,
+            current: this.data.current || 0,
+            monthly: this.data.monthly || 0,
+            delay: this.data.delay || '',
+            comment: this.data.comment || '',
             banks: [
                 {id: 1, name: 'Сбер'},
                 {id: 2, name: 'ВТБ'},
@@ -145,9 +148,14 @@ export default {
     directives: {
         'mask': VueMaskDirective
     },
+    computed: {
+        editing() {
+            return !!this.data
+        }
+    },
     methods: {
         addCreditor() {
-            this.$parent.$emit('creditorAdded', {
+            let data = {
                 bank: this.banks.find(bank => bank.id === this.bank).id,
                 type: this.type,
                 total: this.total,
@@ -155,7 +163,13 @@ export default {
                 monthly: this.monthly,
                 delay: this.delay,
                 comment: this.comment
-            })
+            }
+            if (!this.editing) {
+                this.$parent.$emit('creditorAdded', data)
+            } else {
+                this.$parent.$emit('creditorEdited', data)
+            }
+
             this.$modal.hide('AddCreditorForm')
         }
     }

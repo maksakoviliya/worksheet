@@ -132,11 +132,41 @@ export default {
                 },
                 {
                     name: 'legal',
-                    title: 'Официальный доход'
+                    title: 'Официальный доход',
+                    formatter: value => {
+                        if (this.$ci.parse(value, {
+                            currency: "RUB",
+                            precision: 0,
+                        })) {
+                            return new Intl.NumberFormat('ru-RU', {
+                                style: 'currency',
+                                currency: 'RUB',
+                                minimumFractionDigits: 0,
+                                maximumFractionDigits: 0
+                            }).format(this.$ci.parse(value, {
+                                precision: 0,
+                            }))
+                        }
+                    }
                 },
                 {
                     name: 'illegal',
-                    title: 'Неофициальный доход'
+                    title: 'Неофициальный доход',
+                    formatter: value => {
+                        if (this.$ci.parse(value, {
+                            currency: "RUB",
+                            precision: 0,
+                        })) {
+                            return new Intl.NumberFormat('ru-RU', {
+                                style: 'currency',
+                                currency: 'RUB',
+                                minimumFractionDigits: 0,
+                                maximumFractionDigits: 0
+                            }).format(this.$ci.parse(value, {
+                                precision: 0,
+                            }))
+                        }
+                    }
                 },
                 {
                     name: 'actions',

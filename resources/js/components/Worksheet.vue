@@ -24,7 +24,21 @@
         </div>
         <!--        <worksheet-nav class="sticky" style="top: 90px;"></worksheet-nav>-->
 
-        <div class="bg-white fixed w-full pl-64 left-0 shadow z-10 bottom-0" v-if="worksheetData">
+        <div class="bg-white fixed w-full pl-64 left-0 shadow z-10 bottom-0"  v-if="editing" >
+            <div class="container mx-auto px-6 py-3 text-right">
+                <!--                :class="{'opacity-50 cursor-not-allowed': invalid}"-->
+                <button
+                    class="px-6 py-2 bg-green-600 rounded-md text-white text-sm hover:bg-green-500 focus:outline-none focus:shadow"
+                    type="button"
+                    @click="saveWorksheet">Изменить анкету
+                </button>
+                <button
+                    class="px-6 py-2 bg-gray-300 rounded-md text-gray-900 text-sm hover:bg-gray-400 ml-2 focus:outline-none focus:shadow"
+                    type="button">Отменить
+                </button>
+            </div>
+        </div>
+        <div class="bg-white fixed w-full pl-64 left-0 shadow z-10 bottom-0" v-else>
             <div class="container mx-auto px-6 py-3 text-right">
                 <!--                :class="{'opacity-50 cursor-not-allowed': invalid}"-->
                 <button
@@ -156,6 +170,11 @@ export default {
             }
         }
     },
+    computed: {
+        editing() {
+            return !!this.worksheetData
+        }
+    },
     methods: {
         async addWorksheet() {
 
@@ -166,7 +185,6 @@ export default {
                 isValid.push(this.$refs.creditors.$refs.creditorsValidationObserver ? await this.$refs.creditors.$refs.creditorsValidationObserver?.validate() : true)
                 isValid.push(this.$refs.marital.$refs.maritalValidationObserver ? await this.$refs.marital.$refs.maritalValidationObserver?.validate() : true)
 
-                console.log('isValid', isValid)
                 if (_.every(isValid, item => item === true)) {
                     await axios.post('/api/worksheets', {
                         // Common
@@ -184,6 +202,83 @@ export default {
                         code: this.worksheet.passport.code,
                         issuedBy: this.worksheet.passport.issuedBy,
                         born: this.worksheet.passport.born,
+                        index: this.worksheet.passport.index,
+                        region: this.worksheet.passport.region,
+                        area: this.worksheet.passport.area,
+                        city: this.worksheet.passport.city,
+                        street: this.worksheet.passport.street,
+                        house: this.worksheet.passport.house,
+                        housing: this.worksheet.passport.housing,
+                        room: this.worksheet.passport.room,
+                        registration: this.worksheet.passport.registration,
+                        post: this.worksheet.passport.post,
+                        // Creditors
+                        creditors: this.worksheet.creditors.creditors,
+                        nextPayment: this.worksheet.creditors.nextPayment,
+                        // Income
+                        sources: this.worksheet.income.sources,
+                        isIp: this.worksheet.income.isIp,
+                        isDirector: this.worksheet.income.isDirector,
+                        oooComment: this.worksheet.income.oooComment,
+                        // Marital
+                        isMarried: this.worksheet.marital.isMarried,
+                        spouse: this.worksheet.marital.spouse,
+                        // Children
+                        children: this.worksheet.children.children,
+                        // Immovable
+                        immovable: this.worksheet.immovable.immovable,
+                        // Movable
+                        movable: this.worksheet.movable.movable,
+                        // spousesImmovable
+                        spousesImmovable: this.worksheet.spousesImmovable.spousesImmovable,
+                        // spousesMovable
+                        spousesMovable: this.worksheet.spousesMovable.spousesMovable,
+                        // voidable
+                        voidable: this.worksheet.voidable.voidable,
+                        // payment
+                        payment: this.worksheet.payment.payment,
+
+                        // temp
+                        user_id: this.userId
+                    }, {
+                        headers: {
+                            'Authorization': 'Bearer ' + this.token
+                        },
+                    })
+                    window.location.href = '/worksheets'
+                }
+
+            } catch (e) {
+                console.log(e)
+            }
+        },
+        async saveWorksheet() {
+            console.log('Change worksheet')
+            try {
+                let isValid = []
+                isValid.push(await this.$refs.common.$refs.commonValidationObserver.validate())
+                isValid.push(await this.$refs.passport.$refs.passportValidationObserver.validate())
+                isValid.push(this.$refs.creditors.$refs.creditorsValidationObserver ? await this.$refs.creditors.$refs.creditorsValidationObserver?.validate() : true)
+                isValid.push(this.$refs.marital.$refs.maritalValidationObserver ? await this.$refs.marital.$refs.maritalValidationObserver?.validate() : true)
+
+                if (_.every(isValid, item => item === true)) {
+                    await axios.put(`/api/worksheets/${this.worksheetData.id}`, {
+                        // Common
+                        envyID: this.worksheet.common.envyID,
+                        name: this.worksheet.common.name,
+                        phone: this.worksheet.common.phone,
+                        email: this.worksheet.common.email,
+                        messengers: this.worksheet.common.messengers,
+                        livingCity: this.worksheet.common.livingCity,
+                        // Passport
+                        birthday: this.worksheet.passport.birthday,
+                        series: this.worksheet.passport.series,
+                        number: this.worksheet.passport.number,
+                        issued: this.worksheet.passport.issued,
+                        code: this.worksheet.passport.code,
+                        issuedBy: this.worksheet.passport.issuedBy,
+                        born: this.worksheet.passport.born,
+                        index: this.worksheet.passport.index,
                         region: this.worksheet.passport.region,
                         area: this.worksheet.passport.area,
                         city: this.worksheet.passport.city,
@@ -251,6 +346,7 @@ export default {
             this.worksheet.passport.code = this.worksheetData.code || ''
             this.worksheet.passport.issuedBy = this.worksheetData.issuedBy || ''
             this.worksheet.passport.born = this.worksheetData.born || ''
+            this.worksheet.passport.index = this.worksheetData.index || ''
             this.worksheet.passport.region = this.worksheetData.region || ''
             this.worksheet.passport.area = this.worksheetData.area || ''
             this.worksheet.passport.city = this.worksheetData.city || ''

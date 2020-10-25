@@ -134,7 +134,6 @@ export default {
             installment: '',
             paymentDate: '',
             online: false,
-            buyDate: ''
         }
     },
     methods: {
@@ -147,7 +146,6 @@ export default {
                 installment: this.installment,
                 paymentDate: this.paymentDate,
                 online: this.online,
-                buyDate: this.buyDate,
             })
             this.$modal.hide('AddPaymentForm')
         }

@@ -43,7 +43,7 @@ import AddPaymentForm from "./forms/AddPaymentForm";
 import moment from "moment";
 
 export default {
-    name: "Children",
+    name: "Payment",
     components: {
         Vuetable
     },
@@ -76,11 +76,41 @@ export default {
                 },
                 {
                     name: 'budget',
-                    title: 'Бюджет'
+                    title: 'Бюджет',
+                    formatter: value => {
+                        if (this.$ci.parse(value, {
+                            currency: "RUB",
+                            precision: 0,
+                        })) {
+                            return new Intl.NumberFormat('ru-RU', {
+                                style: 'currency',
+                                currency: 'RUB',
+                                minimumFractionDigits: 0,
+                                maximumFractionDigits: 0
+                            }).format(this.$ci.parse(value, {
+                                precision: 0,
+                            }))
+                        }
+                    }
                 },
                 {
                     name: 'monthly',
-                    title: 'Ежемесячный платеж'
+                    title: 'Ежемесячный платеж',
+                    formatter: value => {
+                        if (this.$ci.parse(value, {
+                            currency: "RUB",
+                            precision: 0,
+                        })) {
+                            return new Intl.NumberFormat('ru-RU', {
+                                style: 'currency',
+                                currency: 'RUB',
+                                minimumFractionDigits: 0,
+                                maximumFractionDigits: 0
+                            }).format(this.$ci.parse(value, {
+                                precision: 0,
+                            }))
+                        }
+                    }
                 },
                 {
                     name: 'installment',
@@ -98,13 +128,6 @@ export default {
                     title: 'Онлайн продажа',
                     formatter: value=>{
                         return value ? 'Да' : 'Нет'
-                    }
-                },
-                {
-                    name: 'buyDate',
-                    title: 'Дата приобретения',
-                    formatter: value=>{
-                        return moment(value).format('DD.MM.YYYY')
                     }
                 },
                 {

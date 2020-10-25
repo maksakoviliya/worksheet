@@ -12,7 +12,7 @@
 
             <div class="w-1/3 pr-2">
                 <date-picker id="birthday"
-                             v-model="data.birthday"
+                             v-model="birthday"
                              :input-class="errors.length ? 'custom-input has-errors' : 'custom-input'"
                              format="DD.MM.YYYY"
                              placeholder="22.08.1987"
@@ -63,7 +63,7 @@
                         }}</small>
                     </label>
                     <date-picker id="issued"
-                                 v-model="data.issued"
+                                 v-model="issued"
                                  :input-class="errors.length ? 'custom-input has-errors' : 'custom-input'"
                                  format="DD.MM.YYYY"
                                  placeholder="22.08.1987"
@@ -273,6 +273,7 @@
 
 <script>
 import {VueMaskDirective} from "v-mask";
+import moment from 'moment'
 
 export default {
     name: "Passport",
@@ -280,24 +281,22 @@ export default {
         'mask': VueMaskDirective
     },
     props: ['data'],
-    data() {
-        return {
-            // data: {
-            //     birthday: '',
-            //     series: '',
-            //     number: '',
-            //     issued: '',
-            //     code: '',
-            //     issuedBy: '',
-            //     born: '',
-            //     region: '',
-            //     area: '',
-            //     city: '',
-            //     street: '',
-            //     house: '',
-            //     housing: '',
-            //     room: ''
-            // }
+    computed: {
+        birthday: {
+            get: function() {
+                return moment(this.data.birthday).toDate()
+            },
+            set: function(value) {
+                this.data.birthday = value
+            }
+        },
+        issued: {
+            get: function() {
+                return moment(this.data.issued).toDate()
+            },
+            set: function(value) {
+                this.data.issued = value
+            }
         }
     }
 }

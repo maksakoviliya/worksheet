@@ -92,7 +92,22 @@ export default {
                 },
                 {
                     name: 'cost',
-                    title: 'Стоимость'
+                    title: 'Стоимость',
+                    formatter: value => {
+                        if (this.$ci.parse(value, {
+                            currency: "RUB",
+                            precision: 0,
+                        })) {
+                            return new Intl.NumberFormat('ru-RU', {
+                                style: 'currency',
+                                currency: 'RUB',
+                                minimumFractionDigits: 0,
+                                maximumFractionDigits: 0
+                            }).format(this.$ci.parse(value, {
+                                precision: 0,
+                            }))
+                        }
+                    }
                 },
                 {
                     name: 'date',

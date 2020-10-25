@@ -20,6 +20,7 @@ class Worksheet extends Model
         'code',
         'issuedBy',
         'born',
+        'index',
         'region',
         'area',
         'city',

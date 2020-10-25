@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Resources\WorksheetCollection;
 use App\Worksheet;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 
 class WorksheetController extends Controller
@@ -48,6 +49,7 @@ class WorksheetController extends Controller
      */
     public function store(Request $request)
     {
+        // TODO: Добавить валидацию
         Worksheet::create($request->all());
         return response()->json(['success']);
     }
@@ -81,9 +83,11 @@ class WorksheetController extends Controller
      * @param  \App\worksheet  $worksheet
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, worksheet $worksheet)
+    public function update(Request $request, Worksheet $worksheet)
     {
-        //
+        // TODO: Добавить валидацию
+        $worksheet->update($request->all());
+        return response()->json(['success']);
     }
 
     /**
