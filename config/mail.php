@@ -79,7 +79,7 @@ return [
     ],
 
     'to' => [
-        'address' => 'maksak_il@mail.ru',
+        'address' => 'from_envy@bp-5.planfix.ru',
         'name' => 'Test to'
     ],
 

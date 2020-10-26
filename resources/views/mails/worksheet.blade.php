@@ -22,7 +22,7 @@
         }
 
         .table-title h3 {
-            color: #fafafa;
+            color: #333;
             font-size: 30px;
             font-weight: 400;
             font-style: normal;
