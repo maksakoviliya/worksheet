@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Worksheet;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -11,14 +12,16 @@ class EmailCreatedWorksheet extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $worksheet;
+
     /**
      * Create a new message instance.
      *
-     * @return void
+     * @param Worksheet $worksheet
      */
-    public function __construct()
+    public function __construct(Worksheet $worksheet)
     {
-        //
+        $this->worksheet = $worksheet;
     }
 
     /**
@@ -28,9 +31,6 @@ class EmailCreatedWorksheet extends Mailable
      */
     public function build()
     {
-//        return $this->from('mail@example.com', 'Mailtrap')->subject('Создана новая анкета')->view('mails.worksheet-created');
-        return $this->from('mail@example.com', 'Mailtrap')
-            ->subject('Test Queued Email')
-            ->view('mails.worksheet-created');
+        return $this->subject('Новая анкета добавлена')->view('mails.worksheet');
     }
 }

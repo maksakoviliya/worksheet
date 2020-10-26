@@ -28,6 +28,6 @@ class SendWorksheetEditedEmail
      */
     public function handle(WorksheetEdited $event)
     {
-        SendEmail::dispatch();
+        SendEmail::dispatch(['type' => 'edit', 'worksheet' =>$event->worksheet]);
     }
 }

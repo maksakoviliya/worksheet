@@ -2,7 +2,10 @@
 
 namespace App\Jobs;
 
+use App\Events\WorksheetEdited;
 use App\Mail\EmailCreatedWorksheet;
+use App\Mail\EmailEditedWorksheet;
+use App\Worksheet;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -15,14 +18,18 @@ class SendEmail implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
+    private $worksheet;
+    private $type;
+
     /**
      * Create a new job instance.
      *
-     * @return void
+     * @param Worksheet $worksheet
      */
-    public function __construct()
+    public function __construct($data)
     {
-        //
+        $this->worksheet=$data['worksheet'];
+        $this->type=$data['type'];
     }
 
     /**
@@ -32,7 +39,11 @@ class SendEmail implements ShouldQueue
      */
     public function handle()
     {
-        $email = new EmailCreatedWorksheet();
+        if ($this->type === 'edit') {
+            $email = new EmailEditedWorksheet($this->worksheet);
+        } else {
+            $email = new EmailCreatedWorksheet($this->worksheet);
+        }
         Mail::to(config('mail.to.address'))->send($email);
     }
 }

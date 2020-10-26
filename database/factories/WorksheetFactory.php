@@ -202,11 +202,12 @@ $factory->define(Worksheet::class, function (Faker $faker) {
     }
 
     $filials = Filial::all()->pluck('id')->toArray();
+    $filialNames = Filial::all()->pluck('name')->toArray();
 
     $payment = [];
     for ($i = 1; $i <= rand(1, 4); $i++) {
         $paymentItem = array(
-            'filial' => $faker->randomElement($filials),
+            'filial' => $faker->randomElement($filialNames),
             'manager' => $faker->firstName . ' ' . $faker->lastName,
             'budget' => (string) $faker->numberBetween(10000, 2000000),
             'monthly' => (string) $faker->numberBetween(10000, 200000),

@@ -78,7 +78,10 @@ return [
         'name' => env('MAIL_FROM_NAME', 'Example'),
     ],
 
-    
+    'to' => [
+        'address' => 'maksak_il@mail.ru',
+        'name' => 'Test to'
+    ],
 
     /*
     |--------------------------------------------------------------------------

@@ -1,17 +1,15 @@
 <template>
     <ValidationObserver ref="ValidationObserver" v-slot="{ invalid, handleSubmit }">
         <form @submit.prevent="handleSubmit(addPayment)">
-            <ValidationProvider v-slot="{ errors }" name="filial" rules="required" tag="div">
-                <label class="inline-block text-gray-700 text-sm font-bold mb-2" for="filial">Филиал<span
+            <ValidationProvider v-slot="{ errors }" name="filial" rules="required">
+                <label class="inline-block text-gray-700 text-sm font-bold mb-2 mt-4" for="filial">Филиал<span
                     class="text-red-300 text-sm">*</span>: <small v-if="errors[0]" class="text-red-400">{{
                         errors[0]
-                    }}</small>
-                </label>
-                <input id="filial"
-                       v-model="filial"
-                       :class="{'border-red-400 focus:red-400': errors.length}"
-                       class="appearance-none rounded-lg border border-gray-300 border-b block px-2 py-2 w-full bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none focus:border-gray-800"
-                       placeholder=""/>
+                    }}</small></label>
+                <multiselect id="filial" v-model="filial" :class="{'invalid': errors.length}"
+                             :options="filials"
+                             :show-labels="false"
+                             placeholder="Выберите филиал"></multiselect>
             </ValidationProvider>
             <ValidationProvider v-slot="{ errors }" class="mt-4" name="manager" rules="required" tag="div">
                 <label class="inline-block text-gray-700 text-sm font-bold mb-2" for="manager">Менеджер<span
@@ -107,7 +105,7 @@
                     :class="{'opacity-50 cursor-not-allowed': invalid}"
                     :disabled="invalid"
                     class="px-6 py-2 bg-green-600 rounded-md text-white text-sm hover:bg-green-500 focus:outline-none focus:shadow"
-                    type="submit">Добавить
+                    type="submit">{{ editing ? 'Изменить' : 'Добавить' }}
                 </button>
                 <button
                     class="px-6 py-2 bg-gray-300 rounded-md text-gray-900 text-sm hover:bg-gray-400 ml-2 focus:outline-none focus:shadow"
@@ -138,6 +136,15 @@ export default {
             installment: this.data?.installment || '',
             paymentDate: this.data?.paymentDate || '',
             online: this.data?.online || false,
+            filials: [
+                'Йошкар-Ола',
+                'Казань',
+                'Москва (Кириллов)',
+                'Москва(Болотин)',
+                'Ульяновск',
+                'Нижний Новгород',
+                'Чебоксары'
+            ]
         }
     },
     computed: {

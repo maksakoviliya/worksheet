@@ -13,7 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('/test', function (){
-   dd(config('mail.to.address'));
+    $worksheet = \App\Worksheet::find(6);
+   return view('mails.worksheet', compact('worksheet'));
 });
 
 Auth::routes(['register' => false]);

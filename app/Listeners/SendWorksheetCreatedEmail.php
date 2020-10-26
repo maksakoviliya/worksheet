@@ -27,6 +27,6 @@ class SendWorksheetCreatedEmail
      */
     public function handle(WorksheetCreated $event)
     {
-        SendEmail::dispatch();
+        SendEmail::dispatch(['type' => 'create', 'worksheet' =>$event->worksheet]);
     }
 }

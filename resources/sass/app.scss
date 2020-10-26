@@ -447,14 +447,13 @@ fieldset[disabled] .multiselect {
 }
 
 .multiselect__option--selected.multiselect__option--highlight {
-    color: #fff;
-    @apply bg-red-200;
+    @apply bg-red-200 text-gray-700;
 }
 
 .multiselect__option--selected.multiselect__option--highlight:after {
     background: #ff6a6a;
     content: attr(data-deselect);
-    color: #fff;
+    @apply text-gray-800;
 }
 
 .multiselect--disabled .multiselect__current,
@@ -490,13 +489,13 @@ fieldset[disabled] .multiselect {
 
 .multiselect__option--group-selected.multiselect__option--highlight {
     background: #ff6a6a;
-    color: #fff;
+    @apply text-gray-800;
 }
 
 .multiselect__option--group-selected.multiselect__option--highlight:after {
     background: #ff6a6a;
     content: attr(data-deselect);
-    color: #fff;
+    @apply text-gray-800;
 }
 
 .multiselect-enter-active,
