@@ -330,7 +330,7 @@ export default {
                             'Authorization': 'Bearer ' + this.token
                         },
                     })
-                    window.location.href = '/worksheets'
+                    // window.location.href = '/worksheets'
                 }
 
             } catch (e) {

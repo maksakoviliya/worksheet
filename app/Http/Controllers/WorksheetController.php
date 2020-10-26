@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\WorksheetCreated;
+use App\Events\WorksheetEdited;
 use App\Http\Resources\WorksheetCollection;
 use App\Worksheet;
 use Illuminate\Http\Request;
@@ -75,12 +77,15 @@ class WorksheetController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request)
     {
         // TODO: Добавить валидацию
-        Worksheet::create($request->all());
+        $worksheet = Worksheet::create($request->all());
+
+        event(new WorksheetCreated($worksheet));
+
         return response()->json(['success']);
     }
 
@@ -117,6 +122,9 @@ class WorksheetController extends Controller
     {
         // TODO: Добавить валидацию
         $worksheet->update($request->all());
+
+        event(new WorksheetEdited($worksheet));
+
         return response()->json(['success']);
     }
 

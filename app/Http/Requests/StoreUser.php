@@ -28,7 +28,7 @@ class StoreUser extends FormRequest
             'user.name' => 'required|max:255',
             'user.email' => 'required|email|unique:users,email',
             'user.role' => Rule::requiredIf($this->user()->can(['manage heads'])),
-            'user.filial' => Rule::requiredIf($this->user()->can(['manage heads'])),
+            'user.filial' => Rule::requiredIf($this->user()->can(['manage heads']) && $this->user['role'] !== 'admin'),
             'user.password' => 'required|confirmed',
             'user.password_confirmation' => 'required',
         ];
