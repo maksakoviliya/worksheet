@@ -1,6 +1,57 @@
 <template>
     <ValidationObserver ref="ValidationObserver" v-slot="{ invalid, handleSubmit }">
         <form @submit.prevent="handleSubmit(addVoidableImmovable)">
+            <ValidationProvider v-slot="{ errors }" name="object" rules="required" tag="div">
+                <label class="inline-block text-gray-700 text-sm font-bold mb-2" for="objectImmovable">Объект<span
+                    class="text-red-300 text-sm">*</span>: <small v-if="errors[0]" class="text-red-400">{{
+                        errors[0]
+                    }}</small>
+                </label>
+                <input id="objectImmovable"
+                       v-model="object"
+                       :class="{'border-red-400 focus:red-400': errors.length}"
+                       class="appearance-none rounded-lg border border-gray-300 border-b block px-2 py-2 w-full bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none focus:border-gray-800"
+                       placeholder=""/>
+            </ValidationProvider>
+            <ValidationProvider v-slot="{ errors }" name="date" rules="required" tag="div" class="mt-4">
+                <label class="inline-block text-gray-700 text-sm font-bold mb-2" for="dateImmovable">Дата оспоримой сделки<span
+                    class="text-red-300 text-sm">*</span>: <small v-if="errors[0]" class="text-red-400">{{
+                        errors[0]
+                    }}</small>
+                </label>
+                <date-picker id="dateImmovable"
+                             v-model="dateComputed"
+                             placeholder="22.08.1987"
+                             :input-class="errors.length ? 'custom-input has-errors' : 'custom-input'"
+                             format="DD.MM.YYYY"
+                             prefix-class="custom"
+                             type="date"></date-picker>
+            </ValidationProvider>
+            <ValidationProvider v-slot="{ errors }" class="mt-4" name="cost" rules="required" tag="div">
+                <label class="inline-block text-gray-700 text-sm font-bold mb-2" for="costImmovable">Стоимость<span
+                    class="text-red-300 text-sm">*</span>: <small v-if="errors[0]" class="text-red-400">{{
+                        errors[0]
+                    }}</small>
+                </label>
+                <input id="costImmovable"
+                       v-model="cost"
+                       v-currency
+                       :class="{'border-red-400 focus:red-400': errors.length}"
+                       class="appearance-none rounded-lg border border-gray-300 border-b block px-2 py-2 w-full bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none focus:border-gray-800"
+                       placeholder=""/>
+            </ValidationProvider>
+            <ValidationProvider v-slot="{ errors }" class="mt-4" name="money" rules="required" tag="div">
+                <label class="inline-block text-gray-700 text-sm font-bold mb-2" for="moneyImmovable">Куда потрачены деньги<span
+                    class="text-red-300 text-sm">*</span>: <small v-if="errors[0]" class="text-red-400">{{
+                        errors[0]
+                    }}</small>
+                </label>
+                <input id="moneyImmovable"
+                       v-model="money"
+                       :class="{'border-red-400 focus:red-400': errors.length}"
+                       class="appearance-none rounded-lg border border-gray-300 border-b block px-2 py-2 w-full bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none focus:border-gray-800"
+                       placeholder=""/>
+            </ValidationProvider>
             <ValidationProvider v-slot="{ errors }" name="buyDate" rules="required" tag="div">
                 <label class="inline-block text-gray-700 text-sm font-bold mb-2" for="buyDate">Дата приобретения<span
                     class="text-red-300 text-sm">*</span>: <small v-if="errors[0]" class="text-red-400">{{
@@ -94,13 +145,13 @@
             <!--                             type="date"></date-picker>-->
             <!--            </ValidationProvider>-->
             <div class="mt-4">
-                <label class="inline-flex items-center cursor-pointer" for="creditors">
+                <label class="inline-flex items-center cursor-pointer" for="creditorsImmovable">
                     <span class="relative">
                       <span class="block w-10 h-6 bg-gray-400 rounded-full shadow-inner"></span>
                         <span
                             :class="creditors ? 'bg-teal-500 transform translate-x-full' : 'bg-white'"
                             class="absolute block w-4 h-4 mt-1 ml-1 rounded-full shadow inset-y-0 left-0 focus-within:shadow-outline transition-transform duration-300 ease-in-out">
-                        <input id="creditors" v-model="creditors" class="absolute opacity-0 w-0 h-0"
+                        <input id="creditorsImmovable" v-model="creditors" class="absolute opacity-0 w-0 h-0"
                                type="checkbox"/>
                       </span>
                     </span>
@@ -367,6 +418,10 @@ export default {
     ],
     data() {
         return {
+            object: this.data?.object || '',
+            date: this.data?.date || '',
+            cost: this.data?.cost || '',
+            money: this.data?.money || '',
             buyDate: this.data?.buyDate || '',
             basis: this.data?.basis || '',
             registrationDate: this.data?.registrationDate || '',
@@ -420,6 +475,16 @@ export default {
     computed: {
         editing() {
             return !!this.data
+        },
+        dateComputed: {
+            get: function () {
+                if (this.date) {
+                    return moment(this.date).toDate()
+                }
+            },
+            set: function (value) {
+                this.date = value
+            }
         },
         buyDateComputed: {
             get: function () {
@@ -485,6 +550,10 @@ export default {
     methods: {
         addVoidableImmovable() {
             let data = {
+                object: this.object,
+                date: this.date,
+                cost: this.cost,
+                money: this.money,
                 buyDate: this.buyDate,
                 basis: this.basis,
                 registrationDate: this.registrationDate,

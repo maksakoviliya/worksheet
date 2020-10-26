@@ -143,15 +143,62 @@ $factory->define(Worksheet::class, function (Faker $faker) {
     }
 
     // Оспариваемые сделки
-    $voidable = [];
+    $voidableMovable = [];
     for ($i = 1; $i <= rand(1, 4); $i++) {
         $voidableItem = array(
             'object' => $faker->sentence(3),
             'date' => $faker->date(),
             'cost' => (string) $faker->numberBetween(1000, 3000000),
             'money' => $faker->sentence,
+            'buyDate' => $faker->date(),
+            'basis' => $faker->sentence,
+            'registrationDate' => $faker->date(),
+            'source' => $faker->numberBetween(1,4),
+            'creditFinishDate' => $faker->date(),
+            'ptsDate' => $faker->date(),
+            'creditors' => $faker->boolean(50),
+            'delayDate' => $faker->date(),
+            'wasMarried' => $faker->boolean(),
+            'divorceDate' => $faker->date(),
+            'contract' => $faker->boolean(50),
+            'whoPaied' => $faker->sentence,
+            'processes' => $faker->boolean(50),
+            'ban' => $faker->boolean(50),
+            'removal' => $faker->boolean(50),
         );
-        $voidable[] = $voidableItem;
+        $voidableMovable[] = $voidableItem;
+    }
+
+    $voidableImmovable = [];
+    for ($i = 1; $i <= rand(1, 4); $i++) {
+        $voidableItem = array(
+            'object' => $faker->sentence(3),
+            'date' => $faker->date(),
+            'cost' => (string) $faker->numberBetween(1000, 3000000),
+            'money' => $faker->sentence,
+            'buyDate' => $faker->date(),
+            'basis' => $faker->sentence,
+            'registrationDate' => $faker->date(),
+            'source' => $faker->numberBetween(1,4),
+            'creditFinishDate' => $faker->date(),
+            'ptsDate' => $faker->date(),
+            'creditors' => $faker->boolean(50),
+            'delayDate' => $faker->date(),
+            'wasMarried' => $faker->boolean(),
+            'divorceDate' => $faker->date(),
+            'contract' => $faker->boolean(50),
+            'whoPaied' => $faker->sentence,
+            'processes' => $faker->boolean(50),
+            'ban' => $faker->boolean(50),
+            'removal' => $faker->boolean(50),
+            'borrowers' => $faker->boolean(50),
+            'share' => $faker->boolean(50),
+            'guarantor' => $faker->boolean(50),
+            'propiska' => $faker->boolean(50),
+            'bills' => $faker->sentence,
+            'payByMatency' => $faker->boolean(50),
+        );
+        $voidableImmovable[] = $voidableItem;
     }
 
     $filials = Filial::all()->pluck('id')->toArray();
@@ -229,7 +276,8 @@ $factory->define(Worksheet::class, function (Faker $faker) {
         'spousesMovable' => $spousesMovable,
 
         // Voidable
-        'voidable' => $voidable,
+        'voidableMovable' => $voidableMovable,
+        'voidableImmovable' => $voidableImmovable,
 
         // Payment
         'payment' => $payment,
@@ -238,6 +286,6 @@ $factory->define(Worksheet::class, function (Faker $faker) {
         'user_id' => $faker->randomElement(User::all()->pluck('id')->toArray()),
 
         // Зависимость от филиала
-        'filial_id' => $faker->optional()->randomElement($filials)
+        'filial_id' => $faker->randomElement($filials)
     ];
 });

@@ -73,7 +73,9 @@ class CreateWorksheetsTable extends Migration
             $table->json('spousesMovable')->nullable();
 
             // Voidable
-            $table->json('voidable')->nullable();
+//            $table->json('voidable')->nullable();
+            $table->json('voidableMovable')->nullable();
+            $table->json('voidableImmovable')->nullable();
 
             // Payment
             $table->json('payment')->nullable();

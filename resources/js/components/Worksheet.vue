@@ -19,7 +19,9 @@
                                class="mt-6" @change="worksheet.spousesImmovable = $event"/>
             <spouses-movable v-if="worksheet.marital.isMarried" :data.sync="worksheet.spousesMovable"
                              class="mt-6" @change="worksheet.spousesMovable = $event"/>
-            <voidable :data.sync="worksheet.voidable" class="mt-6" @change="worksheet.voidable = $event"/>
+            <voidable-movable :data.sync="worksheet.voidableMovable" @change="worksheet.voidableMovable = $event"  class="mt-6"></voidable-movable>
+            <voidable-immmovable :data.sync="worksheet.voidableImmovable"  @change="worksheet.voidableImmovable = $event" class="mt-6"></voidable-immmovable>
+
             <payment :data.sync="worksheet.payment" class="mt-6" @change="worksheet.payment = $event"/>
         </div>
         <!--        <worksheet-nav class="sticky" style="top: 90px;"></worksheet-nav>-->
@@ -67,9 +69,10 @@ import Immovable from "./Fields/Immovable";
 import Movable from "./Fields/Movable";
 import SpousesImmovable from "./Fields/SpousesImmovable";
 import SpousesMovable from "./Fields/SpousesMovable";
-import Voidable from "./Fields/Voidable";
 import Payment from "./Fields/Payment";
 import axios from "axios";
+import VoidableMovable from "./Fields/VoidableMovable";
+import VoidableImmovable from "./Fields/VoidableImmovable";
 
 export default {
     name: "Worksheet",
@@ -85,8 +88,9 @@ export default {
         Movable,
         SpousesImmovable,
         SpousesMovable,
-        Voidable,
-        Payment
+        Payment,
+        VoidableMovable,
+        'voidable-immmovable': VoidableImmovable
     },
     props: {
         token: {
@@ -161,8 +165,11 @@ export default {
                 spousesMovable: {
                     spousesMovable: [],
                 },
-                voidable: {
-                    voidable: []
+                voidableMovable: {
+                    voidableMovable: []
+                },
+                voidableImmovable: {
+                    voidableImmovable: []
                 },
                 payment: {
                     payment: []
@@ -234,7 +241,8 @@ export default {
                         // spousesMovable
                         spousesMovable: this.worksheet.spousesMovable.spousesMovable,
                         // voidable
-                        voidable: this.worksheet.voidable.voidable,
+                        voidableMovable: this.worksheet.voidableMovable.voidableMovable,
+                        voidableImmovable: this.worksheet.voidableImmovable.voidableImmovable,
                         // payment
                         payment: this.worksheet.payment.payment,
 
@@ -310,7 +318,8 @@ export default {
                         // spousesMovable
                         spousesMovable: this.worksheet.spousesMovable.spousesMovable,
                         // voidable
-                        voidable: this.worksheet.voidable.voidable,
+                        voidableMovable: this.worksheet.voidableMovable.voidableMovable,
+                        voidableImmovable: this.worksheet.voidableImmovable.voidableImmovable,
                         // payment
                         payment: this.worksheet.payment.payment,
 
@@ -378,7 +387,8 @@ export default {
             // spousesMovable
             this.worksheet.spousesMovable.spousesMovable = this.worksheetData.spousesMovable
             // voidable
-            this.worksheet.voidable.voidable = this.worksheetData.voidable
+            this.worksheet.voidableMovable.voidableMovable = this.worksheetData.voidableMovable
+            this.worksheet.voidableImmovable.voidableImmovable = this.worksheetData.voidableImmovable
             // payment
             this.worksheet.payment.payment = this.worksheetData.payment
 

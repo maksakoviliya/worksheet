@@ -2,7 +2,7 @@
     <div id="voidable-movable" class="rounded-lg bg-white p-6 mr-6 shadow-md">
         <div class="flex items-center justify-between">
             <div>
-                <h3 class="font-semibold text-lg text-gray-600 mr-4">Движимое имущество</h3>
+                <h3 class="font-semibold text-lg text-gray-600 mr-4">Оспоримые сделки по движимому имуществу</h3>
                 <hr class="w-20 border-teal-400 mt-2">
             </div>
             <button
@@ -100,21 +100,32 @@ export default {
             ],
             fields: [
                 {
+                    name: 'object',
+                    title: 'Объект',
+                },
+                {
+                    name: 'date',
+                    title: 'Дата сделки',
+                    formatter: value => {
+                        return moment(value).format('DD.MM.YYYY')
+                    }
+                },
+                {
                     name: 'buyDate',
                     title: 'Дата приобретения',
-                    formatter: value=>{
+                    formatter: value => {
                         return moment(value).format('DD.MM.YYYY')
                     }
                 },
                 {
                     name: 'source',
                     title: 'На что приобретен',
-                    formatter: value=>this.sourceOptions.find(option=>option.id===value).label
+                    formatter: value => this.sourceOptions.find(option => option.id === value).label
                 },
                 {
                     name: 'registrationDate',
                     title: 'Дата регистрации',
-                    formatter: value=>{
+                    formatter: value => {
                         return moment(value).format('DD.MM.YYYY')
                     }
                 },
@@ -135,6 +146,18 @@ export default {
                 {
                     'voidableMovableAdded': (voidable) => {
                         this.data.voidableMovable.push(voidable)
+                    }
+                }
+            )
+        },
+        showEditVoidableMovableForm(index) {
+            this.$modal.show(
+                AddVoidableMovableForm,
+                {data: this.data.voidableMovable[index]},
+                {classes: 'rounded-lg ml-32', height: 'auto', width: '800px', name: 'AddVoidableMovableForm'},
+                {
+                    'voidableMovableEdited': (immovable) => {
+                        this.data.voidableMovable.splice(index, 1, immovable)
                     }
                 }
             )

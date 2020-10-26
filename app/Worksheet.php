@@ -43,7 +43,8 @@ class Worksheet extends Model
         'movable',
         'spousesImmovable',
         'spousesMovable',
-        'voidable',
+        'voidableMovable',
+        'voidableImmovable',
         'payment',
         'user_id',
     ];
@@ -57,7 +58,8 @@ class Worksheet extends Model
         'movable' => 'array',
         'spousesImmovable' => 'array',
         'spousesMovable' => 'array',
-        'voidable' => 'array',
+        'voidableMovable' => 'array',
+        'voidableImmovable' => 'array',
         'payment' => 'array',
 
         'birthday' => 'date',
@@ -69,11 +71,13 @@ class Worksheet extends Model
         'isMarried' => 'boolean',
     ];
 
-    public function user() {
+    public function user()
+    {
         return $this->belongsTo('App\User');
     }
 
-    public function filial() {
+    public function filial()
+    {
         return $this->belongsTo('App\Filial');
     }
 }
