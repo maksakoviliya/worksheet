@@ -2,6 +2,7 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
+use App\Bank;
 use App\Filial;
 use App\Model;
 use App\User;
@@ -12,9 +13,11 @@ $factory->define(Worksheet::class, function (Faker $faker) {
     // Кредиторы
     $creditors = [];
 
+    $banks = Bank::all()->pluck('name')->toArray();
+
     for ($i = 1; $i <= rand(1, 4); $i++) {
         $creditorItem = [
-            'bank' => rand(1, 4),
+            'bank' => $faker->randomElement($banks),
             'type' => $faker->randomElement([
                 'Потреб. кредит',
                 'Кредитная карта',

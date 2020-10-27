@@ -9,8 +9,11 @@
                 </label>
                 <multiselect id="bank" v-model="bank"
                              :class="{'invalid': errors.length}"
-                             :custom-label=" opt => banks.find(bank => bank.id === opt).name"
-                             :options="banks.map(bank => bank.id)"
+                             :options="banks"
+                             :loading="isLoading"
+                             :internal-search="false"
+                             :options-limit="30"
+                             @search-change="loadBanks"
                              :show-labels="false"
                              placeholder="Выберите банк"></multiselect>
             </ValidationProvider>
@@ -114,12 +117,19 @@
 <script>
 import {VueMaskDirective} from "v-mask";
 // import VueCurrencyInput from 'vue-currency-input'
+import axios from 'axios'
 
 export default {
     name: "AddCreditorForm",
-    props: [
-        'data'
-    ],
+    props: {
+        data: {
+          required: false
+        },
+        token: {
+            required: true,
+            type: String
+        },
+    },
     data() {
         return {
             bank: this.data?.bank || null,
@@ -129,12 +139,8 @@ export default {
             monthly: this.data?.monthly || 0,
             delay: this.data?.delay || '',
             comment: this.data?.comment || '',
-            banks: [
-                {id: 1, name: 'Сбер'},
-                {id: 2, name: 'ВТБ'},
-                {id: 3, name: 'МКБ'},
-                {id: 4, name: 'Тинькоф Банк'},
-            ],
+            isLoading: false,
+            banks: [],
             types: [
                 'Потреб. кредит',
                 'Кредитная карта',
@@ -170,7 +176,21 @@ export default {
                 this.$parent.$emit('creditorEdited', data)
             }
             this.$modal.hide('AddCreditorForm')
-        }
+        },
+        loadBanks: _.debounce(async function (query) {
+            this.isLoading = true
+            const {data} = await axios.get(`/api/banks/?all=true&search=${query}`, {
+                headers: {
+                    'Authorization': 'Bearer ' + this.token
+                },
+            })
+
+            this.banks = _.map(data.data, 'name')
+            this.isLoading = false
+        }, 500)
+    },
+    async mounted() {
+        this.loadBanks()
     }
 }
 </script>

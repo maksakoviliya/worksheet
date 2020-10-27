@@ -21,6 +21,10 @@ Auth::routes(['register' => false]);
 
 
 
+Route::group(['middleware' => ['role:admin', 'auth']], function () {
+    Route::get('banks', 'HomeController@banks')->name('banks.index');
+});
+
 Route::group(['middleware' => ['role:admin|head', 'auth']], function () {
     Route::get('/users', 'HomeController@index')->name('users');
 });

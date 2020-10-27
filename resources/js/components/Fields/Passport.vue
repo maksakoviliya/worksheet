@@ -3,7 +3,7 @@
                         class="rounded-lg bg-white p-6 mr-6 shadow-md" tag="div">
         <h3 class="font-semibold text-lg text-gray-600">Паспортные данные</h3>
         <hr class="w-20 border-teal-400 mt-2">
-        <ValidationProvider v-slot="{ errors }" class="mt-4" name="birthday" rules="required|max:255" tag="div">
+        <ValidationProvider v-slot="{ errors }" class="mt-4" name="birthday" :rules="{required: true, max: 255, is_not: 'Invalid date'}" tag="div">
             <label class="inline-block text-gray-700 text-sm font-bold mb-2" for="birthday">Дата рождения<span
                 class="text-red-300 text-sm">*</span>: <small v-if="errors[0]" class="text-red-400">{{
                     errors[0]
@@ -284,7 +284,9 @@ export default {
     computed: {
         birthday: {
             get: function() {
-                return moment(this.data.birthday).toDate()
+                if (this.data.birthday)
+                    return moment(this.data.birthday).toDate()
+                return null
             },
             set: function(value) {
                 this.data.birthday = value
@@ -292,7 +294,9 @@ export default {
         },
         issued: {
             get: function() {
-                return moment(this.data.issued).toDate()
+                if (this.data.birthday)
+                    return moment(this.data.issued).toDate()
+                return null
             },
             set: function(value) {
                 this.data.issued = value

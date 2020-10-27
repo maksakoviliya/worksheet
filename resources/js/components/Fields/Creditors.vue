@@ -82,7 +82,15 @@ export default {
     components: {
         Vuetable,
     },
-    props: ['data'],
+  props: {
+    data: {
+      required: false
+    },
+    token: {
+      required: true,
+      type: String
+    },
+  },
     data() {
         return {
             classes: {
@@ -230,7 +238,7 @@ export default {
         showAddCreditorForm() {
             this.$modal.show(
                 AddCreditorForm,
-                {},
+                {token: this.token},
                 {classes: 'lg:ml-32', height: 'auto', name: 'AddCreditorForm'},
                 {
                     'creditorAdded': (creditor) => {
@@ -242,7 +250,7 @@ export default {
         showEditCreditorForm(index) {
             this.$modal.show(
                 AddCreditorForm,
-                {data: this.data.creditors[index]},
+                {token: this.token, data: this.data.creditors[index]},
                 {classes: 'lg:ml-32', height: 'auto', name: 'AddCreditorForm'},
                 {
                     'creditorEdited': (creditor) => {

@@ -33,6 +33,8 @@ import DatePicker from 'vue2-datepicker';
 import 'vue2-datepicker/locale/ru';
 import VoidableWorksheets from "./components/VoidableWorksheets";
 import VoidableCreate from "./components/VoidableCreate";
+import Banks from "./components/banks/Banks";
+import BankUploader from "./components/banks/BankUploader";
 
 Vue.component('date-picker', DatePicker)
 
@@ -52,7 +54,9 @@ const app = new Vue({
         Worksheets,
         Worksheet,
         VoidableWorksheets,
-        VoidableCreate
+        VoidableCreate,
+        Banks,
+        BankUploader
     },
     data() {
         return {

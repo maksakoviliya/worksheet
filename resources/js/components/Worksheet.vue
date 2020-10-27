@@ -1,13 +1,13 @@
 <template>
     <div class="flex mt-8 items-start relative">
-
+        <notifications/>
         <div class="w-full">
             <!--            <scrollactive :duration="800" :offset="0" active-class="active" bezier-easing-value=".5,0,.35,1"/>-->
             <common-data ref="common" :data.sync="worksheet.common" @change="worksheet.common = $event"/>
             <passport ref="passport" :data.sync="worksheet.passport" class="mt-6"
                       @change="worksheet.passport = $event"/>
             <creditors ref="creditors" :data.sync="worksheet.creditors" class="mt-6"
-                       @change="worksheet.creditors = $event"/>
+                       @change="worksheet.creditors = $event" :token="token" />
             <income ref="income" :data.sync="worksheet.income" class="mt-6" @change="worksheet.income = $event"/>
             <marital-status ref="marital" :data.sync="worksheet.marital" class="mt-6"
                             @change="worksheet.marital = $event"/>
@@ -184,14 +184,12 @@ export default {
     },
     methods: {
         async addWorksheet() {
-
             try {
                 let isValid = []
                 isValid.push(await this.$refs.common.$refs.commonValidationObserver.validate())
                 isValid.push(await this.$refs.passport.$refs.passportValidationObserver.validate())
                 isValid.push(this.$refs.creditors.$refs.creditorsValidationObserver ? await this.$refs.creditors.$refs.creditorsValidationObserver?.validate() : true)
                 isValid.push(this.$refs.marital.$refs.maritalValidationObserver ? await this.$refs.marital.$refs.maritalValidationObserver?.validate() : true)
-
                 if (_.every(isValid, item => item === true)) {
                     await axios.post('/api/worksheets', {
                         // Common
@@ -254,6 +252,13 @@ export default {
                         },
                     })
                     window.location.href = '/worksheets'
+                }  else {
+                    this.$notify({
+                        title: 'Ошибка валидации',
+                        text: 'Необходимо заполнить обязательные поля',
+                        type: 'error',
+                        position: 'bottom right'
+                    })
                 }
 
             } catch (e) {
@@ -261,14 +266,12 @@ export default {
             }
         },
         async saveWorksheet() {
-            console.log('Change worksheet')
             try {
                 let isValid = []
                 isValid.push(await this.$refs.common.$refs.commonValidationObserver.validate())
                 isValid.push(await this.$refs.passport.$refs.passportValidationObserver.validate())
                 isValid.push(this.$refs.creditors.$refs.creditorsValidationObserver ? await this.$refs.creditors.$refs.creditorsValidationObserver?.validate() : true)
                 isValid.push(this.$refs.marital.$refs.maritalValidationObserver ? await this.$refs.marital.$refs.maritalValidationObserver?.validate() : true)
-
                 if (_.every(isValid, item => item === true)) {
                     await axios.put(`/api/worksheets/${this.worksheetData.id}`, {
                         // Common
@@ -331,6 +334,12 @@ export default {
                         },
                     })
                     window.location.href = '/worksheets'
+                } else {
+                    this.$notify({
+                        title: 'Ошибка валидации',
+                        text: 'Необходимо заполнить обязательные поля',
+                        type: 'error'
+                    })
                 }
 
             } catch (e) {

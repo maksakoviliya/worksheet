@@ -38,7 +38,7 @@ class HomeController extends Controller
     }
 
     // Создать анкету оспариваемых сделок
-    public function createVoidable() {
-        return view('voidable');
+    public function banks() {
+        return view('banks');
     }
 }

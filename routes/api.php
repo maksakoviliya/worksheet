@@ -14,6 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::middleware(['auth:sanctum'])->group(function() {
+    Route::get('/banks', 'BankController@index')->name('banks.index');
+});
+
 Route::middleware(['auth:sanctum', 'can:manage users'])->group(function() {
     Route::get('/user', function (Request $request) { return $request->user(); });
     Route::get('/user/permissions', function (Request $request) {
@@ -30,5 +34,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('users', 'UsersController');
     Route::get('users-data', 'UsersController@getUsersData');
     Route::apiResource('worksheets', 'WorksheetController');
-    Route::apiResource('voidable', 'VoidableController');
+    Route::post('/banks/upload', 'BankController@upload');
+    Route::apiResource('banks', 'BankController')->only(['destroy', 'upload']);
 });
