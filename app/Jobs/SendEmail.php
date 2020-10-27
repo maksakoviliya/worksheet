@@ -44,6 +44,10 @@ class SendEmail implements ShouldQueue
         } else {
             $email = new EmailCreatedWorksheet($this->worksheet);
         }
-        Mail::to(config('mail.to.address'))->send($email);
+        try {
+            Mail::to(config('mail.to.address'))->send($email);
+        } catch (\Exception $exception) {
+            Log::info($exception);
+        }
     }
 }
