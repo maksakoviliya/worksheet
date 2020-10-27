@@ -37,6 +37,7 @@
                     <input id="phone"
                            v-model="data.phone"
                            v-mask="'+7 (###) ###-##-##'"
+                           @keyup="fillPhone"
                            :class="{'border-red-400 focus:red-400': errors.length}"
                            class="appearance-none rounded-lg border border-gray-300 border-b block px-2 py-2 w-full bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none focus:border-gray-800"
                            placeholder="+7(929)999-10-99"/>
@@ -110,6 +111,13 @@ export default {
     data() {
         return {
             messengersList: ['WhatsApp', 'Viber', 'Telegram', 'SMS']
+        }
+    },
+    methods: {
+        fillPhone(event) {
+            if (['8','7','+'].includes(event.key) && this.data.phone.length <= 5) {
+                this.data.phone = this.data.phone.substr(0, this.data.phone.length - 1)
+            }
         }
     }
 }

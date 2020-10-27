@@ -82,6 +82,14 @@ class WorksheetController extends Controller
     public function store(Request $request)
     {
         // TODO: Добавить валидацию
+
+        $request->merge([
+            'user_id' => Auth::user()->id,
+            'filial_id' => Auth::user()->filial_id,
+        ]);
+
+        Log::info($request->all(), ['create worksheet']);
+
         $worksheet = Worksheet::create($request->all());
 
         event(new WorksheetCreated($worksheet));
@@ -121,7 +129,7 @@ class WorksheetController extends Controller
     public function update(Request $request, Worksheet $worksheet)
     {
         // TODO: Добавить валидацию
-        $worksheet->update($request->all());
+        $worksheet->update($request->except('user_id', 'filial_id'));
 
         event(new WorksheetEdited($worksheet));
 

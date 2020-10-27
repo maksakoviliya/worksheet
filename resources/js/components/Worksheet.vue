@@ -34,10 +34,11 @@
                     type="button"
                     @click="saveWorksheet">Изменить анкету
                 </button>
-                <button
+                <a
+                    href="/worksheets"
                     class="px-6 py-2 bg-gray-300 rounded-md text-gray-900 text-sm hover:bg-gray-400 ml-2 focus:outline-none focus:shadow"
                     type="button">Отменить
-                </button>
+                </a>
             </div>
         </div>
         <div class="bg-white fixed w-full pl-64 left-0 shadow z-10 bottom-0" v-else>
@@ -48,10 +49,11 @@
                     type="button"
                     @click="addWorksheet">Добавить анкету
                 </button>
-                <button
+                <a
+                    href="/worksheets"
                     class="px-6 py-2 bg-gray-300 rounded-md text-gray-900 text-sm hover:bg-gray-400 ml-2 focus:outline-none focus:shadow"
                     type="button">Отменить
-                </button>
+                </a>
             </div>
         </div>
     </div>
@@ -325,9 +327,6 @@ export default {
                         voidableImmovable: this.worksheet.voidableImmovable.voidableImmovable,
                         // payment
                         payment: this.worksheet.payment.payment,
-
-                        // temp
-                        user_id: this.userId
                     }, {
                         headers: {
                             'Authorization': 'Bearer ' + this.token
@@ -400,9 +399,6 @@ export default {
             this.worksheet.voidableImmovable.voidableImmovable = this.worksheetData.voidableImmovable
             // payment
             this.worksheet.payment.payment = this.worksheetData.payment
-
-            // temp
-            this.userI = this.worksheetData.user_id
         }
     }
 }

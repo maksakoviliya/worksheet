@@ -47,6 +47,7 @@ class Worksheet extends Model
         'voidableImmovable',
         'payment',
         'user_id',
+        'filial_id',
     ];
 
     protected $casts = [
