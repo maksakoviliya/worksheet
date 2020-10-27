@@ -162,7 +162,7 @@ export default {
     methods: {
         addCreditor() {
             let data = {
-                bank: this.banks.find(bank => bank.id === this.bank).id,
+                bank: this.bank,
                 type: this.type,
                 total: this.total,
                 current: this.current,
