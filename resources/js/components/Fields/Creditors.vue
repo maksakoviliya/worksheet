@@ -118,9 +118,6 @@ export default {
                 {
                     name: 'bank',
                     title: 'Банк',
-                    formatter: value => {
-                        return this.banks.find(bank => bank.id === value).name
-                    }
                 },
                 {
                     name: 'type',
