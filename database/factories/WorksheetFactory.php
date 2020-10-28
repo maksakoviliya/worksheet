@@ -210,7 +210,7 @@ $factory->define(Worksheet::class, function (Faker $faker) {
     $payment = [];
     for ($i = 1; $i <= rand(1, 4); $i++) {
         $paymentItem = array(
-            'filial' => $faker->randomElement($filialNames),
+//            'filial' => $faker->randomElement($filialNames),
             'manager' => $faker->firstName . ' ' . $faker->lastName,
             'budget' => (string) $faker->numberBetween(10000, 2000000),
             'monthly' => (string) $faker->numberBetween(10000, 200000),

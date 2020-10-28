@@ -1,16 +1,16 @@
 <template>
     <ValidationObserver ref="ValidationObserver" v-slot="{ invalid, handleSubmit }">
         <form @submit.prevent="handleSubmit(addPayment)">
-            <ValidationProvider v-slot="{ errors }" name="filial" rules="required">
-                <label class="inline-block text-gray-700 text-sm font-bold mb-2 mt-4" for="filial">Филиал<span
-                    class="text-red-300 text-sm">*</span>: <small v-if="errors[0]" class="text-red-400">{{
-                        errors[0]
-                    }}</small></label>
-                <multiselect id="filial" v-model="filial" :class="{'invalid': errors.length}"
-                             :options="filials"
-                             :show-labels="false"
-                             placeholder="Выберите филиал"></multiselect>
-            </ValidationProvider>
+<!--            <ValidationProvider v-slot="{ errors }" name="filial" rules="required">-->
+<!--                <label class="inline-block text-gray-700 text-sm font-bold mb-2 mt-4" for="filial">Филиал<span-->
+<!--                    class="text-red-300 text-sm">*</span>: <small v-if="errors[0]" class="text-red-400">{{-->
+<!--                        errors[0]-->
+<!--                    }}</small></label>-->
+<!--                <multiselect id="filial" v-model="filial" :class="{'invalid': errors.length}"-->
+<!--                             :options="filials"-->
+<!--                             :show-labels="false"-->
+<!--                             placeholder="Выберите филиал"></multiselect>-->
+<!--            </ValidationProvider>-->
             <ValidationProvider v-slot="{ errors }" class="mt-4" name="manager" rules="required" tag="div">
                 <label class="inline-block text-gray-700 text-sm font-bold mb-2" for="manager">Менеджер<span
                     class="text-red-300 text-sm">*</span>: <small v-if="errors[0]" class="text-red-400">{{
@@ -129,22 +129,22 @@ export default {
     ],
     data() {
         return {
-            filial: this.data?.filial || '',
+            // filial: this.data?.filial || '',
             manager: this.data?.manager || '',
             budget: this.data?.budget || '0 ₽',
             monthly: this.data?.monthly || '0 ₽',
             installment: this.data?.installment || '',
             paymentDate: this.data?.paymentDate || '',
             online: this.data?.online || false,
-            filials: [
-                'Йошкар-Ола',
-                'Казань',
-                'Москва (Кириллов)',
-                'Москва(Болотин)',
-                'Ульяновск',
-                'Нижний Новгород',
-                'Чебоксары'
-            ]
+            // filials: [
+            //     'Йошкар-Ола',
+            //     'Казань',
+            //     'Москва (Кириллов)',
+            //     'Москва(Болотин)',
+            //     'Ульяновск',
+            //     'Нижний Новгород',
+            //     'Чебоксары'
+            // ]
         }
     },
     computed: {
@@ -165,7 +165,7 @@ export default {
     methods: {
         addPayment() {
             let data = {
-                filial: this.filial,
+                // filial: this.filial,
                 manager: this.manager,
                 budget: this.budget,
                 monthly: this.monthly,

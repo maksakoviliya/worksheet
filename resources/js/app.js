@@ -56,7 +56,7 @@ const app = new Vue({
         VoidableWorksheets,
         VoidableCreate,
         Banks,
-        BankUploader
+        BankUploader,
     },
     data() {
         return {

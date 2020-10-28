@@ -27,7 +27,7 @@ class WorksheetController extends Controller
 
         if (Auth::user()->hasRole('admin')) {
             if (!$request->search) {
-                return new WorksheetCollection(Worksheet::paginate(10));
+                return new WorksheetCollection(Worksheet::orderBy('id', 'desc')->paginate(10));
             }
 
             return new WorksheetCollection(Worksheet::where(function ($query) use ($request) {
@@ -35,10 +35,10 @@ class WorksheetController extends Controller
                     ->orWhere('envyID', 'LIKE', "%$request->search%")
                     ->orWhere('name', 'LIKE', "%$request->search%")
                     ->orWhere('email', 'LIKE', "%$request->search%");
-            })->paginate(10));
+            })->orderBy('id', 'desc')->paginate(10));
         } elseif (Auth::user()->hasRole('head')) {
             if (!$request->search) {
-                return new WorksheetCollection(Worksheet::where('filial_id', Auth::user()->filial_id)->paginate(10));
+                return new WorksheetCollection(Worksheet::where('filial_id', Auth::user()->filial_id)->orderBy('id', 'desc')->paginate(10));
             }
 
             return new WorksheetCollection(Worksheet::where('filial_id', Auth::user()->filial_id)->where(function ($query) use ($request) {
@@ -46,10 +46,10 @@ class WorksheetController extends Controller
                     ->orWhere('envyID', 'LIKE', "%$request->search%")
                     ->orWhere('name', 'LIKE', "%$request->search%")
                     ->orWhere('email', 'LIKE', "%$request->search%");
-            })->paginate(10));
+            })->orderBy('id', 'desc')->paginate(10));
         } elseif (Auth::user()->hasRole('user')) {
             if (!$request->search) {
-                return new WorksheetCollection(Worksheet::where('user_id', Auth::user()->id)->where('filial_id', Auth::user()->filial_id)->paginate(10));
+                return new WorksheetCollection(Worksheet::where('user_id', Auth::user()->id)->where('filial_id', Auth::user()->filial_id)->orderBy('id', 'desc')->paginate(10));
             }
 
             return new WorksheetCollection(Worksheet::where('user_id', Auth::user()->user_id)->where('filial_id', Auth::user()->filial_id)->where(function ($query) use ($request) {
@@ -57,7 +57,7 @@ class WorksheetController extends Controller
                     ->orWhere('envyID', 'LIKE', "%$request->search%")
                     ->orWhere('name', 'LIKE', "%$request->search%")
                     ->orWhere('email', 'LIKE', "%$request->search%");
-            })->paginate(10));
+            })->orderBy('id', 'desc')->paginate(10));
         }
 
 
@@ -84,8 +84,7 @@ class WorksheetController extends Controller
         // TODO: Добавить валидацию
 
         $request->merge([
-            'user_id' => Auth::user()->id,
-            'filial_id' => Auth::user()->filial_id,
+            'user_id' => Auth::user()->id
         ]);
 
         Log::info($request->all(), ['create worksheet']);
@@ -129,7 +128,7 @@ class WorksheetController extends Controller
     public function update(Request $request, Worksheet $worksheet)
     {
         // TODO: Добавить валидацию
-        $worksheet->update($request->except('user_id', 'filial_id'));
+        $worksheet->update($request->except('user_id'));
 
         event(new WorksheetEdited($worksheet));
 

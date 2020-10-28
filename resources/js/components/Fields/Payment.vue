@@ -75,10 +75,6 @@ export default {
             },
             fields: [
                 {
-                    name: 'filial',
-                    title: 'Филиал'
-                },
-                {
                     name: 'manager',
                     title: 'Менеджер'
                 },

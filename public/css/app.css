@@ -22436,6 +22436,35 @@ fieldset[disabled] .multiselect {
   outline: 0;
 }
 
+.sidebar {
+  --transform-translate-x: -12rem;
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
+  transition-duration: 200ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sidebar .sidebar--logo {
+  transform: translateX(300px);
+  transition: transform 0.3s ease-in-out;
+}
+
+.sidebar .sidebar--nav {
+  transform: translateX(190px);
+  transition: transform 0.3s ease-in-out;
+}
+
+.sidebar:hover {
+  --transform-translate-x: 0;
+}
+
+.sidebar:hover .sidebar--logo {
+  transform: translateX(0);
+}
+
+.sidebar:hover .sidebar--nav {
+  transform: translateX(0);
+}
+
 @media (min-width: 640px){
   .sm\:container{
     width: 100%;

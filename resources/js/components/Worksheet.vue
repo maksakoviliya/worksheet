@@ -3,7 +3,7 @@
         <notifications/>
         <div class="w-full">
             <!--            <scrollactive :duration="800" :offset="0" active-class="active" bezier-easing-value=".5,0,.35,1"/>-->
-            <common-data ref="common" :data.sync="worksheet.common" @change="worksheet.common = $event"/>
+            <common-data ref="common" :token="token" :filial="filial" :data.sync="worksheet.common" @change="worksheet.common = $event"/>
             <passport ref="passport" :data.sync="worksheet.passport" class="mt-6"
                       @change="worksheet.passport = $event"/>
             <creditors ref="creditors" :data.sync="worksheet.creditors" class="mt-6"
@@ -22,7 +22,7 @@
             <voidable-movable :data.sync="worksheet.voidableMovable" @change="worksheet.voidableMovable = $event"  class="mt-6"></voidable-movable>
             <voidable-immmovable :data.sync="worksheet.voidableImmovable"  @change="worksheet.voidableImmovable = $event" class="mt-6"></voidable-immmovable>
 
-            <payment :data.sync="worksheet.payment" class="mt-6" @change="worksheet.payment = $event"/>
+            <payment :data.sync="worksheet.payment" :filial="worksheet.common.filial_id" class="mt-6" @change="worksheet.payment = $event"/>
         </div>
         <!--        <worksheet-nav class="sticky" style="top: 90px;"></worksheet-nav>-->
 
@@ -103,7 +103,7 @@ export default {
             required: true,
         },
         filial: {
-            default: []
+            required: true
         },
         worksheetData: {
             required: false
@@ -119,6 +119,7 @@ export default {
                     email: '',
                     messengers: [],
                     livingCity: '',
+                    filial_id: this.filial
                 },
                 passport: {
                     birthday: '',
@@ -201,6 +202,7 @@ export default {
                         email: this.worksheet.common.email,
                         messengers: this.worksheet.common.messengers,
                         livingCity: this.worksheet.common.livingCity,
+                        filial_id: this.worksheet.common.filial_id,
                         // Passport
                         birthday: this.worksheet.passport.birthday,
                         series: this.worksheet.passport.series,
@@ -283,6 +285,7 @@ export default {
                         email: this.worksheet.common.email,
                         messengers: this.worksheet.common.messengers,
                         livingCity: this.worksheet.common.livingCity,
+                        filial_id: this.worksheet.common.filial_id,
                         // Passport
                         birthday: this.worksheet.passport.birthday,
                         series: this.worksheet.passport.series,
@@ -355,6 +358,7 @@ export default {
             this.worksheet.common.email = this.worksheetData.email || ''
             this.worksheet.common.messengers = this.worksheetData.messengers || []
             this.worksheet.common.livingCity = this.worksheetData.livingCity || ''
+            this.worksheet.common.filial_id = this.worksheetData.filial_id || this.filial
             // Passport
             this.worksheet.passport.birthday = this.worksheetData.birthday || ''
             this.worksheet.passport.series = this.worksheetData.series || ''

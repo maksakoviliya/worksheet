@@ -16,13 +16,13 @@
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-        <div id="app" x-data="{ sidebarOpen: false }" class="flex h-screen bg-gray-200 font-roboto">
+        <div id="app" class="flex h-screen bg-gray-200 font-roboto">
             @include('layouts.sidebar')
 
             <div class="flex-1 flex flex-col overflow-hidden">
                 <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200 relative">
                     @include('layouts.navbar')
-                    <div class="container mx-auto px-0 lg:px-6 py-8 mt-10">
+                    <div class="container mx-auto pr-0 mt-10">
                         @yield('content')
                     </div>
                 </main>

@@ -114,14 +114,22 @@ export default {
                 }
             },
             fields: [
-                {
-                    name: 'id',
-                    title: '##'
-                },
+                // {
+                //     name: 'id',
+                //     title: '##',
+                // },
                 {
                     name: 'envyID',
                     title: 'ID сделки',
                     formatter: value => _.truncate(value)
+                },
+                {
+                    name: 'name',
+                    title: 'Имя клиента'
+                },
+                {
+                    name: 'phone',
+                    title: 'Телефон клиента'
                 },
                 {
                     name: 'user',

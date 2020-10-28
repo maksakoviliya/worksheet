@@ -19,6 +19,8 @@ class WorksheetResource extends JsonResource
         return [
             'id' => $this->id,
             'envyID' => $this->envyID,
+            'name' => $this->name,
+            'phone' => $this->phone,
             'filial' => $this->filial ? $this->filial['name'] : '',
             'credits_total' => $credits_total ,
             'credits_monthly' => $credits_monthly ,

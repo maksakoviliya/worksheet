@@ -592,3 +592,24 @@ $namespace: 'custom';
         @apply outline-none;
     }
 }
+
+.sidebar{
+    @apply -translate-x-48 transition duration-200 ease-in-out;
+    .sidebar--logo{
+        transform: translateX(300px);
+        transition: transform .3s ease-in-out;
+    }
+    .sidebar--nav{
+        transform: translateX(190px);
+        transition: transform .3s ease-in-out;
+    }
+    &:hover{
+        @apply translate-x-0;
+        .sidebar--logo{
+            transform: translateX(0);
+        }
+        .sidebar--nav {
+            transform: translateX(0);
+        }
+    }
+}
