@@ -1,5 +1,5 @@
 <template>
-    <vue-dropzone ref="myVueDropzone" @vdropzone-success="onSuccess" :useCustomSlot=true
+    <vue-dropzone ref="myVueDropzone" @vdropzone-success="onSuccess" @vdropzone-error="onError" :useCustomSlot=true
                   class="mt-16 rounded-lg border-gray-800 flex flex-col items-center justify-center" id="dropzone"
                   :options="dropzoneOptions">
         <div class="dz-default dz-message">
@@ -62,6 +62,13 @@ export default {
                 type: 'success'
             })
             this.$root.$emit('uploadBanks')
+        },
+        onError(file, message, xhr){
+            this.$notify({
+                title: 'Банки не загружены',
+                text: 'Что-то пошло не так',
+                type: 'error'
+            })
         }
     }
 }

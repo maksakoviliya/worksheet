@@ -108,8 +108,11 @@ class BankController extends Controller
         ]);
 
         Bank::query()->delete();
-
-        Excel::import(new BanksImport, request()->file('file'));
+        try {
+            Excel::import(new BanksImport, request()->file('file'));
+        } catch (\Exception $exception) {
+            
+        }
 
         return response()->json('success');
     }
