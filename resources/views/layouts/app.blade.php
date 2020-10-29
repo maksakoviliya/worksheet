@@ -22,7 +22,7 @@
             <div class="flex-1 flex flex-col overflow-hidden">
                 <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200 relative">
                     @include('layouts.navbar')
-                    <div class="container mx-auto pr-0 mt-10">
+                    <div class="container mx-auto pr-0 mt-24">
                         @yield('content')
                     </div>
                 </main>
