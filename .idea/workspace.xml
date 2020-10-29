@@ -19,16 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2893a89d-c2b1-4e6a-ba5d-8892472103f2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/sidebar.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/worksheets.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/worksheets.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
-    </list>
+    <list default="true" id="2893a89d-c2b1-4e6a-ba5d-8892472103f2" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -167,6 +158,14 @@
       <path value="$PROJECT_DIR$/vendor/doctrine/cache" />
       <path value="$PROJECT_DIR$/vendor/justinrainbow/json-schema" />
       <path value="$PROJECT_DIR$/vendor/symfony/filesystem" />
+      <path value="$PROJECT_DIR$/vendor/markbaker/matrix" />
+      <path value="$PROJECT_DIR$/vendor/markbaker/complex" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-client" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-factory" />
+      <path value="$PROJECT_DIR$/vendor/myclabs/php-enum" />
+      <path value="$PROJECT_DIR$/vendor/maatwebsite/excel" />
+      <path value="$PROJECT_DIR$/vendor/maennchen/zipstream-php" />
+      <path value="$PROJECT_DIR$/vendor/phpoffice/phpspreadsheet" />
     </include_path>
   </component>
   <component name="ProjectId" id="1iMeRF1VYkfMXMFldBxK6pHOTUW" />
@@ -231,10 +230,10 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="1024" y="755" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1602711541917">
+    <state x="1024" y="755" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1603828568816">
       <screen x="0" y="23" width="2560" height="1417" />
     </state>
-    <state x="1024" y="755" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.23.2560.1417@0.23.2560.1417" timestamp="1602711541917" />
+    <state x="1024" y="755" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.23.2560.1417@0.23.2560.1417" timestamp="1603828568816" />
     <state x="1024" y="912" key="ComposerInitDialogKey" timestamp="1601723061982">
       <screen x="0" y="23" width="2560" height="1417" />
     </state>
@@ -247,13 +246,17 @@
       <screen x="0" y="23" width="2560" height="1417" />
     </state>
     <state x="787" y="632" key="SettingsEditor/0.23.2560.1417@0.23.2560.1417" timestamp="1602711078023" />
-    <state x="988" y="732" width="596" height="586" key="find.popup" timestamp="1602709366776">
+    <state x="905" y="635" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1603824820767">
       <screen x="0" y="23" width="2560" height="1417" />
     </state>
-    <state x="988" y="732" width="596" height="586" key="find.popup/0.23.2560.1417@0.23.2560.1417" timestamp="1602709366776" />
-    <state x="951" y="758" width="670" height="676" key="search.everywhere.popup" timestamp="1602745296319">
+    <state x="905" y="635" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.23.2560.1417@0.23.2560.1417" timestamp="1603824820767" />
+    <state x="988" y="732" width="596" height="586" key="find.popup" timestamp="1603871013247">
       <screen x="0" y="23" width="2560" height="1417" />
     </state>
-    <state x="951" y="758" width="670" height="676" key="search.everywhere.popup/0.23.2560.1417@0.23.2560.1417" timestamp="1602745296319" />
+    <state x="988" y="732" width="596" height="586" key="find.popup/0.23.2560.1417@0.23.2560.1417" timestamp="1603871013247" />
+    <state x="951" y="758" width="670" height="676" key="search.everywhere.popup" timestamp="1603872825066">
+      <screen x="0" y="23" width="2560" height="1417" />
+    </state>
+    <state x="951" y="758" width="670" height="676" key="search.everywhere.popup/0.23.2560.1417@0.23.2560.1417" timestamp="1603872825066" />
   </component>
 </project>

@@ -111,7 +111,7 @@ class BankController extends Controller
         try {
             Excel::import(new BanksImport, request()->file('file'));
         } catch (\Exception $exception) {
-            
+
         }
 
         return response()->json('success');
