@@ -10,7 +10,12 @@
     <div class="flex flex-col mt-8 mb-20">
 {{--        {{ Auth()->user()->filial }}--}}
 {{--        {{ Auth()->user()->filial || 'empty' }}--}}
-        <worksheet :user-id="{{ Auth()->user()->id }}" @if($worksheet ?? '')  :worksheet-data="{{ $worksheet }}" @endif filial="{{ Auth()->user()->filial['id'] }}" token="{{ Auth()->user()->token }}"></worksheet>
+        <worksheet
+            :user-id="{{ Auth()->user()->id }}" @if($worksheet ?? '')
+            :worksheet-data="{{ $worksheet }}" @endif
+            filial="{{ Auth()->user()->filial['id'] }}"
+            token="{{ Auth()->user()->token }}"
+        ></worksheet>
 
     </div>
 
