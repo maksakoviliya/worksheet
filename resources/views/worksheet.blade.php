@@ -13,7 +13,7 @@
         <worksheet
             :user-id="{{ Auth()->user()->id }}" @if($worksheet ?? '')
             :worksheet-data="{{ $worksheet }}" @endif
-            filial="{{ Auth()->user()->filial['id'] }}"
+            filial="{{ Auth()->user()->filial ? Auth()->user()->filial['id'] : null }}"
             token="{{ Auth()->user()->token }}"
         ></worksheet>
 
