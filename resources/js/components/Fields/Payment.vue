@@ -49,13 +49,22 @@
 import Vuetable from "vuetable-2";
 import AddPaymentForm from "./forms/AddPaymentForm";
 import moment from "moment";
+import axios from "axios";
 
 export default {
     name: "Payment",
     components: {
         Vuetable
     },
-    props: ['data'],
+    props: {
+        data: {
+            required: false
+        },
+        token: {
+            required: true,
+            type: String
+        },
+    },
     data() {
         return {
             classes: {
@@ -73,10 +82,15 @@ export default {
                     handleIcon: 'grey sidebar icon',
                 },
             },
+            managers: [],
             fields: [
                 {
                     name: 'manager',
-                    title: 'Менеджер'
+                    title: 'Менеджер',
+                    formatter: value => {
+                        let manager = this.managers.find(item => item.id === value)
+                        return manager ? manager.name : ' - '
+                    }
                 },
                 {
                     name: 'budget',
@@ -123,14 +137,14 @@ export default {
                 {
                     name: 'paymentDate',
                     title: 'Дата платежа рассрочки',
-                    formatter: value=>{
+                    formatter: value => {
                         return moment(value).format('DD.MM.YYYY')
                     }
                 },
                 {
                     name: 'online',
                     title: 'Онлайн продажа',
-                    formatter: value=>{
+                    formatter: value => {
                         return value ? 'Да' : 'Нет'
                     }
                 },
@@ -146,7 +160,7 @@ export default {
         showAddPaymentForm() {
             this.$modal.show(
                 AddPaymentForm,
-                {},
+                {managers: this.managers},
                 {classes: 'rounded-lg ml-32', height: 'auto', name: 'AddPaymentForm'},
                 {
                     'paymentAdded': (payment) => {
@@ -158,7 +172,7 @@ export default {
         showEditPaymentForm(index) {
             this.$modal.show(
                 AddPaymentForm,
-                {data: this.data.payment[index]},
+                {data: this.data.payment[index], managers: this.managers},
                 {classes: 'rounded-lg ml-32', height: 'auto', name: 'AddPaymentForm'},
                 {
                     'paymentEdited': (payment) => {
@@ -167,6 +181,25 @@ export default {
                 }
             )
         },
+        async fetchUsers() {
+            try {
+                const {data} = await axios.get('/api/managers', {
+                    headers: {
+                        'Authorization': 'Bearer ' + this.token
+                    },
+                })
+                this.managers = data.data
+            } catch (e) {
+                this.$notify({
+                    text: e,
+                    title: 'Ошибка сервера',
+                    type: 'error'
+                })
+            }
+        }
+    },
+    mounted() {
+        this.fetchUsers()
     }
 }
 </script>

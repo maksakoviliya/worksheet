@@ -22,7 +22,7 @@
             <voidable-movable :data.sync="worksheet.voidableMovable" @change="worksheet.voidableMovable = $event"  class="mt-6"></voidable-movable>
             <voidable-immmovable :data.sync="worksheet.voidableImmovable"  @change="worksheet.voidableImmovable = $event" class="mt-6"></voidable-immmovable>
 
-            <payment :data.sync="worksheet.payment" :filial="worksheet.common.filial_id" class="mt-6" @change="worksheet.payment = $event"/>
+            <payment :data.sync="worksheet.payment" :filial="worksheet.common.filial_id" :token="token" class="mt-6" @change="worksheet.payment = $event"/>
         </div>
         <!--        <worksheet-nav class="sticky" style="top: 90px;"></worksheet-nav>-->
 

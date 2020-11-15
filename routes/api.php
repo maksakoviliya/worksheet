@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['auth:sanctum'])->group(function() {
     Route::get('/banks', 'BankController@index')->name('banks.index');
     Route::get('/filials', 'FilialController@index')->name('filials.index');
+    Route::get('/managers', 'UsersController@managers')->name('users.managers');
 });
 
 Route::middleware(['auth:sanctum', 'can:manage users'])->group(function() {

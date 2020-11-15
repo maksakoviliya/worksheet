@@ -124,7 +124,7 @@ export default {
     data: {
       required: false
     }, filial: {
-      required: true
+      required: false
     }, token: {
       required: true,
       type: String

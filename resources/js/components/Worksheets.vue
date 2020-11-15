@@ -31,6 +31,7 @@
                 api-url="/api/worksheets"
                 pagination-path="meta"
                 @vuetable:pagination-data="onPaginationData"
+                @vuetable:row-clicked="onRowClicked"
             >
                 <template slot="actions" slot-scope="props">
                     <a :href="`/worksheets/${props.rowData.id}`"
@@ -119,6 +120,11 @@ export default {
                 //     title: '##',
                 // },
                 {
+                    name: 'actions',
+                    title: '',
+                    dataClass: "text-right",
+                },
+                {
                     name: 'envyID',
                     title: 'ID сделки',
                     formatter: value => _.truncate(value)
@@ -181,11 +187,6 @@ export default {
                     title: 'Дата создания',
                     // formatter: value => moment(value).format('DD.MM.YYYY')
                 },
-                {
-                    name: 'actions',
-                    title: '',
-                    dataClass: "text-right",
-                }
             ]
         }
     },
@@ -202,6 +203,9 @@ export default {
         },
         onChangePage(page) {
             this.$refs.worksheetsVuetable.changePage(page)
+        },
+        onRowClicked(object, event) {
+            window.location.href = `/worksheets/${object.data.id}`
         },
         showDeleteWorksheetForm(id) {
             this.$modal.show(

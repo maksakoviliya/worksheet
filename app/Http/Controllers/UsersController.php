@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Filial;
 use App\Http\Requests\StoreUser;
 use App\Http\Requests\UpdateUser;
+use App\Http\Resources\ManagerCollection;
 use App\Http\Resources\UserCollection;
 use App\Http\Resources\UserResource;
 use App\Role;
@@ -50,6 +51,19 @@ class UsersController extends Controller
                 })->paginate(10));
         } else {
             return redirect()->route('login');
+        }
+    }
+
+    public function managers()
+    {
+        if (Auth::user()->can('manage heads')) {
+            return new ManagerCollection(User::all());
+        } elseif (Auth::user()->can('manage users')) {
+            return new ManagerCollection(User::where('filial_id', Auth::user()->filial_id)->whereHas('roles', function ($query) {
+                return $query->where('name', 'user');
+            })->get());
+        } else {
+            return new ManagerCollection(User::where('id', Auth::user()->id)->get());
         }
     }
 

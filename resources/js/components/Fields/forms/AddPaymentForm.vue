@@ -1,27 +1,32 @@
 <template>
     <ValidationObserver ref="ValidationObserver" v-slot="{ invalid, handleSubmit }">
         <form @submit.prevent="handleSubmit(addPayment)">
-<!--            <ValidationProvider v-slot="{ errors }" name="filial" rules="required">-->
-<!--                <label class="inline-block text-gray-700 text-sm font-bold mb-2 mt-4" for="filial">Филиал<span-->
-<!--                    class="text-red-300 text-sm">*</span>: <small v-if="errors[0]" class="text-red-400">{{-->
-<!--                        errors[0]-->
-<!--                    }}</small></label>-->
-<!--                <multiselect id="filial" v-model="filial" :class="{'invalid': errors.length}"-->
-<!--                             :options="filials"-->
-<!--                             :show-labels="false"-->
-<!--                             placeholder="Выберите филиал"></multiselect>-->
-<!--            </ValidationProvider>-->
+            <!--            <ValidationProvider v-slot="{ errors }" name="filial" rules="required">-->
+            <!--                <label class="inline-block text-gray-700 text-sm font-bold mb-2 mt-4" for="filial">Филиал<span-->
+            <!--                    class="text-red-300 text-sm">*</span>: <small v-if="errors[0]" class="text-red-400">{{-->
+            <!--                        errors[0]-->
+            <!--                    }}</small></label>-->
+            <!--                <multiselect id="filial" v-model="filial" :class="{'invalid': errors.length}"-->
+            <!--                             :options="filials"-->
+            <!--                             :show-labels="false"-->
+            <!--                             placeholder="Выберите филиал"></multiselect>-->
+            <!--            </ValidationProvider>-->
             <ValidationProvider v-slot="{ errors }" class="mt-4" name="manager" rules="required" tag="div">
                 <label class="inline-block text-gray-700 text-sm font-bold mb-2" for="manager">Менеджер<span
                     class="text-red-300 text-sm">*</span>: <small v-if="errors[0]" class="text-red-400">{{
                         errors[0]
                     }}</small>
                 </label>
-                <input id="manager"
-                       v-model="manager"
-                       :class="{'border-red-400 focus:red-400': errors.length}"
-                       class="appearance-none rounded-lg border border-gray-300 border-b block px-2 py-2 w-full bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none focus:border-gray-800"
-                       placeholder=""/>
+                <!--                <input id="manager"-->
+                <!--                       v-model="manager"-->
+                <!--                       :class="{'border-red-400 focus:red-400': errors.length}"-->
+                <!--                       class="appearance-none rounded-lg border border-gray-300 border-b block px-2 py-2 w-full bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none focus:border-gray-800"-->
+                <!--                       placeholder=""/>-->
+                <multiselect id="filial" v-model="manager" :class="{'invalid': errors.length}"
+                             :options="managers.map(option=>option.id)"
+                             :custom-label="value=>managers.find(option=>option.id===value) ? managers.find(option=>option.id===value).name : ''"
+                             :show-labels="false"
+                             placeholder="Выберите менеджера"></multiselect>
             </ValidationProvider>
             <ValidationProvider v-slot="{ errors }" class="mt-4" name="budget" rules="required" tag="div">
                 <label class="inline-block text-gray-700 text-sm font-bold mb-2" for="budget">Бюджет<span
@@ -116,6 +121,7 @@
     </ValidationObserver>
 </template>
 <script>
+import axios from 'axios'
 import {VueMaskDirective} from 'v-mask'
 import moment from "moment";
 
@@ -124,9 +130,15 @@ export default {
     directives: {
         'mask': VueMaskDirective
     },
-    props: [
-        'data'
-    ],
+    props: {
+        data: {
+            required: false
+        },
+        managers: {
+            required: true,
+            default: []
+        }
+    },
     data() {
         return {
             // filial: this.data?.filial || '',
@@ -179,7 +191,7 @@ export default {
                 this.$parent.$emit('paymentEdited', data)
             }
             this.$modal.hide('AddPaymentForm')
-        }
-    }
+        },
+    },
 }
 </script>
