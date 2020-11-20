@@ -144,21 +144,21 @@
         @if(count($worksheet->immovable))
             @foreach($worksheet->immovable as $item)
                 <p>
-                    Вид иимущества:
+                    Вид иимущества (Недвижимое имущество):
                 <td class="text-left">{{ $item['type'] }}</td>
-                Вид собственности:
+                Вид собственности (Недвижимое имущество):
                 <td class="text-left">{{ $item['ownership'] }}</td>
-                Местонахождение:
+                Местонахождение (Недвижимое имущество):
                 <td class="text-left">{{ $item['address'] }}</td>
-                Площадь:
+                Площадь (Недвижимое имущество):
                 <td class="text-left">{{ $item['area'] }}</td>
-                Сведения о залоге:
+                Сведения о залоге (Недвижимое имущество):
                 <td class="text-left">{{ $item['pledge'] }}</td>
-                Основание приобретения:
+                Основание приобретения (Недвижимое имущество):
                 <td class="text-left">{{ $item['basis'] }}</td>
-                Стоимость:
+                Стоимость (Недвижимое имущество):
                 <td class="text-left">{{ $item['cost'] }}</td>
-                Дата приобретения:
+                Дата приобретения (Недвижимое имущество):
                 <td class="text-left">{{ \Carbon\Carbon::parse($item['date'])->format('d.m.Y') }}</td>
 
                 </p>
@@ -175,14 +175,14 @@
         @if(count($worksheet->movable))
             @foreach($worksheet->movable as $item)
                 <p>
-                    Вид имущества: <span class="text-left">{{ $item['type'] }}</span>
-                    Вид собственности: <span class="text-left">{{ $item['ownership'] }}</span>
-                    Местонахождение: <span class="text-left">{{ $item['address'] }}</span>
-                    Марка и модель: <span class="text-left">{{ $item['model'] }}</span>
-                    VIN номер: <span class="text-left">{{ $item['vin'] }}</span>
-                    Сведения о залоге: <span class="text-left">{{ $item['pledge'] }}</span>
-                    Стоимость: <span class="text-left">{{ $item['cost'] }}</span>
-                    Дата приобретения: <span
+                    Вид имущества (Движимое имущество): <span class="text-left">{{ $item['type'] }}</span>
+                    Вид собственности (Движимое имущество): <span class="text-left">{{ $item['ownership'] }}</span>
+                    Местонахождение (Движимое имущество): <span class="text-left">{{ $item['address'] }}</span>
+                    Марка и модель (Движимое имущество): <span class="text-left">{{ $item['model'] }}</span>
+                    VIN номер (Движимое имущество): <span class="text-left">{{ $item['vin'] }}</span>
+                    Сведения о залоге (Движимое имущество): <span class="text-left">{{ $item['pledge'] }}</span>
+                    Стоимость (Движимое имущество): <span class="text-left">{{ $item['cost'] }}</span>
+                    Дата приобретения (Движимое имущество): <span
                         class="text-left">{{ \Carbon\Carbon::parse($item['date'])->format('d.m.Y') }}</span>
 
                 </p>
@@ -199,14 +199,14 @@
         @if(count($worksheet->spousesImmovable))
             @foreach($worksheet->spousesImmovable as $item)
                 <p>
-                    Вид имущества: <span class="text-left">{{ $item['type'] }}</span>
-                    Вид собственности: <span class="text-left">{{ $item['ownership'] }}</span>
-                    Местонахождение: <span class="text-left">{{ $item['address'] }}</span>
-                    Площадь: <span class="text-left">{{ $item['area'] }}</span>
-                    Сведения о залоге: <span class="text-left">{{ $item['pledge'] }}</span>
-                    Основание приобретения: <span class="text-left">{{ $item['basis'] }}</span>
-                    Стоимость: <span class="text-left">{{ $item['cost'] }}</span>
-                    Дата приобретения: <span
+                    Вид имущества (Недвижимое имущество супруга(и)): <span class="text-left">{{ $item['type'] }}</span>
+                    Вид собственности (Недвижимое имущество супруга(и)): <span class="text-left">{{ $item['ownership'] }}</span>
+                    Местонахождение (Недвижимое имущество супруга(и)): <span class="text-left">{{ $item['address'] }}</span>
+                    Площадь (Недвижимое имущество супруга(и)): <span class="text-left">{{ $item['area'] }}</span>
+                    Сведения о залоге (Недвижимое имущество супруга(и)): <span class="text-left">{{ $item['pledge'] }}</span>
+                    Основание приобретения (Недвижимое имущество супруга(и)): <span class="text-left">{{ $item['basis'] }}</span>
+                    Стоимость (Недвижимое имущество супруга(и)): <span class="text-left">{{ $item['cost'] }}</span>
+                    Дата приобретения (Недвижимое имущество супруга(и)): <span
                         class="text-left">{{ \Carbon\Carbon::parse($item['date'])->format('d.m.Y') }}</span>
 
                 </p>
@@ -223,14 +223,14 @@
         @if(count($worksheet->spousesMovable))
             @foreach($worksheet->spousesMovable as $item)
                 <p>
-                    Вид иимущества: <span class="text-left">{{ $item['type'] }}</span>
-                    Вид собственности: <span class="text-left">{{ $item['ownership'] }}</span>
-                    Местонахождение: <span class="text-left">{{ $item['address'] }}</span>
-                    Марка и модель: <span class="text-left">{{ $item['model'] }}</span>
-                    VIN номер: <span class="text-left">{{ $item['vin'] }}</span>
-                    Сведения о залоге: <span class="text-left">{{ $item['pledge'] }}</span>
-                    Стоимость: <span class="text-left">{{ $item['cost'] }}</span>
-                    Дата приобретения: <span
+                    Вид иимущества (Движимое имущество супруга(и)): <span class="text-left">{{ $item['type'] }}</span>
+                    Вид собственности (Движимое имущество супруга(и)): <span class="text-left">{{ $item['ownership'] }}</span>
+                    Местонахождение (Движимое имущество супруга(и)): <span class="text-left">{{ $item['address'] }}</span>
+                    Марка и модель (Движимое имущество супруга(и)): <span class="text-left">{{ $item['model'] }}</span>
+                    VIN номер (Движимое имущество супруга(и)): <span class="text-left">{{ $item['vin'] }}</span>
+                    Сведения о залоге (Движимое имущество супруга(и)): <span class="text-left">{{ $item['pledge'] }}</span>
+                    Стоимость (Движимое имущество супруга(и)): <span class="text-left">{{ $item['cost'] }}</span>
+                    Дата приобретения (Движимое имущество супруга(и)): <span
                         class="text-left">{{ \Carbon\Carbon::parse($item['date'])->format('d.m.Y') }}</span>
 
                 </p>
@@ -254,13 +254,13 @@
         @if(count($worksheet->voidableMovable))
             @foreach($worksheet->voidableMovable as $item)
                 <p>
-                    Объект: <span class="text-left">{{ $item['object'] }}</span>
-                    Дата сделки: <span
+                    Объект (Оспоримые сделки по движимому имуществу): <span class="text-left">{{ $item['object'] }}</span>
+                    Дата сделки (Оспоримые сделки по движимому имуществу): <span
                         class="text-left">{{ \Carbon\Carbon::parse($item['date'])->format('d.m.Y') }}</span>
-                    Дата приобретения: <span
+                    Дата приобретения (Оспоримые сделки по движимому имуществу): <span
                         class="text-left">{{ \Carbon\Carbon::parse($item['buyDate'])->format('d.m.Y') }}</span>
-                    На что приобритен: <span class="text-left">{{ $sources[$item['source']] }}</span>
-                    Дата регистрации: <span
+                    На что приобритен (Оспоримые сделки по движимому имуществу): <span class="text-left">{{ $sources[$item['source']] }}</span>
+                    Дата регистрации (Оспоримые сделки по движимому имуществу): <span
                         class="text-left">{{ \Carbon\Carbon::parse($item['registrationDate'])->format('d.m.Y') }}</span>
                 </p>
             @endforeach
@@ -279,13 +279,13 @@
         @if(count($worksheet->voidableImmovable))
             @foreach($worksheet->voidableImmovable as $item)
                 <p>
-                    Объект: <span class="text-left">{{ $item['object'] }}</span>
-                    Дата сделки: <span
+                    Объект (Оспоримые сделки по недвижимому имуществу): <span class="text-left">{{ $item['object'] }}</span>
+                    Дата сделки (Оспоримые сделки по недвижимому имуществу): <span
                         class="text-left">{{ \Carbon\Carbon::parse($item['date'])->format('d.m.Y') }}</span>
-                    Дата приобретения: <span
+                    Дата приобретения (Оспоримые сделки по недвижимому имуществу): <span
                         class="text-left">{{ \Carbon\Carbon::parse($item['buyDate'])->format('d.m.Y') }}</span>
-                    На что приобритен: <span class="text-left">{{ $sources[$item['source']] }}</span>
-                    Дата регистрации: <span
+                    На что приобритен (Оспоримые сделки по недвижимому имуществу): <span class="text-left">{{ $sources[$item['source']] }}</span>
+                    Дата регистрации (Оспоримые сделки по недвижимому имуществу): <span
                         class="text-left">{{ \Carbon\Carbon::parse($item['registrationDate'])->format('d.m.Y') }}</span>
                 </p>
             @endforeach
