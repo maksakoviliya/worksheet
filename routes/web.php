@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('/test', function (){
-    $worksheet = \App\Worksheet::find(6);
+    $worksheet = \App\Worksheet::with('filial')->find(6);
    return view('mails.worksheet', compact('worksheet'));
 });
 
