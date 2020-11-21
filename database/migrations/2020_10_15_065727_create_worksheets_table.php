@@ -19,6 +19,8 @@ class CreateWorksheetsTable extends Migration
             // Common
             $table->string('envyID');
             $table->string('name');
+            $table->string('surname');
+            $table->string('patronymic');
             $table->string('phone');
             $table->string('email');
             $table->json('messengers');

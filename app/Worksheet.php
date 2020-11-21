@@ -9,6 +9,8 @@ class Worksheet extends Model
     protected $fillable = [
         'envyID',
         'name',
+        'surname',
+        'patronymic',
         'phone',
         'email',
         'messengers',

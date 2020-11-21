@@ -14,7 +14,9 @@ use Illuminate\Support\Facades\Route;
 */
 Route::get('/test', function (){
     $worksheet = \App\Worksheet::with('filial')->find(6);
-   return view('mails.worksheet', compact('worksheet'));
+    $users = \App\User::all();
+    $filials = \App\Filial::all();
+   return view('mails.worksheet', compact(['worksheet', 'users', 'filials']));
 });
 
 Auth::routes(['register' => false]);

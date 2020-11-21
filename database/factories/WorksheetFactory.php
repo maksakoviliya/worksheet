@@ -225,7 +225,9 @@ $factory->define(Worksheet::class, function (Faker $faker) {
     return [
         // Common
         'envyID' => $faker->uuid,
-        'name' => $faker->firstName . ' ' . $faker->lastName,
+        'name' => $faker->firstName,
+        'surname'=> $faker->lastName,
+        'patronymic'=> $faker->firstName,
         'phone' => $faker->phoneNumber,
         'email' => $faker->email,
         'messengers' => $faker->randomElements(['WhatsApp', 'Viber', 'Telegram', 'SMS'], rand(1, 3)),

@@ -19,6 +19,7 @@
         <h3>Общие данные</h3>
     </div>
     <div>
+        <p class="text-left">Филиал: <span class="text-left">{{$worksheet->filial->name}}</span></p>
         <p class="text-left">Ссылка на сделку в Envy : <span class="text-left">{{ $worksheet->envyID }}</span></p>
         <p class="text-left">ФИО клиента : <span class="text-left">{{ $worksheet->name }}</span></p>
         <p class="text-left">Телефон : <span class="text-left">{{ $worksheet->phone }}</span></p>
@@ -31,23 +32,25 @@
         <div class="table-title">
             <h3>Паспортные данные</h3>
         </div>
-                <p class="text-left">Дата рождения: <span class="text-left">{{ \Carbon\Carbon::parse($worksheet->birthday)->format('d.m.Y') }}</span></p>
-                <p class="text-left">Серия:<span class="text-left">{{ $worksheet->series }}</span></p>
-                <p class="text-left">Номер: <span class="text-left">{{ $worksheet->number }}</span></p>
-                <p class="text-left">Дата выдачи:  <span class="text-left">{{ \Carbon\Carbon::parse($worksheet->isssued)->format('d.m.Y') }}</span></p>
-                <p class="text-left">Код подразделения: <span class="text-left">{{ $worksheet->code }}</span></p>
-                <p class="text-left">Кем выдан: <span class="text-left">{{ $worksheet->issuedBy }}</span></p>
-                <p class="text-left">Место рождения: <span class="text-left">{{ $worksheet->born }}</span></p>
-                <p class="text-left">Индекс:  <span class="text-left">{{ $worksheet->index }}</span></p>
-                <p class="text-left">Регион:  <span class="text-left">{{ $worksheet->region }}</span></p>
-                <p class="text-left">Район:  <span class="text-left">{{ $worksheet->area }}</span></p>
-                <p class="text-left">Город (Населенный пункт):  <span class="text-left">{{ $worksheet->city }}</span></p>
-                <p class="text-left">Улица:  <span class="text-left">{{ $worksheet->street }}</span></p>
-                <p class="text-left">Дом:  <span class="text-left">{{ $worksheet->house }}</span></p>
-                <p class="text-left">Корпус:  <span class="text-left">{{ $worksheet->housing }}</span></p>
-                <p class="text-left">Квартира: <span class="text-left">{{ $worksheet->room }}</span></p>
-                <p class="text-left">Адрес регистрации: <span class="text-left">{{ $worksheet->registration }}</span></p>
-                <p class="text-left">Почтовый адрес: <span class="text-left">{{ $worksheet->post }}</span></p>
+        <p class="text-left">Дата рождения: <span
+                class="text-left">{{ \Carbon\Carbon::parse($worksheet->birthday)->format('d.m.Y') }}</span></p>
+        <p class="text-left">Серия:<span class="text-left">{{ $worksheet->series }}</span></p>
+        <p class="text-left">Номер: <span class="text-left">{{ $worksheet->number }}</span></p>
+        <p class="text-left">Дата выдачи: <span
+                class="text-left">{{ \Carbon\Carbon::parse($worksheet->isssued)->format('d.m.Y') }}</span></p>
+        <p class="text-left">Код подразделения: <span class="text-left">{{ $worksheet->code }}</span></p>
+        <p class="text-left">Кем выдан: <span class="text-left">{{ $worksheet->issuedBy }}</span></p>
+        <p class="text-left">Место рождения: <span class="text-left">{{ $worksheet->born }}</span></p>
+        <p class="text-left">Индекс: <span class="text-left">{{ $worksheet->index }}</span></p>
+        <p class="text-left">Регион: <span class="text-left">{{ $worksheet->region }}</span></p>
+        <p class="text-left">Район: <span class="text-left">{{ $worksheet->area }}</span></p>
+        <p class="text-left">Город (Населенный пункт): <span class="text-left">{{ $worksheet->city }}</span></p>
+        <p class="text-left">Улица: <span class="text-left">{{ $worksheet->street }}</span></p>
+        <p class="text-left">Дом: <span class="text-left">{{ $worksheet->house }}</span></p>
+        <p class="text-left">Корпус: <span class="text-left">{{ $worksheet->housing }}</span></p>
+        <p class="text-left">Квартира: <span class="text-left">{{ $worksheet->room }}</span></p>
+        <p class="text-left">Адрес регистрации: <span class="text-left">{{ $worksheet->registration }}</span></p>
+        <p class="text-left">Почтовый адрес: <span class="text-left">{{ $worksheet->post }}</span></p>
     </div>
 
     <div class="table-wrapper">
@@ -89,19 +92,19 @@
             <p class="text-left">Нет данных</p>
         @endif
 
-                <p class="text-left">Являетсь ли вы учредителем ООО/ИП?: <span class="text-left">
+        <p class="text-left">Являетсь ли вы учредителем ООО/ИП?: <span class="text-left">
                     @if($worksheet->isIp === 1)
-                        Да
-                    @else
-                        Нет
-                    @endif
+                    Да
+                @else
+                    Нет
+                @endif
                 </span></p>
-                <p class="text-left">Комментарий к ООО/ИП: <span class="text-left">{{ $worksheet->oooComment}}</span></p>
-                <p class="text-left">Являетесь ли Вы генеральным директором в ООО?: <span class="text-left">@if($worksheet->isDirector === 1)
-                        Да
-                    @else
-                        Нет
-                    @endif</span></p>
+        <p class="text-left">Комментарий к ООО/ИП: <span class="text-left">{{ $worksheet->oooComment}}</span></p>
+        <p class="text-left">Являетесь ли Вы генеральным директором в ООО?: <span class="text-left">@if($worksheet->isDirector === 1)
+                    Да
+                @else
+                    Нет
+                @endif</span></p>
     </div>
 
     <div class="table-wrapper">
@@ -109,14 +112,14 @@
             <h3>Семейное положение</h3>
         </div>
 
-                <p class="text-left">Семейное положение: <span class="text-left">
+        <p class="text-left">Семейное положение: <span class="text-left">
                     @if($worksheet->isMarried === 1)
-                        Женат(Замужем)
-                    @else
-                        Холост
-                    @endif
+                    Женат(Замужем)
+                @else
+                    Холост
+                @endif
                 </span></p>
-                <p class="text-left">ФИО супруга(и): <span class="text-left">{{ $worksheet->spouse}}</span></p>
+        <p class="text-left">ФИО супруга(и): <span class="text-left">{{ $worksheet->spouse}}</span></p>
     </div>
 
     <div class="table-wrapper">
@@ -201,11 +204,15 @@
             @foreach($worksheet->spousesImmovable as $item)
                 <p>
                     Вид имущества (Недвижимое имущество супруга(и)): <span class="text-left">{{ $item['type'] }}</span>
-                    Вид собственности (Недвижимое имущество супруга(и)): <span class="text-left">{{ $item['ownership'] }}</span>
-                    Местонахождение (Недвижимое имущество супруга(и)): <span class="text-left">{{ $item['address'] }}</span>
+                    Вид собственности (Недвижимое имущество супруга(и)): <span
+                        class="text-left">{{ $item['ownership'] }}</span>
+                    Местонахождение (Недвижимое имущество супруга(и)): <span
+                        class="text-left">{{ $item['address'] }}</span>
                     Площадь (Недвижимое имущество супруга(и)): <span class="text-left">{{ $item['area'] }}</span>
-                    Сведения о залоге (Недвижимое имущество супруга(и)): <span class="text-left">{{ $item['pledge'] }}</span>
-                    Основание приобретения (Недвижимое имущество супруга(и)): <span class="text-left">{{ $item['basis'] }}</span>
+                    Сведения о залоге (Недвижимое имущество супруга(и)): <span
+                        class="text-left">{{ $item['pledge'] }}</span>
+                    Основание приобретения (Недвижимое имущество супруга(и)): <span
+                        class="text-left">{{ $item['basis'] }}</span>
                     Стоимость (Недвижимое имущество супруга(и)): <span class="text-left">{{ $item['cost'] }}</span>
                     Дата приобретения (Недвижимое имущество супруга(и)): <span
                         class="text-left">{{ \Carbon\Carbon::parse($item['date'])->format('d.m.Y') }}</span>
@@ -225,11 +232,14 @@
             @foreach($worksheet->spousesMovable as $item)
                 <p>
                     Вид иимущества (Движимое имущество супруга(и)): <span class="text-left">{{ $item['type'] }}</span>
-                    Вид собственности (Движимое имущество супруга(и)): <span class="text-left">{{ $item['ownership'] }}</span>
-                    Местонахождение (Движимое имущество супруга(и)): <span class="text-left">{{ $item['address'] }}</span>
+                    Вид собственности (Движимое имущество супруга(и)): <span
+                        class="text-left">{{ $item['ownership'] }}</span>
+                    Местонахождение (Движимое имущество супруга(и)): <span
+                        class="text-left">{{ $item['address'] }}</span>
                     Марка и модель (Движимое имущество супруга(и)): <span class="text-left">{{ $item['model'] }}</span>
                     VIN номер (Движимое имущество супруга(и)): <span class="text-left">{{ $item['vin'] }}</span>
-                    Сведения о залоге (Движимое имущество супруга(и)): <span class="text-left">{{ $item['pledge'] }}</span>
+                    Сведения о залоге (Движимое имущество супруга(и)): <span
+                        class="text-left">{{ $item['pledge'] }}</span>
                     Стоимость (Движимое имущество супруга(и)): <span class="text-left">{{ $item['cost'] }}</span>
                     Дата приобретения (Движимое имущество супруга(и)): <span
                         class="text-left">{{ \Carbon\Carbon::parse($item['date'])->format('d.m.Y') }}</span>
@@ -252,15 +262,17 @@
             <h3>Оспоримые сделки по движимому имуществу</h3>
         </div>
 
-        @if(count($worksheet->voidableMovable))
+        @if(count((array)$worksheet->voidableMovable))
             @foreach($worksheet->voidableMovable as $item)
                 <p>
-                    Объект (Оспоримые сделки по движимому имуществу): <span class="text-left">{{ $item['object'] }}</span>
+                    Объект (Оспоримые сделки по движимому имуществу): <span
+                        class="text-left">{{ $item['object'] }}</span>
                     Дата сделки (Оспоримые сделки по движимому имуществу): <span
                         class="text-left">{{ \Carbon\Carbon::parse($item['date'])->format('d.m.Y') }}</span>
                     Дата приобретения (Оспоримые сделки по движимому имуществу): <span
                         class="text-left">{{ \Carbon\Carbon::parse($item['buyDate'])->format('d.m.Y') }}</span>
-                    На что приобритен (Оспоримые сделки по движимому имуществу): <span class="text-left">{{ $sources[$item['source']] }}</span>
+                    На что приобритен (Оспоримые сделки по движимому имуществу): <span
+                        class="text-left">{{ $sources[$item['source']] }}</span>
                     Дата регистрации (Оспоримые сделки по движимому имуществу): <span
                         class="text-left">{{ \Carbon\Carbon::parse($item['registrationDate'])->format('d.m.Y') }}</span>
                 </p>
@@ -277,15 +289,17 @@
         </div>
 
 
-        @if(count($worksheet->voidableImmovable))
+        @if(count((array)$worksheet->voidableImmovable))
             @foreach($worksheet->voidableImmovable as $item)
                 <p>
-                    Объект (Оспоримые сделки по недвижимому имуществу): <span class="text-left">{{ $item['object'] }}</span>
+                    Объект (Оспоримые сделки по недвижимому имуществу): <span
+                        class="text-left">{{ $item['object'] }}</span>
                     Дата сделки (Оспоримые сделки по недвижимому имуществу): <span
                         class="text-left">{{ \Carbon\Carbon::parse($item['date'])->format('d.m.Y') }}</span>
                     Дата приобретения (Оспоримые сделки по недвижимому имуществу): <span
                         class="text-left">{{ \Carbon\Carbon::parse($item['buyDate'])->format('d.m.Y') }}</span>
-                    На что приобритен (Оспоримые сделки по недвижимому имуществу): <span class="text-left">{{ $sources[$item['source']] }}</span>
+                    На что приобритен (Оспоримые сделки по недвижимому имуществу): <span
+                        class="text-left">{{ $sources[$item['source']] }}</span>
                     Дата регистрации (Оспоримые сделки по недвижимому имуществу): <span
                         class="text-left">{{ \Carbon\Carbon::parse($item['registrationDate'])->format('d.m.Y') }}</span>
                 </p>
@@ -303,10 +317,15 @@
         @if(count($worksheet->payment))
             @foreach($worksheet->payment as $item)
                 <p>
-                    Филиал: <span class="text-left">{{ $item['filial'] ?? ' - ' }}</span>
-                    Менеджер: <span class="text-left">{{ $item['manager'] }}</span>
+                    Менеджер: <span class="text-left">
+                        @foreach($users as $user)
+                            @if($user->id == $item['manager'])
+                                {{ $user->name }}
+                            @endif
+                        @endforeach
+                    </span>
                     Бюджет: <span class="text-left">{{ $item['budget'] }}</span>
-                    Ежемесячный платеж: <span class="text-left">{{ $item['monthly'] }}</span>
+                    Ежемесячный платеж (внутренний): <span class="text-left">{{ $item['monthly'] }}</span>
                     Срок рассрочки (мес): <span class="text-left">{{ $item['installment'] }}</span>
                     Дата платежа рассрочки: <span
                         class="text-left">{{ \Carbon\Carbon::parse($item['paymentDate'])->format('d.m.Y') }}</span>
