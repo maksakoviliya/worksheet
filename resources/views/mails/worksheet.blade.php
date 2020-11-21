@@ -32,7 +32,8 @@
             <h3>Паспортные данные</h3>
         </div>
                 <p class="text-left">Дата рождения: <span class="text-left">{{ \Carbon\Carbon::parse($worksheet->birthday)->format('d.m.Y') }}</span></p>
-                <p class="text-left">Серия Номер: <span class="text-left">{{ $worksheet->series }} {{ $worksheet->number }}</span></p>
+                <p class="text-left">Серия:<span class="text-left">{{ $worksheet->series }}</span></p>
+                <p class="text-left">Номер: <span class="text-left">{{ $worksheet->number }}</span></p>
                 <p class="text-left">Дата выдачи:  <span class="text-left">{{ \Carbon\Carbon::parse($worksheet->isssued)->format('d.m.Y') }}</span></p>
                 <p class="text-left">Код подразделения: <span class="text-left">{{ $worksheet->code }}</span></p>
                 <p class="text-left">Кем выдан: <span class="text-left">{{ $worksheet->issuedBy }}</span></p>
