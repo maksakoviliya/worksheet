@@ -151,21 +151,21 @@
             @foreach($worksheet->immovable as $item)
                 <p>
                     Вид иимущества (Недвижимое имущество):
-                <td class="text-left">{{ $item['type'] }}</td>
-                Вид собственности (Недвижимое имущество):
-                <td class="text-left">{{ $item['ownership'] }}</td>
-                Местонахождение (Недвижимое имущество):
-                <td class="text-left">{{ $item['address'] }}</td>
-                Площадь (Недвижимое имущество):
-                <td class="text-left">{{ $item['area'] }}</td>
-                Сведения о залоге (Недвижимое имущество):
-                <td class="text-left">{{ $item['pledge'] }}</td>
-                Основание приобретения (Недвижимое имущество):
-                <td class="text-left">{{ $item['basis'] }}</td>
-                Стоимость (Недвижимое имущество):
-                <td class="text-left">{{ $item['cost'] }}</td>
-                Дата приобретения (Недвижимое имущество):
-                <td class="text-left">{{ \Carbon\Carbon::parse($item['date'])->format('d.m.Y') }}</td>
+                    <span class="text-left">{{ $item['type'] }}</span>
+                    Вид собственности (Недвижимое имущество):
+                    <span class="text-left">{{ $item['ownership'] }}</span>
+                    Местонахождение (Недвижимое имущество):
+                    <span class="text-left">{{ $item['address'] }}</span>
+                    Площадь (Недвижимое имущество):
+                    <span class="text-left">{{ $item['area'] }}</span>
+                    Сведения о залоге (Недвижимое имущество):
+                    <span class="text-left">{{ $item['pledge'] }}</span>
+                    Основание приобретения (Недвижимое имущество):
+                    <span class="text-left">{{ $item['basis'] }}</span>
+                    Стоимость (Недвижимое имущество):
+                    <span class="text-left">{{ $item['cost'] }}</span>
+                    Дата приобретения (Недвижимое имущество):
+                    <span class="text-left">{{ \Carbon\Carbon::parse($item['date'])->format('d.m.Y') }}</span>
 
                 </p>
             @endforeach
@@ -267,16 +267,44 @@
         @if(count((array)$worksheet->voidableMovable))
             @foreach($worksheet->voidableMovable as $item)
                 <p>
-                    Объект (Оспоримые сделки по движимому имуществу): <span
+                    Объект (Оспоримые - движимость): <span
                         class="text-left">{{ $item['object'] }}</span>
-                    Дата сделки (Оспоримые сделки по движимому имуществу): <span
-                        class="text-left">{{ \Carbon\Carbon::parse($item['date'])->format('d.m.Y') }}</span>
-                    Дата приобретения (Оспоримые сделки по движимому имуществу): <span
-                        class="text-left">{{ \Carbon\Carbon::parse($item['buyDate'])->format('d.m.Y') }}</span>
-                    На что приобритен (Оспоримые сделки по движимому имуществу): <span
-                        class="text-left">{{ $sources[$item['source']] }}</span>
-                    Дата регистрации (Оспоримые сделки по движимому имуществу): <span
-                        class="text-left">{{ \Carbon\Carbon::parse($item['registrationDate'])->format('d.m.Y') }}</span>
+                    Дата оспоримой сделки (Оспоримые - движимость): <span
+                        class="text-left">{{ $item['date'] ? \Carbon\Carbon::parse($item['date'])->format('d.m.Y') : '-' }}</span>
+                    Стоимость (Оспоримые - движимость): <span
+                        class="text-left">{{ $item['cost'] }}</span>
+                    Куда потрачены деньги (Оспоримые - движимость): <span
+                        class="text-left">{{ $item['money'] }}</span>
+                    Дата приобретения (Оспоримые - движимость): <span
+                        class="text-left">{{ $item['buyDate'] ? \Carbon\Carbon::parse($item['buyDate'])->format('d.m.Y') : '-' }}</span>
+                    Основание приобретения (Оспоримые - движимость): <span
+                        class="text-left">{{ $item['basis'] }}</span>
+                    Дата регистрации (Оспоримые - движимость): <span
+                        class="text-left">{{ $item['registrationDate'] ? \Carbon\Carbon::parse($item['registrationDate'])->format('d.m.Y') : '-' }}</span>
+                    Нак какие средства приобретался объект (Оспоримые - движимость): <span
+                        class="text-left">{{ $item['source'] }}</span>
+                    Дата закрытия кредита (Оспоримые - движимость): <span
+                        class="text-left">{{ $item['creditFinishDate'] ? \Carbon\Carbon::parse($item['creditFinishDate'])->format('d.m.Y') : '-' }}</span>
+                    Дата акта приема-передачи ПТС (Оспоримые - движимость): <span
+                        class="text-left">{{ $item['ptsDate'] ? \Carbon\Carbon::parse($item['ptsDate'])->format('d.m.Y') : '-' }}</span>
+                    Имелись ли задолженности по кредитам (Оспоримые - движимость): <span
+                        class="text-left">{{ $item['creditors'] ? 'Да' : 'Нет' }}</span>
+                    Когда образовались просрочки (Оспоримые - движимость): <span
+                        class="text-left">{{ $item['delayDate'] ? \Carbon\Carbon::parse($item['delayDate'])->format('d.m.Y') : '-' }}</span>
+                    Был ли брак на момент сделки (Оспоримые - движимость): <span
+                        class="text-left">{{ $item['wasMarried'] ? 'Да' : 'Нет' }}</span>
+                    Дата расторжения брака (Оспоримые - движимость): <span
+                        class="text-left">{{ $item['divorceDate'] ? \Carbon\Carbon::parse($item['divorceDate'])->format('d.m.Y') : '-'}}</span>
+                    Имеется ли брачный контракт (Оспоримые - движимость): <span
+                        class="text-left">{{ $item['contract'] ? 'Да' : 'Нет' }}</span>
+                    Кто оплачивал кредит (Оспоримые - движимость): <span
+                        class="text-left">{{ $item['whoPaied'] ?  $item['whoPaied'] : '-' }}</span>
+                    Имелись ли исполнительные производства (Оспоримые - движимость): <span
+                        class="text-left">{{ $item['processes'] ? 'Да' : 'Нет' }}</span>
+                    Имелись ли постановления о запрете регистрационных действий (Оспоримые - движимость): <span
+                        class="text-left">{{ $item['ban'] ? 'Да' : 'Нет' }}</span>
+                    Снималась ли автомашина с государственного учета (Оспоримые - движимость): <span
+                        class="text-left">{{ $item['removal'] ? 'Да' : 'Нет' }}</span>
                 </p>
             @endforeach
         @else
@@ -294,16 +322,52 @@
         @if(count((array)$worksheet->voidableImmovable))
             @foreach($worksheet->voidableImmovable as $item)
                 <p>
-                    Объект (Оспоримые сделки по недвижимому имуществу): <span
+                    Объект (Оспоримые - недвижимость): <span
                         class="text-left">{{ $item['object'] }}</span>
-                    Дата сделки (Оспоримые сделки по недвижимому имуществу): <span
-                        class="text-left">{{ \Carbon\Carbon::parse($item['date'])->format('d.m.Y') }}</span>
-                    Дата приобретения (Оспоримые сделки по недвижимому имуществу): <span
-                        class="text-left">{{ \Carbon\Carbon::parse($item['buyDate'])->format('d.m.Y') }}</span>
-                    На что приобритен (Оспоримые сделки по недвижимому имуществу): <span
-                        class="text-left">{{ $sources[$item['source']] }}</span>
-                    Дата регистрации (Оспоримые сделки по недвижимому имуществу): <span
-                        class="text-left">{{ \Carbon\Carbon::parse($item['registrationDate'])->format('d.m.Y') }}</span>
+                    Дата оспоримой сделки (Оспоримые - недвижимость): <span
+                        class="text-left">{{ $item['date'] ? \Carbon\Carbon::parse($item['date'])->format('d.m.Y') : '-' }}</span>
+                    Стоимость (Оспоримые - недвижимость): <span
+                        class="text-left">{{ $item['cost'] }}</span>
+                    Куда потрачены деньги (Оспоримые - недвижимость): <span
+                        class="text-left">{{ $item['money'] }}</span>
+                    Дата приобретения (Оспоримые - недвижимость): <span
+                        class="text-left">{{ $item['buyDate'] ? \Carbon\Carbon::parse($item['buyDate'])->format('d.m.Y') : '-' }}</span>
+                    Основание приобретения (Оспоримые - недвижимость): <span
+                        class="text-left">{{ $item['basis'] }}</span>
+                    Дата регистрации (Оспоримые - недвижимость): <span
+                        class="text-left">{{ $item['registrationDate'] ? \Carbon\Carbon::parse($item['registrationDate'])->format('d.m.Y') : '-' }}</span>
+                    Нак какие средства приобретался объект (Оспоримые - недвижимость): <span
+                        class="text-left">{{ $item['source'] }}</span>
+                    Дата закрытия кредита (Оспоримые - недвижимость): <span
+                        class="text-left">{{ $item['creditFinishDate'] ? \Carbon\Carbon::parse($item['creditFinishDate'])->format('d.m.Y') : '-' }}</span>
+                    Имелись ли задолженности по кредитам (Оспоримые - недвижимость): <span
+                        class="text-left">{{ $item['creditors'] ? 'Да' : 'Нет' }}</span>
+                    Когда образовались просрочки (Оспоримые - недвижимость): <span
+                        class="text-left">{{ $item['delayDate'] ? \Carbon\Carbon::parse($item['delayDate'])->format('d.m.Y') : '-' }}</span>
+                    Был ли брак на момент сделки (Оспоримые - недвижимость): <span
+                        class="text-left">{{ $item['wasMarried'] ? 'Да' : 'Нет' }}</span>
+                    Дата расторжения брака (Оспоримые - недвижимость): <span
+                        class="text-left">{{ $item['divorceDate'] ? \Carbon\Carbon::parse($item['divorceDate'])->format('d.m.Y') : '-'}}</span>
+                    Имеется ли брачный контракт (Оспоримые - недвижимость): <span
+                        class="text-left">{{ $item['contract'] ? 'Да' : 'Нет' }}</span>
+                    Кто оплачивал кредит (Оспоримые - недвижимость): <span
+                        class="text-left">{{ $item['whoPaied'] ?  $item['whoPaied'] : '-' }}</span>
+                    Являются ли супруги созаемщиками (Оспоримые - недвижимость): <span
+                        class="text-left">{{ $item['borrowers'] ? 'Да' : 'Нет' }}</span>
+                    Определены ли доли в праве собственности  (Оспоримые - недвижимость): <span
+                        class="text-left">{{ $item['share'] ? 'Да' : 'Нет' }}</span>
+                    Является ли кто-то поручителем? (Оспоримые - недвижимость): <span
+                        class="text-left">{{ $item['guarantor'] ? 'Да' : 'Нет' }}</span>
+                    Имелись ли исполнительные производства (Оспоримые - недвижимость): <span
+                        class="text-left">{{ $item['processes'] ? 'Да' : 'Нет' }}</span>
+                    Имелись ли постановления о запрете регистрационных действий (Оспоримые - недвижимость): <span
+                        class="text-left">{{ $item['ban'] ? 'Да' : 'Нет' }}</span>
+                    Регистрация в указанных объектах (Оспоримые - недвижимость): <span
+                        class="text-left">{{ $item['propiska'] ? 'Да' : 'Нет' }}</span>
+                    Имеется ли задолженность по квартплате? (Оспоримые - недвижимость): <span
+                        class="text-left">{{ $item['bills'] ? 'Да' : 'Нет' }}</span>
+                    Оплата материнским капиталом? (Оспоримые - недвижимость): <span
+                        class="text-left">{{ $item['payByMatency'] ? 'Да' : 'Нет' }}</span>
                 </p>
             @endforeach
         @else

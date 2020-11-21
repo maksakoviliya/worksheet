@@ -129,21 +129,6 @@
                     </ValidationProvider>
                 </VueSlideToggle>
             </transition>
-            <!--            <ValidationProvider v-slot="{ errors }" name="ptsDate" rules="required" tag="div" class="mt-4">-->
-            <!--                <label class="inline-block text-gray-700 text-sm font-bold mb-2" for="ptsDate">Дата акта приема-передачи-->
-            <!--                    ПТС между банком и клиентом<span-->
-            <!--                        class="text-red-300 text-sm">*</span>: <small v-if="errors[0]" class="text-red-400">{{-->
-            <!--                            errors[0]-->
-            <!--                        }}</small>-->
-            <!--                </label>-->
-            <!--                <date-picker id="ptsDate"-->
-            <!--                             v-model="ptsDateComputed"-->
-            <!--                             placeholder="22.08.1987"-->
-            <!--                             :input-class="errors.length ? 'custom-input has-errors' : 'custom-input'"-->
-            <!--                             format="DD.MM.YYYY"-->
-            <!--                             prefix-class="custom"-->
-            <!--                             type="date"></date-picker>-->
-            <!--            </ValidationProvider>-->
             <div class="mt-4">
                 <label class="inline-flex items-center cursor-pointer" for="creditorsImmovable">
                     <span class="relative">
@@ -436,7 +421,6 @@ export default {
             whoPaied: this.data?.whoPaied || '',
             processes: this.data?.processes || false,
             ban: this.data?.ban || false,
-            removal: this.data?.removal || false,
             borrowers: this.data?.borrowers || false,
             share: this.data?.share || '',
             guarantor: this.data?.guarantor || false,
@@ -567,7 +551,6 @@ export default {
                 whoPaied: this.whoPaied,
                 processes: this.processes,
                 ban: this.ban,
-                removal: this.removal,
                 borrowers: this.borrowers,
                 share: this.share,
                 guarantor: this.guarantor,
