@@ -127,7 +127,7 @@
             @foreach($worksheet->children as $item)
                 <p>
                     ФИО: <span class="text-left">{{ $item['name'] }}</span>
-                    Дата рождения: <span
+                    Дата рождения ребенка: <span
                         class="text-left">{{ \Carbon\Carbon::parse($item['birthday'])->format('d.m.Y') }}</span>
                     Возраст: <span class="text-left">{{ \Carbon\Carbon::parse($item['birthday'])->age }}</span>
 
