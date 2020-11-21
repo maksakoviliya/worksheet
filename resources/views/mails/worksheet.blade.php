@@ -21,7 +21,9 @@
     <div>
         <p class="text-left">Филиал: <span class="text-left">{{$worksheet->filial->name}}</span></p>
         <p class="text-left">Ссылка на сделку в Envy : <span class="text-left">{{ $worksheet->envyID }}</span></p>
-        <p class="text-left">ФИО клиента : <span class="text-left">{{ $worksheet->name }}</span></p>
+        <p class="text-left">Фамилия клиента : <span class="text-left">{{ $worksheet->surname }}</span></p>
+        <p class="text-left">Имя клиента: <span class="text-left">{{ $worksheet->name }}</span></p>
+        <p class="text-left">Отчество клиента : <span class="text-left">{{ $worksheet->patronymic }}</span></p>
         <p class="text-left">Телефон : <span class="text-left">{{ $worksheet->phone }}</span></p>
         <p class="text-left">Основной email : <span class="text-left">{{ $worksheet->email }}</span></p>
         <p class="text-left">Мессенджеры : <span class="text-left">{{ join(', ', $worksheet->messengers) }}</span></p>

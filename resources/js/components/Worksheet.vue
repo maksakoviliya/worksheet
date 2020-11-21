@@ -115,6 +115,8 @@ export default {
                 common: {
                     envyID: '',
                     name: '',
+                    surname: '',
+                    patronymic: '',
                     phone: '',
                     email: '',
                     messengers: [],
@@ -197,7 +199,9 @@ export default {
                     await axios.post('/api/worksheets', {
                         // Common
                         envyID: this.worksheet.common.envyID,
+                        surname: this.worksheet.common.surname,
                         name: this.worksheet.common.name,
+                        patronymic: this.worksheet.common.patronymic,
                         phone: this.worksheet.common.phone,
                         email: this.worksheet.common.email,
                         messengers: this.worksheet.common.messengers,
@@ -280,7 +284,9 @@ export default {
                     await axios.put(`/api/worksheets/${this.worksheetData.id}`, {
                         // Common
                         envyID: this.worksheet.common.envyID,
+                        surname: this.worksheet.common.surname,
                         name: this.worksheet.common.name,
+                        patronymic: this.worksheet.common.patronymic,
                         phone: this.worksheet.common.phone,
                         email: this.worksheet.common.email,
                         messengers: this.worksheet.common.messengers,
@@ -353,7 +359,9 @@ export default {
         if (this.worksheetData) {
             // Common
             this.worksheet.common.envyID = this.worksheetData.envyID || ''
+            this.worksheet.common.surname = this.worksheetData.surname || ''
             this.worksheet.common.name = this.worksheetData.name || ''
+            this.worksheet.common.patronymic = this.worksheetData.patronymic || ''
             this.worksheet.common.phone = this.worksheetData.phone || ''
             this.worksheet.common.email = this.worksheetData.email || ''
             this.worksheet.common.messengers = this.worksheetData.messengers || []
