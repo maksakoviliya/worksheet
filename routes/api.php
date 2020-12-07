@@ -36,6 +36,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('users', 'UsersController');
     Route::get('users-data', 'UsersController@getUsersData');
     Route::apiResource('worksheets', 'WorksheetController');
+    Route::post('/send-email', 'WorksheetController@sendEmail');
     Route::post('/banks/upload', 'BankController@upload');
     Route::apiResource('banks', 'BankController')->only(['destroy', 'upload']);
 });

@@ -1,9 +1,8 @@
 <template>
     <ValidationObserver ref="ValidationObserver" v-slot="{ invalid, handleSubmit }">
         <form @submit.prevent="handleSubmit(addWork)">
-            <ValidationProvider v-slot="{ errors }" name="place" rules="required" tag="div">
-                <label class="inline-block text-gray-700 text-sm font-bold mb-2" for="place">Место работы<span
-                    class="text-red-300 text-sm">*</span>: <small v-if="errors[0]" class="text-red-400">{{
+            <ValidationProvider v-slot="{ errors }" name="place" rules="max:255" tag="div">
+                <label class="inline-block text-gray-700 text-sm font-bold mb-2" for="place">Место работы: <small v-if="errors[0]" class="text-red-400">{{
                         errors[0]
                     }}</small>
                 </label>
@@ -13,9 +12,8 @@
                        class="appearance-none rounded-lg border border-gray-300 border-b block px-2 py-2 w-full bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none focus:border-gray-800"
                        placeholder=""/>
             </ValidationProvider>
-            <ValidationProvider v-slot="{ errors }" name="position" rules="required" tag="div" class="mt-4">
-                <label class="inline-block text-gray-700 text-sm font-bold mb-2" for="position">Должность<span
-                    class="text-red-300 text-sm">*</span>: <small v-if="errors[0]" class="text-red-400">{{
+            <ValidationProvider v-slot="{ errors }" name="position" rules="max:255" tag="div" class="mt-4">
+                <label class="inline-block text-gray-700 text-sm font-bold mb-2" for="position">Должность: <small v-if="errors[0]" class="text-red-400">{{
                         errors[0]
                     }}</small>
                 </label>

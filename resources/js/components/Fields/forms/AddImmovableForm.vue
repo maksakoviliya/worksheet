@@ -14,9 +14,8 @@
                              :show-labels="false"
                              placeholder="Выберите вид имущества"></multiselect>
             </ValidationProvider>
-            <ValidationProvider v-slot="{ errors }" class="mt-4" name="ownership" rules="required" tag="div">
-                <label class="inline-block text-gray-700 text-sm font-bold mb-2" for="ownership">Вид собственности<span
-                    class="text-red-300 text-sm">*</span>: <small v-if="errors[0]" class="text-red-400">{{
+            <ValidationProvider v-slot="{ errors }" class="mt-4" name="ownership" rules="max:255" tag="div">
+                <label class="inline-block text-gray-700 text-sm font-bold mb-2" for="ownership">Вид собственности: <small v-if="errors[0]" class="text-red-400">{{
                         errors[0]
                     }}</small>
                 </label>
@@ -26,9 +25,8 @@
                        class="appearance-none rounded-lg border border-gray-300 border-b block px-2 py-2 w-full bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none focus:border-gray-800"
                        placeholder=""/>
             </ValidationProvider>
-            <ValidationProvider v-slot="{ errors }" class="mt-4" name="address" rules="required" tag="div">
-                <label class="inline-block text-gray-700 text-sm font-bold mb-2" for="address">Местонахождение<span
-                    class="text-red-300 text-sm">*</span>: <small v-if="errors[0]" class="text-red-400">{{
+            <ValidationProvider v-slot="{ errors }" class="mt-4" name="address" rules="max:255" tag="div">
+                <label class="inline-block text-gray-700 text-sm font-bold mb-2" for="address">Местонахождение: <small v-if="errors[0]" class="text-red-400">{{
                         errors[0]
                     }}</small>
                 </label>
@@ -38,9 +36,8 @@
                        class="appearance-none rounded-lg border border-gray-300 border-b block px-2 py-2 w-full bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none focus:border-gray-800"
                        placeholder=""/>
             </ValidationProvider>
-            <ValidationProvider v-slot="{ errors }" class="mt-4" name="area" rules="required" tag="div">
-                <label class="inline-block text-gray-700 text-sm font-bold mb-2" for="area">Площадь <span class="text-gray-500 font-light">(м<sup>2</sup>)</span><span
-                    class="text-red-300 text-sm">*</span>: <small v-if="errors[0]" class="text-red-400">{{
+            <ValidationProvider v-slot="{ errors }" class="mt-4" name="area" rules="max:255" tag="div">
+                <label class="inline-block text-gray-700 text-sm font-bold mb-2" for="area">Площадь <span class="text-gray-500 font-light">(м<sup>2</sup>)</span>: <small v-if="errors[0]" class="text-red-400">{{
                         errors[0]
                     }}</small>
                 </label>
@@ -50,9 +47,8 @@
                        class="appearance-none rounded-lg border border-gray-300 border-b block px-2 py-2 w-full bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none focus:border-gray-800"
                        placeholder=""/>
             </ValidationProvider>
-            <ValidationProvider v-slot="{ errors }" class="mt-4" name="pledge" rules="required" tag="div">
-                <label class="inline-block text-gray-700 text-sm font-bold mb-2" for="pledge">Сведения о залоге<span
-                    class="text-red-300 text-sm">*</span>: <small v-if="errors[0]" class="text-red-400">{{
+            <ValidationProvider v-slot="{ errors }" class="mt-4" name="pledge" rules="max:255" tag="div">
+                <label class="inline-block text-gray-700 text-sm font-bold mb-2" for="pledge">Сведения о залоге: <small v-if="errors[0]" class="text-red-400">{{
                         errors[0]
                     }}</small>
                 </label>
@@ -62,9 +58,8 @@
                        class="appearance-none rounded-lg border border-gray-300 border-b block px-2 py-2 w-full bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none focus:border-gray-800"
                        placeholder=""/>
             </ValidationProvider>
-            <ValidationProvider v-slot="{ errors }" class="mt-4" name="basis" rules="required" tag="div">
-                <label class="inline-block text-gray-700 text-sm font-bold mb-2" for="basis">Основание приобретения<span
-                    class="text-red-300 text-sm">*</span>: <small v-if="errors[0]" class="text-red-400">{{
+            <ValidationProvider v-slot="{ errors }" class="mt-4" name="basis" rules="max:255" tag="div">
+                <label class="inline-block text-gray-700 text-sm font-bold mb-2" for="basis">Основание приобретения: <small v-if="errors[0]" class="text-red-400">{{
                         errors[0]
                     }}</small>
                 </label>
@@ -74,9 +69,8 @@
                        class="appearance-none rounded-lg border border-gray-300 border-b block px-2 py-2 w-full bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none focus:border-gray-800"
                        placeholder=""/>
             </ValidationProvider>
-            <ValidationProvider v-slot="{ errors }" class="mt-4" name="cost" rules="required" tag="div">
-                <label class="inline-block text-gray-700 text-sm font-bold mb-2" for="cost">Стоимость <span class="text-gray-500 font-light">(руб.)</span><span
-                    class="text-red-300 text-sm">*</span>: <small v-if="errors[0]" class="text-red-400">{{
+            <ValidationProvider v-slot="{ errors }" class="mt-4" name="cost" rules="max:255" tag="div">
+                <label class="inline-block text-gray-700 text-sm font-bold mb-2" for="cost">Стоимость <span class="text-gray-500 font-light">(руб.)</span>: <small v-if="errors[0]" class="text-red-400">{{
                         errors[0]
                     }}</small>
                 </label>

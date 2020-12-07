@@ -154,6 +154,8 @@ export default {
                             }).format(this.$ci.parse(value, {
                                 precision: 0,
                             }))
+                        } else {
+                            return ' - '
                         }
                     }
                 },
@@ -173,6 +175,8 @@ export default {
                             }).format(this.$ci.parse(value, {
                                 precision: 0,
                             }))
+                        } else {
+                            return ' - '
                         }
                     }
                 },

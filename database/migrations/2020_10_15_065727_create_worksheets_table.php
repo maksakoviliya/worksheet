@@ -22,24 +22,24 @@ class CreateWorksheetsTable extends Migration
             $table->string('surname');
             $table->string('patronymic');
             $table->string('phone');
-            $table->string('email');
+            $table->string('email')->nullable();
             $table->json('messengers');
             $table->string('livingCity');
 
             // Паспорт
-            $table->date('birthday');
-            $table->string('series');
-            $table->string('number');
-            $table->string('issued');
-            $table->string('code');
-            $table->text('issuedBy');
-            $table->text('born');
-            $table->text('index');
+            $table->date('birthday')->nullable();
+            $table->string('series')->nullable();
+            $table->string('number')->nullable();
+            $table->string('issued')->nullable();
+            $table->string('code')->nullable();
+            $table->text('issuedBy')->nullable();
+            $table->text('born')->nullable();
+            $table->text('index')->nullable();
             $table->string('region')->nullable();
             $table->string('area')->nullable();
-            $table->string('city');
-            $table->string('street');
-            $table->string('house');
+            $table->string('city')->nullable();
+            $table->string('street')->nullable();
+            $table->string('house')->nullable();
             $table->string('housing')->nullable();
             $table->string('room')->nullable();
             $table->text('registration')->nullable();

@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\WorksheetCreated;
-use App\Events\WorksheetEdited;
 use App\Http\Resources\WorksheetCollection;
+use App\Mail\EmailEditedWorksheet;
 use App\Worksheet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 
 class WorksheetController extends Controller
@@ -76,7 +76,7 @@ class WorksheetController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request)
@@ -91,7 +91,7 @@ class WorksheetController extends Controller
 
         $worksheet = Worksheet::create($request->all());
 
-        event(new WorksheetCreated($worksheet));
+//        event(new WorksheetCreated($worksheet));
 
         return response()->json(['success']);
     }
@@ -99,7 +99,7 @@ class WorksheetController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\worksheet  $worksheet
+     * @param \App\worksheet $worksheet
      * @return \Illuminate\Http\Response
      */
     public function show()
@@ -110,7 +110,7 @@ class WorksheetController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\worksheet  $worksheet
+     * @param \App\worksheet $worksheet
      * @return \Illuminate\Http\Response
      */
     public function edit(worksheet $worksheet)
@@ -121,8 +121,8 @@ class WorksheetController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\worksheet  $worksheet
+     * @param \Illuminate\Http\Request $request
+     * @param \App\worksheet $worksheet
      * @return \Illuminate\Http\JsonResponse
      */
     public function update(Request $request, Worksheet $worksheet)
@@ -130,7 +130,7 @@ class WorksheetController extends Controller
         // TODO: Добавить валидацию
         $worksheet->update($request->except('user_id'));
 
-        event(new WorksheetEdited($worksheet));
+//        event(new WorksheetEdited($worksheet));
 
         return response()->json(['success']);
     }
@@ -147,5 +147,18 @@ class WorksheetController extends Controller
         $worksheet->delete();
 
         return response()->json(['success']);
+    }
+
+    public function sendEmail(Request $request)
+    {
+        $worksheet = Worksheet::find($request->id);
+        $email = new EmailEditedWorksheet($worksheet);
+        try {
+            Mail::to(config('mail.to.address'))->send($email);
+            return response()->json(['success']);
+        } catch (\Exception $exception) {
+            Log::info($exception);
+            return response()->json(['error'], 500);
+        }
     }
 }

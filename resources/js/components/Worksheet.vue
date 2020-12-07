@@ -3,11 +3,13 @@
         <notifications/>
         <div class="w-full">
             <!--            <scrollactive :duration="800" :offset="0" active-class="active" bezier-easing-value=".5,0,.35,1"/>-->
-            <common-data ref="common" :token="token" :filial="filial" :data.sync="worksheet.common" @change="worksheet.common = $event"/>
-            <passport ref="passport" :data.sync="worksheet.passport" class="mt-6"
+            <common-data ref="common" :token="token" :filial="filial" :required-for-email="requiredForEmail"
+                         :data.sync="worksheet.common"
+                         @change="worksheet.common = $event"/>
+            <passport ref="passport" :data.sync="worksheet.passport" :required-for-email="requiredForEmail" class="mt-6"
                       @change="worksheet.passport = $event"/>
             <creditors ref="creditors" :data.sync="worksheet.creditors" class="mt-6"
-                       @change="worksheet.creditors = $event" :token="token" />
+                       @change="worksheet.creditors = $event" :token="token"/>
             <income ref="income" :data.sync="worksheet.income" class="mt-6" @change="worksheet.income = $event"/>
             <marital-status ref="marital" :data.sync="worksheet.marital" class="mt-6"
                             @change="worksheet.marital = $event"/>
@@ -19,35 +21,90 @@
                                class="mt-6" @change="worksheet.spousesImmovable = $event"/>
             <spouses-movable v-if="worksheet.marital.isMarried" :data.sync="worksheet.spousesMovable"
                              class="mt-6" @change="worksheet.spousesMovable = $event"/>
-            <voidable-movable :data.sync="worksheet.voidableMovable" @change="worksheet.voidableMovable = $event"  class="mt-6"></voidable-movable>
-            <voidable-immmovable :data.sync="worksheet.voidableImmovable"  @change="worksheet.voidableImmovable = $event" class="mt-6"></voidable-immmovable>
+            <voidable-movable :data.sync="worksheet.voidableMovable" @change="worksheet.voidableMovable = $event"
+                              class="mt-6"></voidable-movable>
+            <voidable-immmovable :data.sync="worksheet.voidableImmovable" @change="worksheet.voidableImmovable = $event"
+                                 class="mt-6"></voidable-immmovable>
 
-            <payment :data.sync="worksheet.payment" :filial="worksheet.common.filial_id" :token="token" class="mt-6" @change="worksheet.payment = $event"/>
+            <payment :data.sync="worksheet.payment" :filial="worksheet.common.filial_id" :token="token" class="mt-6"
+                     @change="worksheet.payment = $event"/>
         </div>
         <!--        <worksheet-nav class="sticky" style="top: 90px;"></worksheet-nav>-->
 
-        <div class="bg-white fixed w-full pl-64 left-0 shadow z-10 bottom-0"  v-if="editing" >
-            <div class="container mx-auto px-6 py-3 text-right">
+        <div class="bg-white fixed w-full left-0 shadow z-10 bottom-0" v-if="editing">
+            <div class="container mx-auto pr-6 py-3 text-right flex justify-between">
                 <!--                :class="{'opacity-50 cursor-not-allowed': invalid}"-->
                 <button
-                    class="px-6 py-2 bg-green-600 rounded-md text-white text-sm hover:bg-green-500 focus:outline-none focus:shadow"
+                    class="px-6 py-2 inline-flex bg-green-600 rounded-md text-white text-sm hover:bg-green-500 focus:outline-none focus:shadow"
                     type="button"
-                    @click="saveWorksheet">Изменить анкету
+                    :class="loading ? 'cursor-not-allowed pointer-events-none opacity-50' : ''"
+                    :disabled="loading"
+                    @click="sendEmail">
+                    <svg class="animate-spin fill-current color-white h-5 w-5 mr-3" v-if="loading"
+                         viewBox="0 0 26.349 26.35">
+                        <circle cx="13.792" cy="3.082" r="3.082"/>
+                        <circle cx="13.792" cy="24.501" r="1.849"/>
+                        <circle cx="6.219" cy="6.218" r="2.774"/>
+                        <circle cx="21.365" cy="21.363" r="1.541"/>
+                        <circle cx="3.082" cy="13.792" r="2.465"/>
+                        <circle cx="24.501" cy="13.791" r="1.232"/>
+                        <path
+                            d="M4.694 19.84a2.155 2.155 0 000 3.05 2.155 2.155 0 003.05 0 2.155 2.155 0 000-3.05 2.146 2.146 0 00-3.05 0z"/>
+                        <circle cx="21.364" cy="6.218" r=".924"/>
+                    </svg>
+                    Сохранить анкету и отправить письмо
                 </button>
-                <a
-                    href="/worksheets"
-                    class="px-6 py-2 bg-gray-300 rounded-md text-gray-900 text-sm hover:bg-gray-400 ml-2 focus:outline-none focus:shadow"
-                    type="button">Отменить
-                </a>
+                <div class="ml-auto flex items-center">
+                    <button
+                        class="px-6 py-2 inline-flex bg-green-600 rounded-md text-white text-sm hover:bg-green-500 focus:outline-none focus:shadow"
+                        type="button"
+                        :class="loading ? 'cursor-not-allowed pointer-events-none opacity-50' : ''"
+                        :disabled="loading"
+                        @click="saveWorksheet">
+                        <svg class="animate-spin fill-current color-white h-5 w-5 mr-3" v-if="loading"
+                             viewBox="0 0 26.349 26.35">
+                            <circle cx="13.792" cy="3.082" r="3.082"/>
+                            <circle cx="13.792" cy="24.501" r="1.849"/>
+                            <circle cx="6.219" cy="6.218" r="2.774"/>
+                            <circle cx="21.365" cy="21.363" r="1.541"/>
+                            <circle cx="3.082" cy="13.792" r="2.465"/>
+                            <circle cx="24.501" cy="13.791" r="1.232"/>
+                            <path
+                                d="M4.694 19.84a2.155 2.155 0 000 3.05 2.155 2.155 0 003.05 0 2.155 2.155 0 000-3.05 2.146 2.146 0 00-3.05 0z"/>
+                            <circle cx="21.364" cy="6.218" r=".924"/>
+                        </svg>
+                        Изменить анкету
+                    </button>
+                    <a
+                        href="/worksheets"
+                        class="px-6 py-2 bg-gray-300 rounded-md text-gray-900 text-sm hover:bg-gray-400 ml-2 focus:outline-none focus:shadow"
+                        type="button">Отменить
+                    </a>
+                </div>
             </div>
         </div>
         <div class="bg-white fixed w-full pl-64 left-0 shadow z-10 bottom-0" v-else>
             <div class="container mx-auto px-6 py-3 text-right">
                 <!--                :class="{'opacity-50 cursor-not-allowed': invalid}"-->
                 <button
-                    class="px-6 py-2 bg-green-600 rounded-md text-white text-sm hover:bg-green-500 focus:outline-none focus:shadow"
+                    class="px-6 py-2 bg-green-600 inline-flex rounded-md text-white text-sm hover:bg-green-500 focus:outline-none focus:shadow"
                     type="button"
-                    @click="addWorksheet">Добавить анкету
+                    :class="loading ? 'cursor-not-allowed pointer-events-none opacity-50' : ''"
+                    :disabled="loading"
+                    @click="addWorksheet">
+                    <svg class="animate-spin fill-current color-white h-5 w-5 mr-3" v-if="loading"
+                         viewBox="0 0 26.349 26.35">
+                        <circle cx="13.792" cy="3.082" r="3.082"/>
+                        <circle cx="13.792" cy="24.501" r="1.849"/>
+                        <circle cx="6.219" cy="6.218" r="2.774"/>
+                        <circle cx="21.365" cy="21.363" r="1.541"/>
+                        <circle cx="3.082" cy="13.792" r="2.465"/>
+                        <circle cx="24.501" cy="13.791" r="1.232"/>
+                        <path
+                            d="M4.694 19.84a2.155 2.155 0 000 3.05 2.155 2.155 0 003.05 0 2.155 2.155 0 000-3.05 2.146 2.146 0 00-3.05 0z"/>
+                        <circle cx="21.364" cy="6.218" r=".924"/>
+                    </svg>
+                    Добавить анкету
                 </button>
                 <a
                     href="/worksheets"
@@ -111,6 +168,8 @@ export default {
     },
     data() {
         return {
+            loading: false,
+            requiredForEmail: false,
             worksheet: {
                 common: {
                     envyID: '',
@@ -190,6 +249,7 @@ export default {
     methods: {
         async addWorksheet() {
             try {
+                this.loading = true
                 let isValid = []
                 isValid.push(await this.$refs.common.$refs.commonValidationObserver.validate())
                 isValid.push(await this.$refs.passport.$refs.passportValidationObserver.validate())
@@ -260,7 +320,7 @@ export default {
                         },
                     })
                     window.location.href = '/worksheets'
-                }  else {
+                } else {
                     this.$notify({
                         title: 'Ошибка валидации',
                         text: 'Необходимо заполнить обязательные поля',
@@ -270,11 +330,19 @@ export default {
                 }
 
             } catch (e) {
-                console.log(e)
+                this.loading = false
+
+                this.$notify({
+                    title: 'Ошибка сервера',
+                    text: e,
+                    type: 'error',
+                    position: 'bottom right'
+                })
             }
         },
-        async saveWorksheet() {
+        async saveWorksheet(redirect = true) {
             try {
+                this.loading = true
                 let isValid = []
                 isValid.push(await this.$refs.common.$refs.commonValidationObserver.validate())
                 isValid.push(await this.$refs.passport.$refs.passportValidationObserver.validate())
@@ -341,7 +409,9 @@ export default {
                             'Authorization': 'Bearer ' + this.token
                         },
                     })
-                    window.location.href = '/worksheets'
+                    if (redirect) {
+                        window.location.href = '/worksheets'
+                    }
                 } else {
                     this.$notify({
                         title: 'Ошибка валидации',
@@ -351,7 +421,58 @@ export default {
                 }
 
             } catch (e) {
+                this.$notify({
+                    title: 'Ошибка сервера',
+                    text: 'Что-то пошло не так',
+                    type: 'error'
+                })
+            } finally {
+                this.loading = false
+            }
+        },
+        async sendEmail() {
+            try {
+                this.loading = true
+                this.requiredForEmail = true
+
+                const common = await this.$refs.common.$refs.commonValidationObserver.validate()
+                const passport = await this.$refs.passport.$refs.passportValidationObserver.validate()
+
+                // console.log(common)
+                // console.log(passport)
+                if (common && passport) {
+                    await this.saveWorksheet(false)
+                    this.$notify({
+                        title: 'Анкета сохранена',
+                        text: 'Все данные успешно обновлены',
+                        type: 'success'
+                    })
+                } else {
+                    this.loading = false
+                    this.$notify({
+                        title: 'Ошибка валидации',
+                        text: 'Необходимо заполнить обязательные поля',
+                        type: 'error'
+                    })
+                }
+            } catch (e) {
                 console.log(e)
+            }
+            try {
+                const {data} = await axios.post('/api/send-email', {
+                    id: this.worksheetData.id
+                },{
+                    headers: {
+                        'Authorization': 'Bearer ' + this.token
+                    }
+                })
+                this.requiredForEmail = false
+            } catch (e) {
+                this.$notify({
+                    title: 'Ошибка сервера',
+                    text: e,
+                    type: 'error'
+                })
             }
         }
     },
@@ -415,7 +536,3 @@ export default {
     }
 }
 </script>
-
-<style scoped>
-
-</style>
