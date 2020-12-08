@@ -19,9 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2893a89d-c2b1-4e6a-ba5d-8892472103f2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="2893a89d-c2b1-4e6a-ba5d-8892472103f2" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -216,6 +214,7 @@
       <workItem from="1604009105193" duration="721000" />
       <workItem from="1605465430324" duration="5129000" />
       <workItem from="1605471665157" duration="8000" />
+      <workItem from="1605869004840" duration="3499000" />
     </task>
     <servers />
   </component>
@@ -251,17 +250,17 @@
       <screen x="0" y="23" width="2560" height="1417" />
     </state>
     <state x="787" y="632" key="SettingsEditor/0.23.2560.1417@0.23.2560.1417" timestamp="1602711078023" />
-    <state x="905" y="635" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1605468632067">
+    <state x="905" y="635" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1605871163062">
       <screen x="0" y="23" width="2560" height="1417" />
     </state>
-    <state x="905" y="635" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.23.2560.1417@0.23.2560.1417" timestamp="1605468632067" />
+    <state x="905" y="635" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.23.2560.1417@0.23.2560.1417" timestamp="1605871163062" />
     <state x="988" y="732" width="596" height="586" key="find.popup" timestamp="1605470051160">
       <screen x="0" y="23" width="2560" height="1417" />
     </state>
     <state x="988" y="732" width="596" height="586" key="find.popup/0.23.2560.1417@0.23.2560.1417" timestamp="1605470051160" />
-    <state x="951" y="758" width="670" height="676" key="search.everywhere.popup" timestamp="1605469856023">
+    <state x="951" y="758" width="670" height="676" key="search.everywhere.popup" timestamp="1605869143491">
       <screen x="0" y="23" width="2560" height="1417" />
     </state>
-    <state x="951" y="758" width="670" height="676" key="search.everywhere.popup/0.23.2560.1417@0.23.2560.1417" timestamp="1605469856023" />
+    <state x="951" y="758" width="670" height="676" key="search.everywhere.popup/0.23.2560.1417@0.23.2560.1417" timestamp="1605869143491" />
   </component>
 </project>
