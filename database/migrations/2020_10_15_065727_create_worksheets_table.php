@@ -88,6 +88,9 @@ class CreateWorksheetsTable extends Migration
             // Зависимость от филиала
             $table->integer('filial_id')->unsigned()->nullable();
 
+            // Отправлялось ли письмо в планфикс
+            $table->boolean('in_planfix')->default(false);
+
             $table->timestamps();
         });
     }

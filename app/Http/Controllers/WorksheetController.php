@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\WorksheetCollection;
+use App\Mail\EmailClearPlanfix;
 use App\Mail\EmailEditedWorksheet;
 use App\Worksheet;
 use Illuminate\Http\Request;
@@ -152,9 +153,33 @@ class WorksheetController extends Controller
     public function sendEmail(Request $request)
     {
         $worksheet = Worksheet::find($request->id);
+//        $worksheet->update([
+//            'in_planfix' => 1
+//        ]);
         $email = new EmailEditedWorksheet($worksheet);
         try {
             Mail::to(config('mail.to.address'))->send($email);
+            $worksheet->update([
+                'in_planfix' => 1
+            ]);
+            return response()->json(['success']);
+        } catch (\Exception $exception) {
+            Log::info($exception);
+            return response()->json(['error'], 500);
+        }
+    }
+
+    public function sendClearEmail(Request $request) {
+        $worksheet = Worksheet::find($request->id);
+//        $worksheet->update([
+//            'in_planfix' => 0
+//        ]);
+        $email = new EmailClearPlanfix($worksheet);
+        try {
+            Mail::to(config('mail.to.address'))->send($email);
+            $worksheet->update([
+                'in_planfix' => 0
+            ]);
             return response()->json(['success']);
         } catch (\Exception $exception) {
             Log::info($exception);

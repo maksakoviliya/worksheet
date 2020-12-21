@@ -50,6 +50,7 @@ class Worksheet extends Model
         'payment',
         'user_id',
         'filial_id',
+        'in_planfix'
     ];
 
     protected $casts = [
@@ -72,6 +73,8 @@ class Worksheet extends Model
         'isIp' => 'boolean',
         'isDirector' => 'boolean',
         'isMarried' => 'boolean',
+
+        'in_planfix' => 'boolean',
     ];
 
     public function user()

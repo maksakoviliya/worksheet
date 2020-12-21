@@ -38,6 +38,7 @@
                     class="px-6 py-2 inline-flex bg-green-600 rounded-md text-white text-sm hover:bg-green-500 focus:outline-none focus:shadow"
                     type="button"
                     :class="loading ? 'cursor-not-allowed pointer-events-none opacity-50' : ''"
+                    v-if="!this.in_planfix"
                     :disabled="loading"
                     @click="sendEmail">
                     <svg class="animate-spin fill-current color-white h-5 w-5 mr-3" v-if="loading"
@@ -53,6 +54,27 @@
                         <circle cx="21.364" cy="6.218" r=".924"/>
                     </svg>
                     Передать в Planfix
+                </button>
+                <button
+                    class="px-6 py-2 inline-flex bg-green-600 rounded-md text-white text-sm hover:bg-green-500 focus:outline-none focus:shadow"
+                    type="button"
+                    v-else
+                    :class="loading ? 'cursor-not-allowed pointer-events-none opacity-50' : ''"
+                    :disabled="loading"
+                    @click="sendClearEmail">
+                    <svg class="animate-spin fill-current color-white h-5 w-5 mr-3" v-if="loading"
+                         viewBox="0 0 26.349 26.35">
+                        <circle cx="13.792" cy="3.082" r="3.082"/>
+                        <circle cx="13.792" cy="24.501" r="1.849"/>
+                        <circle cx="6.219" cy="6.218" r="2.774"/>
+                        <circle cx="21.365" cy="21.363" r="1.541"/>
+                        <circle cx="3.082" cy="13.792" r="2.465"/>
+                        <circle cx="24.501" cy="13.791" r="1.232"/>
+                        <path
+                            d="M4.694 19.84a2.155 2.155 0 000 3.05 2.155 2.155 0 003.05 0 2.155 2.155 0 000-3.05 2.146 2.146 0 00-3.05 0z"/>
+                        <circle cx="21.364" cy="6.218" r=".924"/>
+                    </svg>
+                    Очистить данные в Planfix
                 </button>
                 <div class="ml-auto flex items-center">
                     <button
@@ -74,6 +96,13 @@
                             <circle cx="21.364" cy="6.218" r=".924"/>
                         </svg>
                         Изменить анкету
+                    </button>
+                    <button
+                        class="px-6 py-2 inline-flex bg-red-600 rounded-md text-white text-sm hover:bg-red-500 ml-2 focus:outline-none focus:shadow"
+                        @click="showDeleteWorksheetForm(worksheetData.id)" type="button"
+                        :class="loading ? 'cursor-not-allowed pointer-events-none opacity-50' : ''"
+                        :disabled="loading">
+                        Удалить анкету
                     </button>
                     <a
                         href="/worksheets"
@@ -132,6 +161,7 @@ import Payment from "./Fields/Payment";
 import axios from "axios";
 import VoidableMovable from "./Fields/VoidableMovable";
 import VoidableImmovable from "./Fields/VoidableImmovable";
+import DeleteConfirmation from "./DeleteConfirmation";
 
 export default {
     name: "Worksheet",
@@ -238,7 +268,8 @@ export default {
                 payment: {
                     payment: []
                 }
-            }
+            },
+            in_planfix: false
         }
     },
     computed: {
@@ -474,10 +505,67 @@ export default {
                     type: 'error'
                 })
             }
+        },
+        async sendClearEmail() {
+            try {
+                const {data} = await axios.post('/api/send-clear-email', {
+                    id: this.worksheetData.id
+                },{
+                    headers: {
+                        'Authorization': 'Bearer ' + this.token
+                    }
+                })
+                this.requiredForEmail = false
+                this.in_planfix = false
+            } catch (e) {
+                this.$notify({
+                    title: 'Ошибка сервера',
+                    text: e,
+                    type: 'error'
+                })
+            }
+        },
+        showDeleteWorksheetForm(id) {
+            this.$modal.show(
+                DeleteConfirmation,
+                {
+                    data: {
+                        type: 'анкету'
+                    }
+                },
+                {classes: 'rounded-lg ml-32', height: 'auto', width: '500px', name: 'DeleteConfirmation'},
+                {
+                    'onConfirm': () => {
+                        this.deleteWorksheet(id)
+                    }
+                }
+            )
+        },
+        async deleteWorksheet(id) {
+            try {
+                await axios.delete(`/api/worksheets/${id}`, {
+                    headers: {
+                        'Authorization': 'Bearer ' + this.token
+                    }
+                })
+                this.$notify({
+                    title: 'Все получилось!',
+                    text: 'Анкета удален успешно',
+                    type: 'success'
+                })
+                window.location.href = "/worksheets";
+            } catch (e) {
+                this.$notify({
+                    title: 'Ошибка!',
+                    text: 'Анкета не удалена',
+                    type: 'error'
+                })
+            }
         }
     },
     mounted() {
         if (this.worksheetData) {
+            // console.log('this.worksheetData', this.worksheetData)
             // Common
             this.worksheet.common.envyID = this.worksheetData.envyID || ''
             this.worksheet.common.surname = this.worksheetData.surname || ''
@@ -532,6 +620,8 @@ export default {
             this.worksheet.voidableImmovable.voidableImmovable = this.worksheetData.voidableImmovable
             // payment
             this.worksheet.payment.payment = this.worksheetData.payment
+
+            this.in_planfix = this.worksheetData.in_planfix
         }
     }
 }
