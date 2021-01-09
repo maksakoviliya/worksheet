@@ -17,7 +17,7 @@ class EmailClearPlanfix extends Mailable
     /**
      * Create a new message instance.
      *
-     * @return void
+     * @param Worksheet $worksheet
      */
     public function __construct(Worksheet $worksheet)
     {

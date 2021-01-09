@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Resources\WorksheetCollection;
 use App\Mail\EmailClearPlanfix;
 use App\Mail\EmailEditedWorksheet;
+use App\Mail\EmailRemovedWorksheet;
 use App\Worksheet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -145,9 +146,15 @@ class WorksheetController extends Controller
      */
     public function destroy(worksheet $worksheet)
     {
-        $worksheet->delete();
-
-        return response()->json(['success']);
+        $email = new EmailRemovedWorksheet($worksheet);
+        try {
+            $worksheet->delete();
+            Mail::to(config('mail.to.address'))->send($email);
+            return response()->json(['success']);
+        } catch (\Exception $exception) {
+            Log::info($exception);
+            return response()->json(['error'], 500);
+        }
     }
 
     public function sendEmail(Request $request)

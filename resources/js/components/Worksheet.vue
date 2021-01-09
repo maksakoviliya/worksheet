@@ -82,7 +82,7 @@
                         type="button"
                         :class="loading ? 'cursor-not-allowed pointer-events-none opacity-50' : ''"
                         :disabled="loading"
-                        @click="saveWorksheet">
+                        @click="saveWorksheet(false)">
                         <svg class="animate-spin fill-current color-white h-5 w-5 mr-3" v-if="loading"
                              viewBox="0 0 26.349 26.35">
                             <circle cx="13.792" cy="3.082" r="3.082"/>

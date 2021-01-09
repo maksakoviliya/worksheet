@@ -21,6 +21,9 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\WorksheetEdited' => [
             'App\Listeners\SendWorksheetEditedEmail',
         ],
+        'App\Events\WorksheetRemoved' => [
+            'App\Listeners\SendWorksheetRemovedEmail',
+        ],
     ];
 
     /**

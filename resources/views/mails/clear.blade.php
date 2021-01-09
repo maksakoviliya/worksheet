@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Анкетта была изменена</title>
+    <title>Анкета была изменена</title>
     <style>
         @import url(https://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100);
 

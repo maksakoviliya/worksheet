@@ -613,3 +613,7 @@ $namespace: 'custom';
         }
     }
 }
+
+.pagination_current{
+    @apply bg-gray-200;
+}
