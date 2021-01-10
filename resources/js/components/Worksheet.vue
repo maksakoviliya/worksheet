@@ -488,6 +488,7 @@ export default {
                             }
                         })
                         this.requiredForEmail = false
+                        this.in_planfix = true
                     } catch (e) {
                         this.$notify({
                             title: 'Ошибка сервера',
@@ -495,7 +496,7 @@ export default {
                             type: 'error'
                         })
                     }
-                    
+
                 } else {
                     this.loading = false
                     this.$notify({
@@ -506,6 +507,12 @@ export default {
                 }
             } catch (e) {
                 console.log(e)
+                this.loading = false
+                this.$notify({
+                    title: 'Ошибка валидации',
+                    text: 'Необходимо заполнить обязательные поля',
+                    type: 'error'
+                })
             }
         },
         async sendClearEmail() {
