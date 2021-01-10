@@ -17,7 +17,7 @@
                     class="px-6 py-2 bg-green-600 rounded-md text-white text-sm hover:bg-green-500 focus:outline-none focus:shadow"
                     type="button"
                     v-if="editing"
-                >Изменить анкету
+                >Сохранить анкету
                     <!--                    @click="saveWorksheet">Изменить анкету-->
                 </button>
                 <button

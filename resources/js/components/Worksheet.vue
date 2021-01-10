@@ -95,7 +95,7 @@
                                 d="M4.694 19.84a2.155 2.155 0 000 3.05 2.155 2.155 0 003.05 0 2.155 2.155 0 000-3.05 2.146 2.146 0 00-3.05 0z"/>
                             <circle cx="21.364" cy="6.218" r=".924"/>
                         </svg>
-                        Изменить анкету
+                        Сохранить анкету
                     </button>
                     <button
                         class="px-6 py-2 inline-flex bg-red-600 rounded-md text-white text-sm hover:bg-red-500 ml-2 focus:outline-none focus:shadow"
