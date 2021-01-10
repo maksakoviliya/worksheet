@@ -443,6 +443,13 @@ export default {
                             'Authorization': 'Bearer ' + this.token
                         },
                     })
+
+                    this.$notify({
+                        title: 'Анкета изменена',
+                        text: 'Анкета была успешно изменена',
+                        type: 'success'
+                    })
+
                     if (redirect) {
                         window.location.href = '/worksheets'
                     }
