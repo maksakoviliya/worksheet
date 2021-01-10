@@ -478,6 +478,24 @@ export default {
                         text: 'Все данные успешно обновлены',
                         type: 'success'
                     })
+
+                    try {
+                        const {data} = await axios.post('/api/send-email', {
+                            id: this.worksheetData.id
+                        },{
+                            headers: {
+                                'Authorization': 'Bearer ' + this.token
+                            }
+                        })
+                        this.requiredForEmail = false
+                    } catch (e) {
+                        this.$notify({
+                            title: 'Ошибка сервера',
+                            text: e,
+                            type: 'error'
+                        })
+                    }
+                    
                 } else {
                     this.loading = false
                     this.$notify({
@@ -488,22 +506,6 @@ export default {
                 }
             } catch (e) {
                 console.log(e)
-            }
-            try {
-                const {data} = await axios.post('/api/send-email', {
-                    id: this.worksheetData.id
-                },{
-                    headers: {
-                        'Authorization': 'Bearer ' + this.token
-                    }
-                })
-                this.requiredForEmail = false
-            } catch (e) {
-                this.$notify({
-                    title: 'Ошибка сервера',
-                    text: e,
-                    type: 'error'
-                })
             }
         },
         async sendClearEmail() {
