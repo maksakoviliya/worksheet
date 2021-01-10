@@ -79,8 +79,8 @@ return [
     ],
 
     'to' => [
-        'address' => 'from_envy@bp-5.planfix.ru',
-        'name' => 'Test to'
+        'address' => env('MAIL_TO_ADDRESS', 'from_envy@bp-5.planfix.ru'),
+        'name' => env('MAIL_TO_NAME', 'Test to')
     ],
 
     /*
