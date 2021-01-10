@@ -15,15 +15,15 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'App\Events\WorksheetCreated' => [
-            'App\Listeners\SendWorksheetCreatedEmail',
-        ],
-        'App\Events\WorksheetEdited' => [
-            'App\Listeners\SendWorksheetEditedEmail',
-        ],
-        'App\Events\WorksheetRemoved' => [
-            'App\Listeners\SendWorksheetRemovedEmail',
-        ],
+//        'App\Events\WorksheetCreated' => [
+//            'App\Listeners\SendWorksheetCreatedEmail',
+//        ],
+//        'App\Events\WorksheetEdited' => [
+//            'App\Listeners\SendWorksheetEditedEmail',
+//        ],
+//        'App\Events\WorksheetRemoved' => [
+//            'App\Listeners\SendWorksheetRemovedEmail',
+//        ],
     ];
 
     /**
