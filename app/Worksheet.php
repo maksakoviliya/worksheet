@@ -6,51 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Worksheet extends Model
 {
-    protected $fillable = [
-        'envyID',
-        'name',
-        'surname',
-        'patronymic',
-        'phone',
-        'email',
-        'messengers',
-        'livingCity',
-        'birthday',
-        'series',
-        'number',
-        'issued',
-        'code',
-        'issuedBy',
-        'born',
-        'index',
-        'region',
-        'area',
-        'city',
-        'street',
-        'house',
-        'housing',
-        'room',
-        'registration',
-        'post',
-        'creditors',
-        'nextPayment',
-        'sources',
-        'isIp',
-        'isDirector',
-        'oooComment',
-        'isMarried',
-        'spouse',
-        'children',
-        'immovable',
-        'movable',
-        'spousesImmovable',
-        'spousesMovable',
-        'voidableMovable',
-        'voidableImmovable',
-        'payment',
-        'user_id',
-        'filial_id',
-        'in_planfix'
+    protected $guarded = [
+        'id',
+        'created_at',
+        'updated_at'
     ];
 
     protected $casts = [

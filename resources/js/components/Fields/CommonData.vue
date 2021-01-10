@@ -62,6 +62,18 @@
                    class="appearance-none rounded-lg border border-gray-300 border-b block px-2 py-2 w-full bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none focus:border-gray-800"
                    placeholder="Егоров Антон Андреевич"/>
         </ValidationProvider>
+        <ValidationProvider v-slot="{ errors }" class="mt-4" name="fio_genus_case" rules="required|max:255" tag="div">
+            <label class="inline-block text-gray-700 text-sm font-bold mb-2" for="fio_genus_case">ФИО в род. падеже<span
+                class="text-red-300 text-sm">*</span>: <small v-if="errors[0]" class="text-red-400">{{
+                    errors[0]
+                }}</small>
+            </label>
+            <input id="fio_genus_case"
+                   v-model="data.fio_genus_case"
+                   :class="{'border-red-400 focus:red-400': errors.length}"
+                   class="appearance-none rounded-lg border border-gray-300 border-b block px-2 py-2 w-full bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none focus:border-gray-800"
+                   placeholder="Егорова Антона Андреевича"/>
+        </ValidationProvider>
         <div class="flex">
             <div class="w-1/2 mr-4">
                 <ValidationProvider v-slot="{ errors }" class="mt-4" name="phone" rules="required|max:255" tag="div">

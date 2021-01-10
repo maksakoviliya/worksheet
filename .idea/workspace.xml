@@ -20,7 +20,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2893a89d-c2b1-4e6a-ba5d-8892472103f2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Worksheet.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Worksheet.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/factories/WorksheetFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/factories/WorksheetFactory.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_10_15_065727_create_worksheets_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_10_15_065727_create_worksheets_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Fields/CommonData.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Fields/CommonData.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Worksheet.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Worksheet.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/mails/clear.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/mails/clear.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -219,6 +225,7 @@
       <workItem from="1605869004840" duration="3499000" />
       <workItem from="1607449509848" duration="265000" />
       <workItem from="1607450974138" duration="18000" />
+      <workItem from="1610273719420" duration="1326000" />
     </task>
     <servers />
   </component>
@@ -236,35 +243,5 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="1024" y="755" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1603828568816">
-      <screen x="0" y="23" width="2560" height="1417" />
-    </state>
-    <state x="1024" y="755" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.23.2560.1417@0.23.2560.1417" timestamp="1603828568816" />
-    <state x="1024" y="912" key="ComposerInitDialogKey" timestamp="1601723061982">
-      <screen x="0" y="23" width="2560" height="1417" />
-    </state>
-    <state x="1024" y="912" key="ComposerInitDialogKey/0.23.2560.1417@0.23.2560.1417" timestamp="1601723061982" />
-    <state x="1074" y="784" key="FileChooserDialogImpl" timestamp="1602454277402">
-      <screen x="0" y="23" width="2560" height="1417" />
-    </state>
-    <state x="1074" y="784" key="FileChooserDialogImpl/0.23.2560.1417@0.23.2560.1417" timestamp="1602454277402" />
-    <state x="787" y="632" key="SettingsEditor" timestamp="1602711078023">
-      <screen x="0" y="23" width="2560" height="1417" />
-    </state>
-    <state x="787" y="632" key="SettingsEditor/0.23.2560.1417@0.23.2560.1417" timestamp="1602711078023" />
-    <state x="905" y="635" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1605871163062">
-      <screen x="0" y="23" width="2560" height="1417" />
-    </state>
-    <state x="905" y="635" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.23.2560.1417@0.23.2560.1417" timestamp="1605871163062" />
-    <state x="988" y="732" width="596" height="586" key="find.popup" timestamp="1605470051160">
-      <screen x="0" y="23" width="2560" height="1417" />
-    </state>
-    <state x="988" y="732" width="596" height="586" key="find.popup/0.23.2560.1417@0.23.2560.1417" timestamp="1605470051160" />
-    <state x="951" y="758" width="670" height="676" key="search.everywhere.popup" timestamp="1605869143491">
-      <screen x="0" y="23" width="2560" height="1417" />
-    </state>
-    <state x="951" y="758" width="670" height="676" key="search.everywhere.popup/0.23.2560.1417@0.23.2560.1417" timestamp="1605869143491" />
   </component>
 </project>

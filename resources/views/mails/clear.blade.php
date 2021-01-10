@@ -16,7 +16,7 @@
 <body>
 <div class="table-wrapper">
     <div class="table-title">
-        <h3>Очитска данных в Planfix</h3>
+        <h3>Очистка данных в Planfix</h3>
     </div>
     <div>
         <p class="text-left">Ссылка на сделку в Envy: <span class="text-left">{{$worksheet->envyID}}</span></p>

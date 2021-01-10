@@ -21,6 +21,7 @@ class CreateWorksheetsTable extends Migration
             $table->string('name');
             $table->string('surname');
             $table->string('patronymic');
+            $table->string('fio_genus_case');
             $table->string('phone');
             $table->string('email')->nullable();
             $table->json('messengers');

@@ -206,6 +206,7 @@ export default {
                     name: '',
                     surname: '',
                     patronymic: '',
+                    fio_genus_case: '',
                     phone: '',
                     email: '',
                     messengers: [],
@@ -293,6 +294,7 @@ export default {
                         surname: this.worksheet.common.surname,
                         name: this.worksheet.common.name,
                         patronymic: this.worksheet.common.patronymic,
+                        fio_genus_case: this.worksheet.common.fio_genus_case,
                         phone: this.worksheet.common.phone,
                         email: this.worksheet.common.email,
                         messengers: this.worksheet.common.messengers,
@@ -386,6 +388,7 @@ export default {
                         surname: this.worksheet.common.surname,
                         name: this.worksheet.common.name,
                         patronymic: this.worksheet.common.patronymic,
+                        fio_genus_case: this.worksheet.common.fio_genus_case,
                         phone: this.worksheet.common.phone,
                         email: this.worksheet.common.email,
                         messengers: this.worksheet.common.messengers,
@@ -580,6 +583,7 @@ export default {
             this.worksheet.common.surname = this.worksheetData.surname || ''
             this.worksheet.common.name = this.worksheetData.name || ''
             this.worksheet.common.patronymic = this.worksheetData.patronymic || ''
+            this.worksheet.common.fio_genus_case = this.worksheetData.fio_genus_case || ''
             this.worksheet.common.phone = this.worksheetData.phone || ''
             this.worksheet.common.email = this.worksheetData.email || ''
             this.worksheet.common.messengers = this.worksheetData.messengers || []

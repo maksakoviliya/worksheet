@@ -232,6 +232,7 @@ $factory->define(Worksheet::class, function (Faker $faker) {
         'email' => $faker->email,
         'messengers' => $faker->randomElements(['WhatsApp', 'Viber', 'Telegram', 'SMS'], rand(1, 3)),
         'livingCity' => $faker->city,
+        'fio_genus_case' => $faker->firstName.' '.$faker->lastName.' '.$faker->firstName,
 
         // Паспорт
         'birthday' => $faker->date(),
