@@ -43,9 +43,9 @@
                                 d="M484.193 31.977c-18.057-18.057-41.637-27.161-65.39-27.658-24.997-.547-50.143 8.506-69.046 27.434L181.37 200.14c-24.574 24.674-38.105 57.406-38.105 92.177v55.714c0 13.754 11.118 24.872 24.872 24.872h55.714c34.772 0 67.504-13.531 92.202-38.13L484.216 166.61c37.061-37.083 37.061-97.523-.023-134.633zM280.91 299.581c-15.247 15.197-35.543 23.579-57.057 23.579H193.01v-30.842c0-21.515 8.382-41.811 23.554-57.033L327.57 124.279l64.32 64.32-110.98 110.982zm168.113-168.114L427.06 153.43l-64.32-64.32 21.962-21.962c17.759-17.759 46.611-17.709 64.32 0 17.71 17.733 17.71 46.585.001 64.319z"/>
                         </svg>
                     </a>
-                    <button @click="showDeleteWorksheetForm(props.rowData.id)" type="button"
+                    <button @click.prevent="showDeleteWorksheetForm(props.rowData.id)" type="button"
                             v-if="canDelete"
-                            class="text-gray-600 hover:text-red-900 transition duration-200 ease-in-out inline-flex items-center focus:outline-none focus:text-gray-500 ml-3"
+                            class="delete-btn text-gray-600 hover:text-red-900 transition duration-200 ease-in-out inline-flex items-center focus:outline-none focus:text-gray-500 ml-3"
                     >
                         <svg class="w-6 h-6 fill-current" viewBox="0 0 512.009 512.009">
                             <path
@@ -204,8 +204,10 @@ export default {
         onChangePage(page) {
             this.$refs.worksheetsVuetable.changePage(page)
         },
-        onRowClicked(object, event) {
-            window.location.href = `/worksheets/${object.data.id}`
+        onRowClicked(object) {
+            if(!object.event.target.closest('.delete-btn')) {
+                window.location.href = `/worksheets/${object.data.id}`
+            }
         },
         showDeleteWorksheetForm(id) {
             this.$modal.show(
