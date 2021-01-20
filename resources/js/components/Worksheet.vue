@@ -363,14 +363,14 @@ export default {
                 }
 
             } catch (e) {
-                this.loading = false
-
                 this.$notify({
                     title: 'Ошибка сервера',
                     text: e,
                     type: 'error',
                     position: 'bottom right'
                 })
+            } finally {
+                this.loading = false
             }
         },
         async saveWorksheet(redirect = true) {

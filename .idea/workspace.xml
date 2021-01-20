@@ -19,15 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2893a89d-c2b1-4e6a-ba5d-8892472103f2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/app/Worksheet.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Worksheet.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/factories/WorksheetFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/factories/WorksheetFactory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_10_15_065727_create_worksheets_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_10_15_065727_create_worksheets_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Fields/CommonData.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Fields/CommonData.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Worksheet.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Worksheet.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/mails/clear.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/mails/clear.blade.php" afterDir="false" />
-    </list>
+    <list default="true" id="2893a89d-c2b1-4e6a-ba5d-8892472103f2" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -226,6 +218,7 @@
       <workItem from="1607449509848" duration="265000" />
       <workItem from="1607450974138" duration="18000" />
       <workItem from="1610273719420" duration="1326000" />
+      <workItem from="1610275790494" duration="1736000" />
     </task>
     <servers />
   </component>
