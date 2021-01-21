@@ -8,7 +8,6 @@ import {ValidationObserver, ValidationProvider} from 'vee-validate';
 import Notifications from 'vue-notification'
 import VueMask from 'v-mask'
 
-
 Vue.use(VModal, {dynamicDefault: {draggable: false, resizable: false, adaptive: true}})
 Vue.component('multiselect', Multiselect)
 

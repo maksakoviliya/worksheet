@@ -25,7 +25,8 @@
         <hr class="w-20 border-gray-400 mt-2">
         <div class="flex">
             <div class="w-1/3 mr-4">
-                <ValidationProvider v-slot="{ errors }" class="mt-4" name="series" :rules="{required: required, max: 255}" tag="div">
+                <ValidationProvider v-slot="{ errors }" class="mt-4" name="series"
+                                    :rules="{required: required, max: 255}" tag="div">
                     <label class="inline-block text-gray-700 text-sm font-bold mb-2" for="series">Серия: <small
                         v-if="errors[0]" class="text-red-400">{{
                             errors[0]
@@ -40,7 +41,8 @@
                 </ValidationProvider>
             </div>
             <div class="w-2/3">
-                <ValidationProvider v-slot="{ errors }" class="mt-4" name="number" :rules="{required: required, max: 255}" tag="div">
+                <ValidationProvider v-slot="{ errors }" class="mt-4" name="number"
+                                    :rules="{required: required, max: 255}" tag="div">
                     <label class="inline-block text-gray-700 text-sm font-bold mb-2" for="number">Номер: <small
                         v-if="errors[0]" class="text-red-400">{{
                             errors[0]
@@ -57,7 +59,8 @@
         </div>
         <div class="flex">
             <div class="w-1/2 mr-4">
-                <ValidationProvider v-slot="{ errors }" class="mt-4" name="issued" :rules="{required: required, max: 255}" tag="div">
+                <ValidationProvider v-slot="{ errors }" class="mt-4" name="issued"
+                                    :rules="{required: required, max: 255}" tag="div">
                     <label class="inline-block text-gray-700 text-sm font-bold mb-2" for="issued">Дата выдачи: <small
                         v-if="errors[0]" class="text-red-400">{{
                             errors[0]
@@ -73,7 +76,8 @@
                 </ValidationProvider>
             </div>
             <div class="w-1/2">
-                <ValidationProvider v-slot="{ errors }" class="mt-4" name="code" :rules="{required: required, max: 255}" tag="div">
+                <ValidationProvider v-slot="{ errors }" class="mt-4" name="code" :rules="{required: required, max: 255}"
+                                    tag="div">
                     <label class="inline-block text-gray-700 text-sm font-bold mb-2" for="code">Код подразделения:
                         <small v-if="errors[0]" class="text-red-400">{{
                                 errors[0]
@@ -88,7 +92,8 @@
                 </ValidationProvider>
             </div>
         </div>
-        <ValidationProvider v-slot="{ errors }" class="mt-4" name="issuedBy" :rules="{required: required, max: 255}" tag="div">
+        <ValidationProvider v-slot="{ errors }" class="mt-4" name="issuedBy" :rules="{required: required, max: 255}"
+                            tag="div">
             <label class="inline-block text-gray-700 text-sm font-bold mb-2" for="issuedBy">Кем выдан: <small
                 v-if="errors[0]" class="text-red-400">{{
                     errors[0]
@@ -100,7 +105,8 @@
                       name="issuedBy"
                       placeholder="Управлением ФМС по городу Москва"></textarea>
         </ValidationProvider>
-        <ValidationProvider v-slot="{ errors }" class="mt-4" name="born" :rules="{required: required, max: 255}" tag="div">
+        <ValidationProvider v-slot="{ errors }" class="mt-4" name="born" :rules="{required: required, max: 255}"
+                            tag="div">
             <label class="inline-block text-gray-700 text-sm font-bold mb-2" for="born">Место рождения: <small
                 v-if="errors[0]" class="text-red-400">{{
                     errors[0]
@@ -116,7 +122,8 @@
         <hr class="w-20 border-gray-400 mt-2">
         <div class="flex">
             <div class="w-1/2 mr-4">
-                <ValidationProvider v-slot="{ errors }" class="mt-4" name="index" :rules="{required: required, max: 255}" tag="div">
+                <ValidationProvider v-slot="{ errors }" class="mt-4" name="index"
+                                    :rules="{required: required, max: 255}" tag="div">
                     <label class="inline-block text-gray-700 text-sm font-bold mb-2" for="index">Индекс: <small
                         v-if="errors[0]" class="text-red-400">{{
                             errors[0]
@@ -161,7 +168,8 @@
                 </ValidationProvider>
             </div>
             <div class="w-1/2">
-                <ValidationProvider v-slot="{ errors }" class="mt-4" name="city" :rules="{required: required, max: 255}" tag="div">
+                <ValidationProvider v-slot="{ errors }" class="mt-4" name="city" :rules="{required: required, max: 255}"
+                                    tag="div">
                     <label class="inline-block text-gray-700 text-sm font-bold mb-2" for="city">Город <span
                         class="text-sm text-gray-500 font-light">(Населенный пункт)</span>: <small v-if="errors[0]"
                                                                                                    class="text-red-400">{{
@@ -176,7 +184,8 @@
                 </ValidationProvider>
             </div>
         </div>
-        <ValidationProvider v-slot="{ errors }" class="mt-4" name="street" :rules="{required: required, max: 255}" tag="div">
+        <ValidationProvider v-slot="{ errors }" class="mt-4" name="street" :rules="{required: required, max: 255}"
+                            tag="div">
             <label class="inline-block text-gray-700 text-sm font-bold mb-2" for="street">Улица: <small v-if="errors[0]"
                                                                                                         class="text-red-400">{{
                     errors[0]
@@ -190,7 +199,8 @@
         </ValidationProvider>
         <div class="flex">
             <div class="w-1/3 mr-4">
-                <ValidationProvider v-slot="{ errors }" class="mt-4" name="house" :rules="{required: required, max: 255}" tag="div">
+                <ValidationProvider v-slot="{ errors }" class="mt-4" name="house"
+                                    :rules="{required: required, max: 255}" tag="div">
                     <label class="inline-block text-gray-700 text-sm font-bold mb-2" for="house">Дом: <small
                         v-if="errors[0]" class="text-red-400">{{
                             errors[0]
@@ -274,7 +284,7 @@
 
 <script>
 import {VueMaskDirective} from "v-mask";
-import moment from 'moment'
+import moment from "moment";
 
 export default {
     name: "Passport",
@@ -293,9 +303,7 @@ export default {
     computed: {
         birthday: {
             get: function () {
-                if (this.data.birthday)
-                    return moment(this.data.birthday).toDate()
-                return null
+                return this.data.birthday ? moment.utc(this.data.birthday).toDate() : null
             },
             set: function (value) {
                 this.data.birthday = value

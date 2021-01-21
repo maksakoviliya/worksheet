@@ -162,6 +162,7 @@ import axios from "axios";
 import VoidableMovable from "./Fields/VoidableMovable";
 import VoidableImmovable from "./Fields/VoidableImmovable";
 import DeleteConfirmation from "./DeleteConfirmation";
+import * as moment from "moment";
 
 export default {
     name: "Worksheet",
@@ -301,10 +302,10 @@ export default {
                         livingCity: this.worksheet.common.livingCity,
                         filial_id: this.worksheet.common.filial_id,
                         // Passport
-                        birthday: this.worksheet.passport.birthday,
+                        birthday: moment(this.worksheet.passport.birthday).add(1, "day").toISOString(),
                         series: this.worksheet.passport.series,
                         number: this.worksheet.passport.number,
-                        issued: this.worksheet.passport.issued,
+                        issued: moment(this.worksheet.passport.issued).add(1, "day").toISOString(),
                         code: this.worksheet.passport.code,
                         issuedBy: this.worksheet.passport.issuedBy,
                         born: this.worksheet.passport.born,
@@ -381,6 +382,7 @@ export default {
                 isValid.push(await this.$refs.passport.$refs.passportValidationObserver.validate())
                 isValid.push(this.$refs.creditors.$refs.creditorsValidationObserver ? await this.$refs.creditors.$refs.creditorsValidationObserver?.validate() : true)
                 isValid.push(this.$refs.marital.$refs.maritalValidationObserver ? await this.$refs.marital.$refs.maritalValidationObserver?.validate() : true)
+                console.log('moment(this.worksheet.passport.birthday).add(1, "day").toISOString()', moment(this.worksheet.passport.birthday).add(1, "day").toISOString())
                 if (_.every(isValid, item => item === true)) {
                     await axios.put(`/api/worksheets/${this.worksheetData.id}`, {
                         // Common
@@ -395,10 +397,10 @@ export default {
                         livingCity: this.worksheet.common.livingCity,
                         filial_id: this.worksheet.common.filial_id,
                         // Passport
-                        birthday: this.worksheet.passport.birthday,
+                        birthday: moment(this.worksheet.passport.birthday).add(1, "day").toISOString(),
                         series: this.worksheet.passport.series,
                         number: this.worksheet.passport.number,
-                        issued: this.worksheet.passport.issued,
+                        issued: moment(this.worksheet.passport.issued).add(1, "day").toISOString(),
                         code: this.worksheet.passport.code,
                         issuedBy: this.worksheet.passport.issuedBy,
                         born: this.worksheet.passport.born,
